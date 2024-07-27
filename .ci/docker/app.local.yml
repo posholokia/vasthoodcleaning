@@ -1,0 +1,21 @@
+services:
+  vasthood_django:
+    container_name: vasthood_django
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    env_file:
+      - ../../.env
+    tty: true
+    ports:
+      - "8000:8000"
+    networks:
+      - dev-net
+    volumes:
+      - ../../core/apps:/app/apps
+
+
+networks:
+  dev-net:
+    name: dev-net
+    driver: bridge

@@ -1,0 +1,46 @@
+stages:
+  - build
+  - deploy
+
+
+.docker_login: &docker_login
+  - echo "$DOCKER_KEY" | docker login --username $DOCKER_USER --password-stdin
+
+
+.common:
+  only:
+    - master
+  tags:
+    - back
+
+
+build:
+  stage: build
+  before_script:
+    - *docker_login
+  script:
+    - docker build --network host -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
+  extends: .common
+
+deploy:
+  stage: deploy
+  image: docker:20.10-git
+  dependencies:
+    - build
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+    - *docker_login
+  script:
+    - docker pull $CI_REGISTRY_IMAGE
+    - docker run --rm --env-file $env --network db-net $CI_REGISTRY_IMAGE -m python manage.py migrate
+    - docker stack deploy --with-registry-auth --resolve-image always -c ./.ci/docker/app.prod.yml back
+  after_script:
+    - sleep 15
+    - rm -r -f ~/.ssh
+    - docker system prune -f -a || true
+  extends: .common
+

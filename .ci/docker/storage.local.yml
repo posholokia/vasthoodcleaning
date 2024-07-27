@@ -1,0 +1,26 @@
+services:
+  vasthood_db:
+    container_name: vasthood_db
+    image: public.ecr.aws/docker/library/postgres:15
+    environment:
+      POSTGRES_DB: "vasthoodclean"
+      POSTGRES_USER: "master"
+      POSTGRES_PASSWORD: "123456"
+    ports:
+      - "5432:5432"
+    networks:
+      - dev-net
+    volumes:
+      - vhc_data:/var/lib/postgresql/data/
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
+volumes:
+  vhc_data:
+    name: vhc_data
+
+
+networks:
+  dev-net:
+    name: dev-net
+    driver: bridge
