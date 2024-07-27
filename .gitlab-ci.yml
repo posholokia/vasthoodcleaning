@@ -36,7 +36,7 @@ deploy:
     - *docker_login
   script:
     - docker pull $CI_REGISTRY_IMAGE
-    - docker run --rm --env-file $env --network db-net $CI_REGISTRY_IMAGE -m manage.py migrate
+    - docker run --rm --env-file $env --network db-net $CI_REGISTRY_IMAGE -m core/manage.py migrate
     - docker stack deploy --with-registry-auth --resolve-image always -c ./.ci/docker/app.prod.yml back
   after_script:
     - sleep 15
