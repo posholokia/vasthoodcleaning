@@ -108,8 +108,8 @@ class FooterInline(NestedStackedInline):
 
 class FAQInline(NestedStackedInline):
     model = FAQ
-    can_delete = False
-    max_num = 1
+    can_delete = True
+    extra = 1
 
 
 @admin.register(Site)
@@ -120,6 +120,7 @@ class SiteAdmin(NestedModelAdmin):
         ServiceInline,
         AboutInline,
         FooterInline,
+        FAQInline,
     ]
 
     def has_add_permission(self, request) -> bool:

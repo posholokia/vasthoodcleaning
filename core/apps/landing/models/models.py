@@ -161,17 +161,10 @@ class Footer(models.Model):
         verbose_name_plural = "Footer"
 
 
-class Question(models.Model):
+class FAQ(models.Model):
     question = models.TextField("Question")
     answer = models.TextField("Answer")
-    faq = models.ForeignKey(
-        "FAQ", on_delete=models.CASCADE, related_name="questions"
-    )
-
-
-class FAQ(models.Model):
-    title = models.CharField("Title", max_length=64, blank=True)
-    site = models.OneToOneField(
+    site = models.ForeignKey(
         Site, on_delete=models.CASCADE, related_name="faq"
     )
 

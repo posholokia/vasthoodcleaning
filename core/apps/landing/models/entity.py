@@ -97,17 +97,10 @@ class FooterEntity:
 
 
 @dataclass
-class QuestionEntity:
+class FAQEntity:
     id: int
     question: str
     answer: str
-
-
-@dataclass
-class FAQEntity:
-    id: int
-    title: str = ""
-    questions: list[QuestionEntity] = field(default_factory=list)
 
 
 @dataclass
@@ -119,5 +112,5 @@ class SiteEntity:
     results: Optional[ResultEntity] = None
     services: list[ServiceEntity] = field(default_factory=list)
     main_screen: Optional[MainScreenEntity] = None
-    faq: Optional[FAQEntity] = None
+    faq: list[FAQEntity] = field(default_factory=list)
     footer: Optional[FooterEntity] = None

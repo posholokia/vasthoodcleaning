@@ -71,14 +71,9 @@ class FooterRetrieveSchema(Schema):
     address: Annotated[str, MinLen(1), MaxLen(64)]
 
 
-class QuestionRetrieveSchema(Schema):
+class FAQRetrieveSchema(Schema):
     question: str
     answer: str
-
-
-class FAQRetrieveSchema(Schema):
-    title: str
-    questions: list[QuestionRetrieveSchema] = Field(default_factory=list)
 
 
 class SiteRetrieveSchema(Schema):
@@ -88,5 +83,5 @@ class SiteRetrieveSchema(Schema):
     results: Optional[ResultRetrieveSchema] = None
     services: list[ServiceRetrieveSchema] = Field(default_factory=list)
     main_screen: Optional[MainScreenRetrieveSchema] = None
-    faq: Optional[FAQRetrieveSchema] = None
+    faq: list[FAQRetrieveSchema] = Field(default_factory=list)
     footer: Optional[FooterRetrieveSchema] = None

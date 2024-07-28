@@ -6,7 +6,6 @@ from .entity import (
     FAQEntity,
     FooterEntity,
     MainScreenEntity,
-    QuestionEntity,
     ResultEntity,
     ResultPhotoEntity,
     ServiceDetailEntity,
@@ -23,7 +22,6 @@ from .models import (
     MainScreen,
     OurResults,
     OurResultsPhoto,
-    Question,
     Service,
     ServiceDetail,
     Site,
@@ -55,6 +53,4 @@ __all__ = (
     "Footer",
     "FAQEntity",
     "FAQ",
-    "Question",
-    "QuestionEntity",
 )

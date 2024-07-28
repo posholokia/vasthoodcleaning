@@ -10,12 +10,11 @@ from apps.landing.models import (
     AboutBlock,
     Advantage,
     OurResultsPhoto,
-    Question,
     Service,
     ServiceDetail,
     ServiceDetailEntity,
     Site,
-    SiteEntity,
+    SiteEntity, FAQ,
 )
 from apps.landing.services.storage.base import ISiteRepository
 from services.mapper import Mapper
@@ -30,7 +29,6 @@ class ORMSiteRepository(ISiteRepository):
                 "results",
                 "main_screen",
                 "footer",
-                "faq",
             )
             .prefetch_related(
                 Prefetch(
@@ -52,8 +50,8 @@ class ORMSiteRepository(ISiteRepository):
             )
             .prefetch_related(
                 Prefetch(
-                    lookup="faq__question",
-                    queryset=Question.objects.all(),
+                    lookup="faq",
+                    queryset=FAQ.objects.all(),
                 )
             )
             .afirst()
