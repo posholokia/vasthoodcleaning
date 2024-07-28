@@ -1,5 +1,5 @@
 services:
-  main-app:
+  django-app:
     image: ${CI_REGISTRY_IMAGE}
     env_file:
       - $env
@@ -9,9 +9,6 @@ services:
     networks:
        - nginx-net
        - db-net
-       - service-net
-    secrets:
-      - remote_config
     healthcheck:
       test: "curl --fail http://localhost:8000/api/v1/healthcheck/"
       interval: 10s

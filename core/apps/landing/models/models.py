@@ -159,3 +159,25 @@ class Footer(models.Model):
     class Meta:
         verbose_name = "Footer"
         verbose_name_plural = "Footer"
+
+
+class Question(models.Model):
+    question = models.TextField("Question")
+    answer = models.TextField("Answer")
+    faq = models.ForeignKey(
+        "FAQ", on_delete=models.CASCADE, related_name="questions"
+    )
+
+
+class FAQ(models.Model):
+    title = models.CharField("Title", max_length=64, blank=True)
+    site = models.OneToOneField(
+        Site, on_delete=models.CASCADE, related_name="faq"
+    )
+
+    def __str__(self):
+        return "FAQ"
+
+    class Meta:
+        verbose_name = "FAQ"
+        verbose_name_plural = "FAQ"

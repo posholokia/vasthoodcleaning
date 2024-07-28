@@ -22,7 +22,7 @@ async def get_landing(request: HttpRequest) -> SiteRetrieveSchema:
     return Mapper.dataclass_to_schema(obj=site, schema=SiteRetrieveSchema)
 
 
-@router.get("service/{service_id}", response=ServiceDetailRetrieveSchema)
+@router.get("service/{service_id}/", response=ServiceDetailRetrieveSchema)
 async def get_service(
     request: HttpRequest,
     service_id: int,

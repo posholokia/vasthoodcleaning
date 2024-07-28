@@ -71,6 +71,12 @@ class FooterRetrieveSchema(Schema):
     address: Annotated[str, MinLen(1), MaxLen(64)]
 
 
+class FAQRetrieveSchema(Schema):
+    title: str
+    question: str
+    answer: str
+
+
 class SiteRetrieveSchema(Schema):
     whatsapp: Annotated[str, MinLen(1), MaxLen(16)]
     phone: str
@@ -78,4 +84,5 @@ class SiteRetrieveSchema(Schema):
     results: Optional[ResultRetrieveSchema] = None
     services: list[ServiceRetrieveSchema] = Field(default_factory=list)
     main_screen: Optional[MainScreenRetrieveSchema] = None
+    faq: Optional[FAQRetrieveSchema] = None
     footer: Optional[FooterRetrieveSchema] = None

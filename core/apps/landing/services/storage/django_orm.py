@@ -10,6 +10,7 @@ from apps.landing.models import (
     AboutBlock,
     Advantage,
     OurResultsPhoto,
+    Question,
     Service,
     ServiceDetail,
     ServiceDetailEntity,
@@ -29,6 +30,7 @@ class ORMSiteRepository(ISiteRepository):
                 "results",
                 "main_screen",
                 "footer",
+                "faq",
             )
             .prefetch_related(
                 Prefetch(
@@ -46,6 +48,12 @@ class ORMSiteRepository(ISiteRepository):
                 Prefetch(
                     lookup="results__result_photos",
                     queryset=OurResultsPhoto.objects.all(),
+                )
+            )
+            .prefetch_related(
+                Prefetch(
+                    lookup="faq__question",
+                    queryset=Question.objects.all(),
                 )
             )
             .afirst()

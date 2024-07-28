@@ -15,6 +15,7 @@ from apps.landing.models import (
     AboutBlock,
     Advantage,
     ColorFont,
+    FAQ,
     Footer,
     MainScreen,
     OurResults,
@@ -103,6 +104,12 @@ class FooterInline(NestedStackedInline):
     model = Footer
     max_num = 1
     can_delete = False
+
+
+class FAQInline(NestedStackedInline):
+    model = FAQ
+    can_delete = False
+    max_num = 1
 
 
 @admin.register(Site)

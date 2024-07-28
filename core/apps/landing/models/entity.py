@@ -46,7 +46,7 @@ class ServiceEntity:
     name: Annotated[str, MinLen(1), MaxLen(100)]
     font_color: FontColorEntity
     image: str
-    discount_message: Annotated[str, MinLen(0), MaxLen(100)]
+    discount_message: Annotated[str, MaxLen(100)] = ""
 
 
 @dataclass
@@ -97,6 +97,20 @@ class FooterEntity:
 
 
 @dataclass
+class QuestionEntity:
+    id: int
+    question: str
+    answer: str
+
+
+@dataclass
+class FAQEntity:
+    id: int
+    title: str = ""
+    questions: list[QuestionEntity] = field(default_factory=list)
+
+
+@dataclass
 class SiteEntity:
     id: int
     whatsapp: Annotated[str, MinLen(1), MaxLen(16)]
@@ -105,4 +119,5 @@ class SiteEntity:
     results: Optional[ResultEntity] = None
     services: list[ServiceEntity] = field(default_factory=list)
     main_screen: Optional[MainScreenEntity] = None
+    faq: Optional[FAQEntity] = None
     footer: Optional[FooterEntity] = None

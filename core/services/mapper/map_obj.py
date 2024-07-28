@@ -23,6 +23,7 @@ class Mapper:
     def model_to_dataclass(cls, instance: Model, dataclass_type: Any) -> Any:
         """
         Function for converting a django model object into a dataclass
+        Dont work with Union annotation.
         """
         attrs = {}
         fields_ = get_type_hints(dataclass_type)
@@ -59,12 +60,14 @@ class Mapper:
     @classmethod
     def dataclass_to_schema(cls, schema: Type[T], obj: Any) -> T:
         """
-        Function for converting a dataclass object into a pydantic model
+        Function for converting a dataclass object into a pydantic model.
+        Dont work with Union annotation
         """
         attrs = {}
-        for field in schema.__fields__.keys():
+
+        for field in schema.__annotations__.keys():
             value = getattr(obj, field)
-            sub_schema = schema.__fields__[field]
+            sub_schema = schema.__annotations__[field]
             field_type = cls._extract_field_type(sub_schema)
             if (
                 isinstance(value, list)
