@@ -71,10 +71,14 @@ class FooterRetrieveSchema(Schema):
     address: Annotated[str, MinLen(1), MaxLen(64)]
 
 
-class FAQRetrieveSchema(Schema):
-    title: str
+class QuestionRetrieveSchema(Schema):
     question: str
     answer: str
+
+
+class FAQRetrieveSchema(Schema):
+    title: str
+    questions: list[QuestionRetrieveSchema] = Field(default_factory=list)
 
 
 class SiteRetrieveSchema(Schema):
