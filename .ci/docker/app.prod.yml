@@ -10,7 +10,7 @@ services:
        - nginx-net
        - db-net
     healthcheck:
-      test: "curl --fail http://localhost:8000/api/v1/healthcheck/"
+      test: "curl --fail http://localhost:8000/api/healthcheck/"
       interval: 10s
       timeout: 2s
       retries: 3

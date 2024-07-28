@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]"]
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "colorfield",
@@ -150,8 +150,16 @@ LOGGING = {
 }
 
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://api.vasthood.com",
+]
 
 X_FRAME_OPTIONS = "ALLOWALL"
+
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://vasthood.com",
+    "https://www.vasthood.com",
+    "https://api.vasthood.com",
+]
