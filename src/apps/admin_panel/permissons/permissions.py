@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from apps.landing.models import Site
 from apps.landing.services.storage import ISiteRepository
-from services.constructor.permissons import BasePermission
+from core.constructor.permissons import BasePermission
 
 
 @dataclass(frozen=True, eq=False)

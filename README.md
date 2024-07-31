@@ -23,7 +23,7 @@ docker exec -it vasthood_django python manage.py migrate
 ```
 Or use make: `make run`
 
-3. For local deployment, mark the core directory as "Resource root" since imports in the application are done after core.
+3. For local development, mark the core directory as "Source root" since imports in the application are done after core.
 
     Only files and folders not directly related to the application, such as test, ci/cd, docker, etc., should be 
 outside the core directory. Everything necessary for the application's operation should be inside core.

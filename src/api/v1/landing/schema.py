@@ -34,8 +34,14 @@ class ServiceRetrieveSchema(Schema):
     image: str
 
 
+class ServiceMainDetailRetrieveSchema(Schema):
+    id: int
+    name: Annotated[str, MinLen(1), MaxLen(100)]
+    image: str
+
+
 class ServiceDetailRetrieveSchema(Schema):
-    service: ServiceRetrieveSchema
+    service: ServiceMainDetailRetrieveSchema
     quality_title: Annotated[str, MinLen(1), MaxLen(100)]
     quality_text: Annotated[str, MinLen(1)]
     advantage: list[AdvantageRetrieveSchema] = Field(default_factory=list)

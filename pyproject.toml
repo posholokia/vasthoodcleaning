@@ -16,6 +16,7 @@ django-nested-admin = "^4.0.2"
 django-admin-interface = "^0.28.8"
 punq = "^0.7.0"
 django-cors-headers = "^4.4.0"
+twilio = "^9.2.3"
 
 
 [tool.poetry.group.dev.dependencies]

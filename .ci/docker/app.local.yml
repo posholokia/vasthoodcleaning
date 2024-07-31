@@ -12,7 +12,7 @@ services:
     networks:
       - dev-net
     volumes:
-      - ../../core/apps:/app/apps
+      - ../../src/apps:/app/apps
 
 
 networks:
