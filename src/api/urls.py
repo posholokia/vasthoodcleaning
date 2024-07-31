@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.urls import path
 from ninja import NinjaAPI
 
-from core.constructor import BaseHTTPException
+from core.constructor.exceptions import BaseHTTPException
 
 from .v1.urls import router as v1_router
 
