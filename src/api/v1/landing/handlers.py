@@ -1,3 +1,5 @@
+import asyncio
+
 from django.http import HttpRequest
 from ninja import Router
 
@@ -8,6 +10,7 @@ from api.v1.landing.schema import (
 from apps.landing.actions.actions import LandingAction
 from config.containers import get_container
 from services.mapper import Mapper
+from services.notification.sms_receiver.reciever import SMSNotificationReceiver
 
 
 router = Router(tags=["Landing"])
@@ -34,3 +37,19 @@ async def get_service(
     return Mapper.dataclass_to_schema(
         obj=service, schema=ServiceDetailRetrieveSchema
     )
+
+
+# @router.post("test-sms/")
+# async def main(request: HttpRequest):
+#     container = get_container()
+#     sms: SMSNotificationReceiver = container.resolve(SMSNotificationReceiver)
+#     data = {
+#         "to": "+13126848315",
+#         "message": "test sms service",
+#         "from": "Aleksandr_test_phone",
+#         # "to": "+17639103848",
+#         # "message": "test sms service",
+#         # "from": "+13126848315",
+#     }
+#     print(f'\n\n{data=}\n\n')
+#     # asyncio.create_task(sms.receive(data))

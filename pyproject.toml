@@ -17,6 +17,7 @@ django-admin-interface = "^0.28.8"
 punq = "^0.7.0"
 django-cors-headers = "^4.4.0"
 twilio = "^9.2.3"
+pydantic-settings = "^2.4.0"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -10,7 +10,7 @@ services:
        - nginx-net
        - db-net
     volumes:
-      media_volume:/app/media
+      - media_volume:/app/media
     healthcheck:
       test: "curl --fail http://localhost:8000/api/healthcheck"
       interval: 10s

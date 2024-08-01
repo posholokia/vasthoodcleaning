@@ -11,6 +11,9 @@ from apps.landing.services.storage import (
     ISiteRepository,
     ORMSiteRepository,
 )
+from services.notification.config import BuildNotificationConfig
+from services.notification.sms_receiver.conf import SMSTwilioConfig
+from services.notification.sms_receiver.reciever import SMSNotificationReceiver
 
 
 @lru_cache(1)
@@ -21,8 +24,15 @@ def get_container() -> Container:
 def _initialize_container() -> Container:
     container = Container()
 
+    def build_sms_notifications() -> SMSNotificationReceiver:
+        config = BuildNotificationConfig.build_from_env(SMSTwilioConfig)
+        return SMSNotificationReceiver(config=config)
+
     # repository
     container.register(ISiteRepository, ORMSiteRepository)
+
+    # notification
+    container.register(SMSNotificationReceiver, factory=build_sms_notifications)
 
     # admin perms
     container.register(AdminCanAddSitePermission)

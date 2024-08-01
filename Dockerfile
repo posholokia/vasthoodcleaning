@@ -32,5 +32,7 @@ RUN chown -R app:app /app
 
 USER app
 
+RUN python3 manage.py collectstatic
+
 ENTRYPOINT [ "python3" ]
 CMD ["-m", "gunicorn", "-b", "0.0.0.0:8000", "--workers", "2", "--access-logfile", "-", "config.wsgi", "--reload" ]
