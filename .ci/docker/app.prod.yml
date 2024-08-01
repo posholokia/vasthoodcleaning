@@ -11,6 +11,7 @@ services:
        - db-net
     volumes:
       - media_volume:/app/media
+      - static_volume:/app/static
     healthcheck:
       test: "curl --fail http://localhost:8000/api/healthcheck"
       interval: 10s
@@ -45,4 +46,6 @@ networks:
 
 volumes:
   media_volume:
-    name: media_volume
+    external: true
+  static_volume:
+    external: true
