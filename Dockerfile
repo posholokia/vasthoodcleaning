@@ -26,11 +26,11 @@ COPY poetry.lock pyproject.toml ./
 RUN python3 -m poetry config virtualenvs.in-project true &&\
     python3 -m poetry install --no-cache --no-root -n --without dev
 
-COPY ./src .
-
 RUN chown -R app:app /app
 
 USER app
+
+COPY ./src .
 
 RUN python3 manage.py collectstatic
 

@@ -116,11 +116,11 @@ class FAQInline(NestedStackedInline):
 class SiteAdmin(NestedModelAdmin):
     inlines = [
         MainScreenInline,
+        AboutInline,
         OurResultsInline,
         ServiceInline,
-        AboutInline,
-        FooterInline,
         FAQInline,
+        FooterInline,
     ]
 
     def has_add_permission(self, request) -> bool:
