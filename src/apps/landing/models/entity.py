@@ -106,8 +106,8 @@ class FAQEntity:
 @dataclass
 class SiteEntity:
     id: int
-    whatsapp: Annotated[str, MinLen(1), MaxLen(16)]
-    phone: str
+    whatsapp: Annotated[str, MinLen(1), MaxLen(32)]
+    phone: Annotated[str, MinLen(1), MaxLen(32)]
     about: Optional[AboutEntity] = None
     results: Optional[ResultEntity] = None
     services: list[ServiceEntity] = field(default_factory=list)

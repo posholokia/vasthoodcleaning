@@ -4,8 +4,8 @@ from apps.landing.models.entity import ColorFontEnum
 
 
 class Site(models.Model):
-    whatsapp = models.CharField("WhatsApp", max_length=16)
-    phone = models.CharField("Phone", max_length=15)
+    whatsapp = models.CharField("WhatsApp", max_length=32)
+    phone = models.CharField("Phone", max_length=32)
 
     def __str__(self):
         return "Site landing"
