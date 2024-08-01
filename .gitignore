@@ -3,8 +3,10 @@ __pycache__
 .idea
 .env
 .ruff_cache
-core/media/*
-!core/media/.gitkeep
+src/media/*
+!src/media/.gitkeep
+src/static/*
+!src/static/.gitkeep
 *.sqlite*
 *.pyc
 .mypy_cache
