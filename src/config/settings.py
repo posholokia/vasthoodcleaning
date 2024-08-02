@@ -164,4 +164,5 @@ CORS_ALLOWED_ORIGINS = [
     "https://vasthood.com",
     "https://www.vasthood.com",
     "https://api.vasthood.com",
+    "https://web.dev.vasthood.com",
 ]
