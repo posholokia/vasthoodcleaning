@@ -141,24 +141,37 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "simple",
         },
+        "error_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "errors.log",
+            "formatter": "verbose",
+        },
+        "console_errors": {
+            "level": "ERROR",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
     },
-    'loggers': {
-        '': {
-            'level': 'DEBUG',
-            'handlers': ['console', ],
-            'propagate': True
+    "loggers": {
+        "": {
+            "level": "DEBUG",
+            "handlers": ["console"],
+            "propagate": True
         },
-        'django.db.backends': {
-            'handlers': ['console', ],
-            'level': 'DEBUG',
-            'propagate': False,
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
         },
-        'django.request': {
-            'level': 'DEBUG',
-            'handlers': ['console', ]
-        }
+        "django.request": {
+            "level": "ERROR",
+            "handlers": ["console_errors", "error_file"],
+            "propagate": False,
+        },
     },
 }
+
 
 
 CSRF_TRUSTED_ORIGINS = [
