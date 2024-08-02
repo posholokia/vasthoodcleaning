@@ -173,7 +173,6 @@ LOGGING = {
 }
 
 
-
 CSRF_TRUSTED_ORIGINS = [
     "https://api.vasthood.com",
 ]

@@ -83,7 +83,7 @@ class FAQRetrieveSchema(Schema):
 
 
 class SiteRetrieveSchema(Schema):
-    whatsapp: Annotated[str, MinLen(1), MaxLen(16)]
+    whatsapp: str
     phone: str
     about: Optional[AboutRetrieveSchema] = None
     results: Optional[ResultRetrieveSchema] = None
