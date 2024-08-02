@@ -106,7 +106,7 @@ class FAQEntity:
 @dataclass
 class SiteEntity:
     id: int
-    whatsapp: Annotated[str, MinLen(1), MaxLen(32)]
+    whatsapp: Annotated[str, MinLen(1), MaxLen(256)]
     phone: Annotated[str, MinLen(1), MaxLen(32)]
     about: Optional[AboutEntity] = None
     results: Optional[ResultEntity] = None

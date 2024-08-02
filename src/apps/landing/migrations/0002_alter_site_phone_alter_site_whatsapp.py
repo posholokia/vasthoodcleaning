@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='site',
             name='whatsapp',
-            field=models.CharField(max_length=32, verbose_name='WhatsApp'),
+            field=models.CharField(max_length=256, verbose_name='WhatsApp'),
         ),
     ]
