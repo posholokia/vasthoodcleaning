@@ -1,3 +1,4 @@
+from types import UnionType
 from typing import (
     Any,
     get_type_hints,
@@ -15,7 +16,7 @@ from django.db.models import (
 )
 
 
-T = TypeVar("T")
+TSchema = TypeVar("TSchema")
 
 
 class Mapper:
@@ -34,7 +35,7 @@ class Mapper:
             except models.ObjectDoesNotExist:
                 continue
 
-            field_type = cls._extract_field_type(field_type)
+            field_type = cls._extract_field_type_schema(field_type)
 
             if isinstance(model_field, OneToOneRel):
                 if not hasattr(instance, field_name):
@@ -58,21 +59,49 @@ class Mapper:
         return dataclass_type(**attrs)
 
     @classmethod
-    def dataclass_to_schema(cls, schema: Type[T], obj: Any) -> T:
+    def dataclass_to_schema(cls, schema: Type[TSchema], obj: Any) -> TSchema:
         """
-        Function for converting a dataclass object into a pydantic model.
-        Dont work with Union annotation
+        Функция конвертирует объекты dataclass в pydantic схему.
+        Правила:
+            1. В датаклассе должны быть все обязательные поля, которые есть
+            в схеме и с таким же названием
+            2. Не поддерживает Union аннотации
+            (за исключением <type | None = None>)
+            3. Работает с Optional[type]
+            4. Работает с VarType:
+                T = TypeVar("T")
+
+                class ASchema(BaseModel):
+                    name: str
+
+                class BSchema(BaseModel, Generic[T]):
+                    field_: T
+
+                Mapper.dataclass_to_schema(BSchema[ASchema], obj_b)
+
+            5. Поддерживает списки <list[type]> (все объекты должны быть
+            одного типа) и вложенные объекты:
+                class ASchema(BaseModel):
+                    name: str
+
+                class BSchema(BaseModel):
+                    my_field: Optional[ASchema] = None
+
+                class CSchema(BaseModel):
+                    optional_field: str | None = None
+                    list_field: list[BSchema] = Field(default_factory=list)
+
+                Mapper.dataclass_to_schema(CSchema, obj_c)
         """
         attrs = {}
-
-        for field in schema.__annotations__.keys():
+        for field in schema.__fields__.keys():
             value = getattr(obj, field)
-            sub_schema = schema.__annotations__[field]
-            field_type = cls._extract_field_type(sub_schema)
+            sub_schema = schema.__fields__[field]
+            field_type = cls._extract_field_type_schema(sub_schema.annotation)
             if (
-                isinstance(value, list)
-                and len(value) > 0
-                and hasattr(value[0], "__dataclass_fields__")
+                    isinstance(value, list)
+                    and len(value) > 0
+                    and hasattr(value[0], "__dataclass_fields__")
             ):
                 attrs[field] = [
                     cls.dataclass_to_schema(field_type, item) for item in value
@@ -84,14 +113,16 @@ class Mapper:
         return schema(**attrs)
 
     @staticmethod
-    def _extract_field_type(field_type: Any) -> Any:
+    def _extract_field_type_schema(field_type: Any) -> Any:
         if isinstance(field_type, list):
             field_type = field_type[0]
-        if hasattr(field_type, "__origin__"):
+        if isinstance(field_type, UnionType):
+            return next(t for t in field_type.__args__ if t is not type(None))
+        elif hasattr(field_type, "__origin__"):
+            if field_type.__origin__ is list:
+                return field_type.__args__[0]
             if field_type.__origin__ is Union:
                 return next(
                     t for t in field_type.__args__ if t is not type(None)
                 )
-            elif field_type.__origin__ is list:
-                return field_type.__args__[0]
         return field_type

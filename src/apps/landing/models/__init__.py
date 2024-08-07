@@ -12,7 +12,7 @@ from .entity import (
     ServiceEntity,
     SiteEntity,
 )
-from .models import (
+from .orm import (
     About,
     AboutBlock,
     Advantage,

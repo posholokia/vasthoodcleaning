@@ -34,11 +34,15 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
     - *docker_login
+    - chmod +x ./.ci/scripts/collectstatic.sh
   script:
     - docker pull $CI_REGISTRY_IMAGE
     - docker run --rm --env-file $env --network db-net $CI_REGISTRY_IMAGE -m manage migrate
+    - ./.ci/scripts/collectstatic.sh
     - docker stack deploy --with-registry-auth --resolve-image always -c ./.ci/docker/app.prod.yml back
   after_script:
+    - chmod -x ./.ci/scripts/collectstatic.sh
+    - rm ./.ci/scripts/collectstatic.sh
     - sleep 15
     - rm -r -f ~/.ssh
     - docker system prune -f -a || true

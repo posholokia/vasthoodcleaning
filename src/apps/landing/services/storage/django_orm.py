@@ -33,25 +33,27 @@ class ORMSiteRepository(ISiteRepository):
             .prefetch_related(
                 Prefetch(
                     lookup="services",
-                    queryset=Service.objects.select_related("font_color"),
+                    queryset=Service.objects.select_related(
+                        "font_color"
+                    ).order_by("id"),
                 )
             )
             .prefetch_related(
                 Prefetch(
                     lookup="about__blocks",
-                    queryset=AboutBlock.objects.all(),
+                    queryset=AboutBlock.objects.all().order_by("id"),
                 )
             )
             .prefetch_related(
                 Prefetch(
                     lookup="results__result_photos",
-                    queryset=OurResultsPhoto.objects.all(),
+                    queryset=OurResultsPhoto.objects.all().order_by("id"),
                 )
             )
             .prefetch_related(
                 Prefetch(
                     lookup="faq",
-                    queryset=FAQ.objects.all(),
+                    queryset=FAQ.objects.all().order_by("id"),
                 )
             )
             .afirst()
@@ -69,7 +71,7 @@ class ORMSiteRepository(ISiteRepository):
                 .prefetch_related(
                     Prefetch(
                         lookup="advantage",
-                        queryset=Advantage.objects.all(),
+                        queryset=Advantage.objects.all().order_by("id"),
                     )
                 )
                 .aget(service_id=service_pk)

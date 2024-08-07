@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from django.conf import settings
 from punq import Container
 
 from apps.admin_panel.permissons import AdminCanAddSitePermission
@@ -11,33 +12,42 @@ from apps.landing.services.storage import (
     ISiteRepository,
     ORMSiteRepository,
 )
-from services.notification.config import BuildNotificationConfig
-from services.notification.sms_receiver.conf import SMSTwilioConfig
+from services.notification.base import INotificationReceiver
+from services.notification.console_reciever.reciever import ConsoleNotificationReceiver
 from services.notification.sms_receiver.reciever import SMSNotificationReceiver
 
 
 @lru_cache(1)
 def get_container() -> Container:
-    return _initialize_container()
+    return ContainerFactory().initialize_container()
 
 
-def _initialize_container() -> Container:
+class ContainerFactory:
     container = Container()
 
-    def build_sms_notifications() -> SMSNotificationReceiver:
-        config = BuildNotificationConfig.build_from_env(SMSTwilioConfig)
-        return SMSNotificationReceiver(config=config)
+    def initialize_container(self) -> Container:
+        self.__init_common_containers()
 
-    # repository
-    container.register(ISiteRepository, ORMSiteRepository)
+        if settings.ENVIRON == "prod":
+            self.__init_prod_container()
+        elif settings.ENVIRON == "local":
+            self.__init_local_container()
 
-    # notification
-    container.register(SMSNotificationReceiver, factory=build_sms_notifications)
+        return self.container
 
-    # admin perms
-    container.register(AdminCanAddSitePermission)
-    container.register(AdminCanDeleteSitePermission)
+    def __init_common_containers(self) -> None:
+        # repository
+        self.container.register(ISiteRepository, ORMSiteRepository)
 
-    # actions
-    container.register(LandingAction)
-    return container
+        # admin perms
+        self.container.register(AdminCanAddSitePermission)
+        self.container.register(AdminCanDeleteSitePermission)
+
+        # actions
+        self.container.register(LandingAction)
+
+    def __init_prod_container(self) -> None:
+        self.container.register(INotificationReceiver, SMSNotificationReceiver)
+
+    def __init_local_container(self) -> None:
+        self.container.register(INotificationReceiver, ConsoleNotificationReceiver)

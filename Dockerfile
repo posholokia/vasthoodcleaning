@@ -26,13 +26,11 @@ COPY poetry.lock pyproject.toml ./
 RUN python3 -m poetry config virtualenvs.in-project true &&\
     python3 -m poetry install --no-cache --no-root -n --without dev
 
+COPY ./src .
+
 RUN chown -R app:app /app
 
 USER app
-
-COPY ./src .
-
-RUN python3 manage.py collectstatic
 
 ENTRYPOINT [ "python3" ]
 CMD ["-m", "gunicorn", "-b", "0.0.0.0:8000", "--workers", "2", "--access-logfile", "-", "config.wsgi", "--reload" ]
