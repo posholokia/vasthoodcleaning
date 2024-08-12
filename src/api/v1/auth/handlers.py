@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 
 from apps.clients.actions import AuthClientAction
 from apps.clients.services.exceptions import NotExistsRefreshToken
@@ -65,6 +66,7 @@ async def login(
         secure=True,
         httponly=True,
         samesite="Lax",
+        expires=datetime.now() + timedelta(days=1)
     )
     return response
 
