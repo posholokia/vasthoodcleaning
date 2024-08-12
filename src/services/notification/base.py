@@ -1,4 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import (
+    ABC,
+    abstractmethod,
+)
 from dataclasses import dataclass
 from typing import Any
 
@@ -7,5 +10,12 @@ from typing import Any
 class INotificationReceiver(ABC):
     @abstractmethod
     async def connect(self) -> Any: ...
+
     @abstractmethod
-    async def receive(self, data: dict) -> None: ...
+    async def receive(self, data: dict) -> None:
+        """
+        data = {
+            to: message recipient number,
+            body: message text
+        }
+        """

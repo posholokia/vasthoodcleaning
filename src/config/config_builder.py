@@ -1,6 +1,9 @@
 import os
-from typing import Type
-from typing import TypeVar
+from typing import (
+    Type,
+    TypeVar,
+)
+
 from dotenv import load_dotenv
 
 

@@ -9,9 +9,11 @@ services:
     networks:
        - nginx-net
        - db-net
+       - service-net
     volumes:
       - media_volume:/app/media
       - static_volume:/app/static
+      - logs_dir:/app/logs
     healthcheck:
       test: "curl --fail http://localhost:8000/api/healthcheck"
       interval: 10s
@@ -49,3 +51,4 @@ volumes:
     external: true
   static_volume:
     external: true
+  logs_dir:

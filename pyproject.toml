@@ -19,6 +19,7 @@ django-cors-headers = "^4.4.0"
 twilio = "^9.2.3"
 pydantic-settings = "^2.4.0"
 loguru = "^0.7.2"
+redis = "^5.0.8"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -38,7 +39,8 @@ exclude = [
     ".venv",
     "venv",
     "test",
-    ".mypy_cache"
+    ".mypy_cache",
+    "src/config/settings/__init__.py",
     ]
 
 line-length = 79

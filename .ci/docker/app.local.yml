@@ -14,6 +14,7 @@ services:
     volumes:
       - ../../src/apps:/app/apps
       - static_volume:/app/static
+      - logs_dir:/app/logs
 
 
 networks:
@@ -25,3 +26,4 @@ networks:
 volumes:
   static_volume:
     external: true
+  logs_dir:

@@ -1,11 +1,3 @@
-from asgiref.sync import async_to_sync
-from django.contrib import admin
-from django.contrib.auth.models import Group
-from nested_admin.nested import (
-    NestedModelAdmin,
-    NestedStackedInline,
-)
-
 from apps.admin_panel.permissons import AdminCanAddSitePermission
 from apps.admin_panel.permissons.permissions import (
     AdminCanDeleteSitePermission,
@@ -24,7 +16,14 @@ from apps.landing.models import (
     ServiceDetail,
     Site,
 )
+from asgiref.sync import async_to_sync
 from config.containers import get_container
+from django.contrib import admin
+from django.contrib.auth.models import Group
+from nested_admin.nested import (
+    NestedModelAdmin,
+    NestedStackedInline,
+)
 
 
 admin.site.unregister(Group)

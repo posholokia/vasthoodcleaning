@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from apps.landing.models import Site
 from apps.landing.services.storage import ISiteRepository
+
 from core.constructor.permissons import BasePermission
 
 

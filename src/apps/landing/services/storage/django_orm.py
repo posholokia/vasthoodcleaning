@@ -1,22 +1,22 @@
 from dataclasses import dataclass
 
-from django.db.models import Prefetch
-
-from apps.landing.exceptions import (
-    ServiceNotFoundError,
-    SiteNotFoundError,
-)
 from apps.landing.models import (
     AboutBlock,
     Advantage,
+    FAQ,
     OurResultsPhoto,
     Service,
     ServiceDetail,
     ServiceDetailEntity,
     Site,
-    SiteEntity, FAQ,
+    SiteEntity,
+)
+from apps.landing.services.exceptions import (
+    ServiceNotFoundError,
+    SiteNotFoundError,
 )
 from apps.landing.services.storage.base import ISiteRepository
+from django.db.models import Prefetch
 from services.mapper import Mapper
 
 

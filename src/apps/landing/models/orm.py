@@ -1,6 +1,5 @@
-from django.db import models
-
 from apps.landing.models.entity import ColorFontEnum
+from django.db import models
 
 
 class Site(models.Model):

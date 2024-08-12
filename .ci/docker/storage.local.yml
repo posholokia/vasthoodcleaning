@@ -14,6 +14,14 @@ services:
       - vhc_data:/var/lib/postgresql/data/
       - /var/run/docker.sock:/var/run/docker.sock
 
+  redis:
+    container_name: redis
+    image: public.ecr.aws/docker/library/redis:7.2.4
+    ports:
+      - "6379:6379"
+    networks:
+      - dev-net
+
 
 volumes:
   vhc_data:

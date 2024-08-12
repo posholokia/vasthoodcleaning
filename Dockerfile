@@ -28,6 +28,7 @@ RUN python3 -m poetry config virtualenvs.in-project true &&\
 
 COPY ./src .
 
+RUN mkdir "logs"
 RUN chown -R app:app /app
 
 USER app

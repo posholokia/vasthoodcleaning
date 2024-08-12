@@ -23,8 +23,7 @@ class Mapper:
     @classmethod
     def model_to_dataclass(cls, instance: Model, dataclass_type: Any) -> Any:
         """
-        Function for converting a django model object into a dataclass
-        Dont work with Union annotation.
+        Конвертация django orm моделей в объекты dataclass.
         """
         attrs = {}
         fields_ = get_type_hints(dataclass_type)
@@ -77,7 +76,7 @@ class Mapper:
                 class BSchema(BaseModel, Generic[T]):
                     field_: T
 
-                Mapper.dataclass_to_schema(BSchema[ASchema], obj_b)
+                Mapper.dataclass_to_schema(BSchema[ASchema], dataclass_obj)
 
             5. Поддерживает списки <list[type]> (все объекты должны быть
             одного типа) и вложенные объекты:
@@ -91,7 +90,7 @@ class Mapper:
                     optional_field: str | None = None
                     list_field: list[BSchema] = Field(default_factory=list)
 
-                Mapper.dataclass_to_schema(CSchema, obj_c)
+                Mapper.dataclass_to_schema(CSchema, dataclass_obj)
         """
         attrs = {}
         for field in schema.__fields__.keys():
@@ -99,9 +98,9 @@ class Mapper:
             sub_schema = schema.__fields__[field]
             field_type = cls._extract_field_type_schema(sub_schema.annotation)
             if (
-                    isinstance(value, list)
-                    and len(value) > 0
-                    and hasattr(value[0], "__dataclass_fields__")
+                isinstance(value, list)
+                and len(value) > 0
+                and hasattr(value[0], "__dataclass_fields__")
             ):
                 attrs[field] = [
                     cls.dataclass_to_schema(field_type, item) for item in value

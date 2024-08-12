@@ -1,5 +1,5 @@
-from .orm import User
 from .entity import UserEntity
+from .orm import User
 
 
 __all__ = (

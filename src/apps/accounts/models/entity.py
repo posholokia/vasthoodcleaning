@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import (
-    Annotated,
-)
+from typing import Annotated
 
 from annotated_types import (
     MaxLen,

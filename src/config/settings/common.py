@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from loguru import logger
 
 
 load_dotenv()
@@ -10,7 +11,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
-ENVIRON = os.getenv("ENVIRON")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -23,13 +23,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    "nested_admin",
+    "corsheaders",
     "apps.accounts.apps.AccountsConfig",
     "apps.landing.apps.LandingConfig",
     "apps.admin_panel.apps.AdminConfig",
-
-    "nested_admin",
-    "corsheaders",
+    "apps.clients.apps.ClientsConfig",
 ]
 
 MIDDLEWARE = [
@@ -105,68 +104,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",  # for admin
 )
 
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{levelname} {asctime} {module} {message}",
-            "style": "{",
-        },
-        "simple": {
-            "format": "{levelname} {message}",
-            "style": "{",
-        },
-    },
-    "filters": {
-        "require_debug_true": {
-            "()": "django.utils.log.RequireDebugTrue",
-        },
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "filters": ["require_debug_true"],
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
-        },
-        "error_file": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": "errors.log",
-            "formatter": "verbose",
-        },
-        "console_errors": {
-            "level": "ERROR",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        },
-    },
-    "loggers": {
-        "": {
-            "level": "DEBUG",
-            "handlers": ["console"],
-            "propagate": True
-        },
-        "django.db.backends": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
-        },
-        "django.request": {
-            "level": "ERROR",
-            "handlers": ["console_errors", "error_file"],
-            "propagate": False,
-        },
-    },
-}
-
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://api.vasthood.com",
-]
-
+# для форм в админке
 X_FRAME_OPTIONS = "ALLOWALL"
 
 # CORS
@@ -177,3 +115,29 @@ CORS_ALLOWED_ORIGINS = [
     "https://api.vasthood.com",
     "https://web.dev.vasthood.com",
 ]
+
+# Разрешаем отправлять cookie при межсайтовых запросах на разрешённые домены:
+CORS_ALLOW_CREDENTIALS = True
+
+# логгер
+logger.remove()  # Удаляем стандартный обработчик
+logger.add(
+    os.path.join(BASE_DIR, 'logs/debug.log'),
+    level='DEBUG',
+    rotation='1 MB',
+    retention='30 days',
+    format="{time} {level} {message}",
+    enqueue=True,
+    diagnose=False,
+    backtrace=False,
+)
+logger.add(
+    os.path.join(BASE_DIR, 'logs/errors.log'),
+    level='ERROR',
+    rotation='1 MB',
+    retention='30 days',
+    format="{time} {level} {message}",
+    enqueue=True,
+    diagnose=False,
+    backtrace=False,
+)
