@@ -4,13 +4,13 @@ from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.exceptions import (
     InvalidCredentials,
     JWTTokenExpired,
-    JWTTokenInvalid,
+    JWTTokenInvalid, TokenInBlacklist,
 )
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.services.validators import ClientPhoneValidator
 from services.jwt_token.exceptions import (
     DecodeJWTError,
-    TokenExpireError,
+    TokenExpireError, TokenInBlacklistError,
 )
 from services.notification.base import INotificationReceiver
 
@@ -49,6 +49,8 @@ class AuthClientAction:
             raise JWTTokenInvalid()
         except TokenExpireError:
             raise JWTTokenExpired()
+        except TokenInBlacklistError:
+            raise TokenInBlacklist()
         return access
 
     async def logout(self, refresh: str) -> None:

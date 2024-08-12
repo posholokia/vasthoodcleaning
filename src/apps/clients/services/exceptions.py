@@ -28,6 +28,12 @@ class JWTTokenExpired(BaseHTTPException):
 
 
 @dataclass(eq=False)
+class TokenInBlacklist(BaseHTTPException):
+    code: int = 401
+    message: str = "Token in blacklist"
+
+
+@dataclass(eq=False)
 class PhoneFormatError(BaseHTTPException):
     code: int = 400
     message: str = (
