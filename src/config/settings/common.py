@@ -109,7 +109,7 @@ X_FRAME_OPTIONS = "ALLOWALL"
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    "https://localhost:5173",
+    "http://localhost:5173",
     "https://vasthood.com",
     "https://www.vasthood.com",
     "https://api.vasthood.com",

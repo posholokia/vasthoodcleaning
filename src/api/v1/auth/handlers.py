@@ -62,7 +62,7 @@ async def login(
     response.set_cookie(
         key="refresh",
         value=refresh,
-        secure=True,
+        secure=False,
         httponly=True,
         samesite="Lax",
     )
