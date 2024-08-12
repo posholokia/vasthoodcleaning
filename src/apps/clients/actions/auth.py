@@ -8,8 +8,10 @@ from apps.clients.services.exceptions import (
 )
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.services.validators import ClientPhoneValidator
-from jwt import ExpiredSignatureError
-from services.jwt_token.exceptions import DecodeJWTError
+from services.jwt_token.exceptions import (
+    DecodeJWTError,
+    TokenExpireError,
+)
 from services.notification.base import INotificationReceiver
 
 
@@ -45,7 +47,7 @@ class AuthClientAction:
             access = await self.token_service.access_token(refresh)
         except DecodeJWTError:
             raise JWTTokenInvalid()
-        except ExpiredSignatureError:
+        except TokenExpireError:
             raise JWTTokenExpired()
         return access
 
@@ -54,5 +56,5 @@ class AuthClientAction:
             await self.token_service.set_blacklist(refresh)
         except DecodeJWTError:
             raise JWTTokenInvalid()
-        except ExpiredSignatureError:
+        except TokenExpireError:
             raise JWTTokenExpired()

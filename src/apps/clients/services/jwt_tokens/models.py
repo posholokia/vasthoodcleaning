@@ -24,7 +24,7 @@ class AccessToken(Token):
 @dataclass
 class RefreshToken(Token):
     token_type: TokenType = TokenType.refresh
-    lifetime: timedelta = timedelta(seconds=1)
+    lifetime: timedelta = timedelta(days=1)
     access_token_cls: AccessToken = field(default_factory=AccessToken)
     sub_claim: str = "client"
 
