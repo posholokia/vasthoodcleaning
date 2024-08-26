@@ -104,6 +104,10 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",  # for admin
 )
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://api.vasthood.com",  # для админки
+]
+
 # для форм в админке
 X_FRAME_OPTIONS = "ALLOWALL"
 
