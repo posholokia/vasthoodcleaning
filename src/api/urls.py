@@ -43,7 +43,7 @@ def healthcheck(request: HttpRequest) -> None:
 def get_webhooks(request: HttpRequest) -> HttpResponse:
     path = settings.BASE_DIR
     line_list = []
-    with open(f"{path}/log/warnings.log") as file:
+    with open(f"{path}/logs/warnings.log") as file:
         lines = file.readlines()[-10:]
         for line in lines:
             time, data = line.split("WARNING CMS WEBHOOK: body: b'")
