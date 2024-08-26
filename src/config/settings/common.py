@@ -136,6 +136,17 @@ logger.add(
     backtrace=False,
 )
 logger.add(
+    os.path.join(BASE_DIR, 'logs/warnings.log'),
+    level='WARNING',
+    rotation='1 MB',
+    retention='30 days',
+    format="{time} {level} {message}",
+    enqueue=True,
+    diagnose=False,
+    backtrace=False,
+)
+
+logger.add(
     os.path.join(BASE_DIR, 'logs/errors.log'),
     level='ERROR',
     rotation='1 MB',

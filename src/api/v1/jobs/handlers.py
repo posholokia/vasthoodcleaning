@@ -10,5 +10,9 @@ router = Router(tags=["Jobs"])
 async def take_jobs(
     request: HttpRequest
 ) -> None:
-    logger.warning("CMS WEBHOOK: {}", request.body)
+    logger.warning(
+        "CMS WEBHOOK: body: {}, header: {}",
+        request.body,
+        request.headers,
+    )
     return None
