@@ -145,7 +145,6 @@ logger.add(
     diagnose=False,
     backtrace=False,
 )
-
 logger.add(
     os.path.join(BASE_DIR, 'logs/errors.log'),
     level='ERROR',

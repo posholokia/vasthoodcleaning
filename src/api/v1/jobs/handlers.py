@@ -1,6 +1,7 @@
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from ninja import Router
 from loguru import logger
+from django.shortcuts import render
 
 
 router = Router(tags=["Jobs"])

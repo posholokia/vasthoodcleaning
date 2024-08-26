@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Данные события</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .text_blue {
+            color: #74a6f7;
+        }
+        .text_red {
+            color: #fc686f;
+        }
+    </style>
+</head>
+<body>
+    {% for obj in data %}
+        <div class="{% if forloop.counter|divisibleby:2 %}text_red{% else %}text_blue{% endif %}">
+            <pre>
+                <br><strong>{{ obj.0 | safe }}</strong>: {{ obj.1 | safe }}
+            </pre>
+        </div>
+    {% endfor %}
+</body>
+</html>
+
