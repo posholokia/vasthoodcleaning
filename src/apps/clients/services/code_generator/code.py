@@ -1,6 +1,6 @@
 import time
 import random
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from apps.clients.services.code_generator.exceptions import (
     TooOftenSendingError,
@@ -13,9 +13,9 @@ from django.conf import settings
 @dataclass
 class VerificationCodeService:
     storage: ICodeStorage
-    code_interval: int = 60  # допустимый интервал между смс
+    code_interval: int = field(init=False, default=60)  # допустимый интервал между смс
 
-    async def generate_code(self, phone: str) -> None:
+    async def generate_code(self, phone: str) -> str:
         if settings.CONF.environ == EnvironVariables.prod:
             digest = "0123456789"
         else:
@@ -32,6 +32,7 @@ class VerificationCodeService:
                 raise TooOftenSendingError()
 
         await self.storage.save_code(phone, f"{code}-{created_at}")
+        return code
 
     async def check_code(self, phone: str, user_code: str) -> bool:
         code_with_exp = await self.storage.get_code(phone)

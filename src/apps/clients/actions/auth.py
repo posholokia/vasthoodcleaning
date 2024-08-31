@@ -4,7 +4,7 @@ from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.exceptions import (
     InvalidCredentials,
     JWTTokenExpired,
-    JWTTokenInvalid, TokenInBlacklist,
+    JWTTokenInvalid, TokenInBlacklist, SmsServiceError,
 )
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.services.validators import ClientPhoneValidator
@@ -13,6 +13,7 @@ from services.jwt_token.exceptions import (
     TokenExpireError, TokenInBlacklistError,
 )
 from services.notification.base import INotificationReceiver
+from services.notification.exceptions import SendSmsError
 
 
 @dataclass
@@ -35,12 +36,15 @@ class AuthClientAction:
     async def send_code(self, phone: str) -> None:
         await self.validator.validate(phone)
         code = await self.code_service.generate_code(phone)
-        await self.notification_service.receive(
-            {
-                "to": phone,
-                "message": f"You code {code}",
-            }
-        )
+        try:
+            await self.notification_service.receive(
+                {
+                    "to": phone,
+                    "message": f"You code {code}",
+                }
+            )
+        except SendSmsError:
+            raise SmsServiceError()
 
     async def refresh_token(self, refresh: str) -> str:
         try:

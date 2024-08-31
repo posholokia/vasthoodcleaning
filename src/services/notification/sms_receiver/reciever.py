@@ -6,6 +6,8 @@ from services.notification.base import INotificationReceiver
 from twilio.base.exceptions import TwilioException
 from twilio.rest import Client
 
+from services.notification.exceptions import SendSmsError
+
 
 @dataclass
 class SMSNotificationReceiver(INotificationReceiver):
@@ -26,3 +28,4 @@ class SMSNotificationReceiver(INotificationReceiver):
             )
         except TwilioException as e:
             logger.error("Ошибка отправки сообщения: {}", e)
+            raise SendSmsError(e)

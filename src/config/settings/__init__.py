@@ -4,6 +4,7 @@ from .database import *
 from .redis import RedisConf
 from .services import ServiceConf
 from .twilio_config import SMSTwilioConfig
+from .logger import logger  # noqa
 
 
 class Configs(
