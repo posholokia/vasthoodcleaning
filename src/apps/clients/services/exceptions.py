@@ -40,3 +40,9 @@ class PhoneFormatError(BaseHTTPException):
         "Invalid phone format, phone must "
         "start with + and contain 10-15 digits."
     )
+
+
+@dataclass(eq=False)
+class SmsServiceError(BaseHTTPException):
+    code: int = 503
+    message: str = "The SMS service is temporarily unavailable."

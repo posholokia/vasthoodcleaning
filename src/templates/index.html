@@ -10,10 +10,10 @@
             margin: 0;
         }
         .text_blue {
-            color: #74a6f7;
+            color: #224e9f;
         }
         .text_red {
-            color: #fc686f;
+            color: #b24048;
         }
     </style>
 </head>
@@ -21,7 +21,7 @@
     {% for obj in data %}
         <div class="{% if forloop.counter|divisibleby:2 %}text_red{% else %}text_blue{% endif %}">
             <pre>
-                <br><strong>{{ obj.0 | safe }}</strong>: {{ obj.1 | safe }}
+                <br>{{ obj | safe }}
             </pre>
         </div>
     {% endfor %}

@@ -1,0 +1,2 @@
+class SendSmsError(Exception):
+    pass

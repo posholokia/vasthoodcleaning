@@ -2,7 +2,7 @@ from abc import (
     ABC,
     abstractmethod,
 )
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from apps.clients.services.code_generator.exceptions import SaveCodeError
 from services.redis_pool.connection import RedisPool
@@ -23,7 +23,7 @@ class ICodeStorage(ABC):
 @dataclass
 class RedisCodeStorage(ICodeStorage):
     conn: RedisPool
-    code_exp: int = 120  # срок хранения кода
+    code_exp: int = field(init=False, default=120)  # срок хранения кода
 
     async def save_code(self, phone: str, code: str) -> None:
         redis = await self.conn()
