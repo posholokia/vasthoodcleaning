@@ -32,7 +32,7 @@ class Token:
     """Базовая модель jwt токена"""
 
     algorithm: str = "HS512"
-    secret_key: str = settings.CONF.crypto_key
+    secret_key: str = settings.conf.crypto_key
     token_type: TokenType = TokenType.undefined
     _payload: dict = field(default_factory=dict)
     lifetime: timedelta = timedelta(days=1)

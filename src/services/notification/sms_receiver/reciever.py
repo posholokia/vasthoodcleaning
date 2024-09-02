@@ -6,11 +6,13 @@ from services.notification.base import INotificationReceiver
 from twilio.base.exceptions import TwilioException
 from twilio.rest import Client
 
+from services.notification.exceptions import SendSmsError
+
 
 @dataclass
 class SMSNotificationReceiver(INotificationReceiver):
     async def connect(self) -> Client:
-        client = Client(settings.CONF.account_sid, settings.CONF.auth_token)
+        client = Client(settings.conf.account_sid, settings.conf.auth_token)
         return client
 
     async def receive(self, data: dict) -> None:
@@ -22,7 +24,8 @@ class SMSNotificationReceiver(INotificationReceiver):
             client.messages.create(
                 to=data.get("to"),
                 body=data.get("message"),
-                from_=settings.CONF.from_number,
+                from_=settings.conf.from_number,
             )
         except TwilioException as e:
             logger.error("Ошибка отправки сообщения: {}", e)
+            raise SendSmsError(e)

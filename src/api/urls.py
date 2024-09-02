@@ -46,36 +46,43 @@ def get_webhooks(request: HttpRequest) -> HttpResponse:
     with open(f"{path}/logs/warnings.log") as file:
         lines = file.readlines()[-10:]
         for line in lines:
+            logger.info("{}", line)
             time, data = line.split("WARNING CMS WEBHOOK: body: b'")
             data = data.split("', header:")[0].rstrip(",\n").rstrip("'\n")
             line_list.append((time, json.loads(data.encode())))
 
-    html = [dict_render(obj[1]) for obj in line_list]
+    html = [dict_render(time_log=obj[0], data=obj[1]) for obj in line_list]
     return render(
         request,
         "index.html",
-        {"data": [(time, obj) for obj in html]}
+        {"data": [obj for obj in html]}
     )
 
 
-def dict_render(data: dict[str, str | dict[str, str]], deep=0) -> str:
+def dict_render(data: dict[str, str | dict[str, str]],  time_log="", deep=0) -> str:
+    logger.info("data: {} | {}", type(data), data)
     tab = " " * 4
     res = "{\n"
+
+    time_log_line = f"<strong>{time_log}</strong>" if time_log else ""
+    if isinstance(data, str):
+        res += tab * (deep + 1) + data + "\n" + tab * deep + "}"
+        return res
     deep += 1
     for key, value in data.items():
         res += tab * deep + f"{key}:  "
 
         if isinstance(value, dict):
-            res += dict_render(value, deep) + ",\n"
+            res += dict_render(value, deep=deep) + ",\n"
         elif isinstance(value, list):
             res += "["
             for item in value:
-                res += "\n" + (tab * (deep+1)) + (dict_render(item, deep+1) + ",\n" + tab * deep)
+                res += "\n" + (tab * (deep+1)) + (dict_render(item, deep=deep+1) + ",\n" + tab * deep)
             res += "],\n"
         else:
             res += str(value) + ",\n"
     res += tab * (deep - 1) + "}"
-    return res
+    return time_log_line + res
 
 
 api.add_router("v1/", v1_router)
