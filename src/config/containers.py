@@ -33,17 +33,14 @@ from services.notification.console_reciever.reciever import (
 )
 from services.notification.sms_receiver.reciever import SMSNotificationReceiver
 from services.redis_pool.connection import RedisPool
-from loguru import logger
 
 
 @lru_cache(1)
 def get_container() -> Container:
-    match settings.CONF.environ:
+    match settings.conf.environ:
         case EnvironVariables.local:
-            logger.debug("call local container ")
             return _get_test_container()
         case EnvironVariables.prod:
-            logger.debug("call prod container ")
             return _get_main_container()
     raise Exception("Для этого типа окружения не установлен контейнер")
 
@@ -73,10 +70,10 @@ class DiContainer:
 
     def __init_redis_containers(self) -> None:
         self.builder.register(
-            "RedisCode", RedisPool, db_number=settings.CONF.redis_db_code,
+            "RedisCode", RedisPool, db_number=settings.conf.redis_db_code,
         )
         self.builder.register(
-            "RedisToken", RedisPool, db_number=settings.CONF.redis_db_token,
+            "RedisToken", RedisPool, db_number=settings.conf.redis_db_token,
         )
         self.builder.register(
             ICodeStorage,

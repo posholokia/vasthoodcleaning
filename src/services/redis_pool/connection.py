@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from config.settings import CONF
+from config.settings import conf
 from redis import asyncio as aioredis
 
 
@@ -10,10 +10,10 @@ class RedisPool:
 
     async def __call__(self) -> aioredis.Redis:
         conn = aioredis.Redis(
-            host=CONF.redis_host,
-            username=CONF.redis_user,
-            password=CONF.redis_pass,
-            port=CONF.redis_port,
+            host=conf.redis_host,
+            username=conf.redis_user,
+            password=conf.redis_pass,
+            port=conf.redis_port,
             db=self.db_number,
         )
         return conn

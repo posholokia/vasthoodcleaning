@@ -1,0 +1,2 @@
+class CRMRequestError(Exception):
+    pass

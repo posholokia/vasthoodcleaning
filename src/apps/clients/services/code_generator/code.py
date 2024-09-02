@@ -16,7 +16,7 @@ class VerificationCodeService:
     code_interval: int = field(init=False, default=60)  # допустимый интервал между смс
 
     async def generate_code(self, phone: str) -> str:
-        if settings.CONF.environ == EnvironVariables.prod:
+        if settings.conf.environ == EnvironVariables.prod:
             digest = "0123456789"
         else:
             digest = "1"  # не для прода код всегда 111111
