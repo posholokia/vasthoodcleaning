@@ -11,11 +11,11 @@ from apps.landing.models import (
     Site,
     SiteEntity,
 )
-from apps.landing.services.exceptions import (
+from apps.landing.exceptions import (
     ServiceNotFoundError,
     SiteNotFoundError,
 )
-from apps.landing.services.storage.base import ISiteRepository
+from apps.landing.storage import ISiteRepository
 from django.db.models import Prefetch
 from services.mapper import Mapper
 

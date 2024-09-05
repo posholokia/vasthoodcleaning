@@ -18,4 +18,6 @@ router = Router(tags=["Clients"])
 async def test_auth(
     request: HttpRequest,
 ) -> ResponseStatusSchema:
-    return ResponseStatusSchema(response=f"Successful auth {request.auth}")
+    return ResponseStatusSchema(
+        response=f"Successful auth {request.auth}"  # type: ignore
+    )

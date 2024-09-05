@@ -4,7 +4,7 @@ from apps.landing.models import (
     ServiceDetailEntity,
     SiteEntity,
 )
-from apps.landing.services.storage import ISiteRepository
+from apps.landing.storage import ISiteRepository
 
 
 @dataclass

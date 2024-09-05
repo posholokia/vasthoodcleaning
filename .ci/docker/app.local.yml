@@ -15,7 +15,12 @@ services:
       - ../../src/apps:/app/apps
       - static_volume:/app/static
       - logs_dir:/app/logs
-
+    healthcheck:
+      test: "curl --fail http://localhost:8000/api/healthcheck"
+      interval: 2s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
 
 networks:
   dev-net:

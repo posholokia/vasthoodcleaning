@@ -1,8 +1,8 @@
 from .auth import AuthClientAction
-from .client import ClientAction
+from .client import WebhookClientAction
 
 
 __all__ = (
     "AuthClientAction",
-    "ClientAction",
+    "WebhookClientAction",
 )

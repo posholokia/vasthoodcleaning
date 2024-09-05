@@ -4,7 +4,7 @@ from apps.admin_panel.permissons import AdminCanAddSitePermission
 from apps.admin_panel.permissons.permissions import (
     AdminCanDeleteSitePermission,
 )
-from apps.clients.actions import AuthClientAction
+from apps.clients.actions import AuthClientAction, WebhookClientAction
 from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.code_generator.storage import (
     ICodeStorage,
@@ -13,9 +13,14 @@ from apps.clients.services.code_generator.storage import (
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.services.jwt_tokens.storage.base import ITokenStorage
 from apps.clients.services.jwt_tokens.storage.cache import RedisTokenStorage
-from apps.clients.services.validators import ClientPhoneValidator
+from apps.clients.storage.base import IClientRepository
+from apps.clients.storage.orm import ORMClientRepository
+from apps.clients.validators import ClientPhoneValidator
+from apps.jobs.actions.job import WebhookJobAction
+from apps.jobs.storage.base import IJobRepository
+from apps.jobs.storage.orm import ORMJobRepository
 from apps.landing.actions.actions import LandingAction
-from apps.landing.services.storage import (
+from apps.landing.storage import (
     ISiteRepository,
     ORMSiteRepository,
 )
@@ -33,6 +38,7 @@ from services.notification.console_reciever.reciever import (
 )
 from services.notification.sms_receiver.reciever import SMSNotificationReceiver
 from services.redis_pool.connection import RedisPool
+from services.webhook.event_router import WebhookEventRouter
 
 
 @lru_cache(1)
@@ -64,7 +70,7 @@ class DiContainer:
         self.__init_permissions_containers()
         self.__init_validator_containers()
         self.__init_action_containers()
-
+        self.__init_webhook_container()
         self.container = self.builder.build()
         return self.container
 
@@ -88,6 +94,8 @@ class DiContainer:
 
     def __init_repository_containers(self) -> None:
         self.builder.register(ISiteRepository, ORMSiteRepository)
+        self.builder.register(IClientRepository, ORMClientRepository)
+        self.builder.register(IJobRepository, ORMJobRepository)
 
     def __init_permissions_containers(self) -> None:
         self.builder.register(
@@ -100,6 +108,8 @@ class DiContainer:
     def __init_action_containers(self) -> None:
         self.builder.register(LandingAction, LandingAction)
         self.builder.register(AuthClientAction, AuthClientAction)
+        self.builder.register(WebhookClientAction, WebhookClientAction)
+        self.builder.register(WebhookJobAction, WebhookJobAction)
 
     def __init_validator_containers(self) -> None:
         self.builder.register(ClientPhoneValidator, ClientPhoneValidator)
@@ -111,6 +121,9 @@ class DiContainer:
             INotificationReceiver,
             SMSNotificationReceiver,
         )
+
+    def __init_webhook_container(self) -> None:
+        self.builder.register(WebhookEventRouter, WebhookEventRouter)
 
 
 class DiTestContainer:
