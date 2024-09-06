@@ -1,5 +1,7 @@
 from functools import lru_cache
 
+from ninja.security import APIKeyHeader
+
 from apps.admin_panel.permissons import AdminCanAddSitePermission
 from apps.admin_panel.permissons.permissions import (
     AdminCanDeleteSitePermission,
@@ -32,6 +34,7 @@ from core.di_container import (
     TestContainer,
     Dependency as Dep,
 )
+from core.security.webhook_auth import ApiKey, ApiKeyLocal
 from services.notification.base import INotificationReceiver
 from services.notification.console_reciever.reciever import (
     ConsoleNotificationReceiver,
@@ -121,6 +124,7 @@ class DiContainer:
             INotificationReceiver,
             SMSNotificationReceiver,
         )
+        self.builder.register(APIKeyHeader, ApiKey)
 
     def __init_webhook_container(self) -> None:
         self.builder.register(WebhookEventRouter, WebhookEventRouter)
@@ -134,5 +138,9 @@ class DiTestContainer:
         self.container = self.container.with_overridden(
             INotificationReceiver,
             ConsoleNotificationReceiver,
+        )
+        self.container = self.container.with_overridden(
+            APIKeyHeader,
+            ApiKeyLocal
         )
         return self.container
