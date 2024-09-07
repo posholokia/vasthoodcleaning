@@ -10,8 +10,8 @@ from core.constructor.permissons import BasePermission
 class AdminCanAddSitePermission(BasePermission):
     repository: ISiteRepository
 
-    async def has_permission(self) -> bool:
-        if await Site.objects.aexists():
+    def has_permission(self) -> bool:
+        if Site.objects.exists():
             return False
         return True
 
@@ -20,7 +20,7 @@ class AdminCanAddSitePermission(BasePermission):
 class AdminCanDeleteSitePermission(BasePermission):
     repository: ISiteRepository
 
-    async def has_permission(self) -> bool:
-        if await Site.objects.aexists():
+    def has_permission(self) -> bool:
+        if Site.objects.exists():
             return False
         return True

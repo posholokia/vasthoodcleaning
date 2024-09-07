@@ -1,15 +1,15 @@
+import redis
 from dataclasses import dataclass
 
 from config.settings import conf
-from redis import asyncio as aioredis
 
 
 @dataclass
 class RedisPool:
     db_number: int
 
-    async def __call__(self) -> aioredis.Redis:
-        conn = aioredis.Redis(
+    def __call__(self) -> redis.Redis:
+        conn = redis.Redis(
             host=conf.redis_host,
             username=conf.redis_user,
             password=conf.redis_pass,

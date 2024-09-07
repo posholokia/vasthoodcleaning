@@ -11,16 +11,16 @@ from services.notification.exceptions import SendSmsError
 
 @dataclass
 class SMSNotificationReceiver(INotificationReceiver):
-    async def connect(self) -> Client:
+    def connect(self) -> Client:
         client = Client(settings.conf.account_sid, settings.conf.auth_token)
         return client
 
-    async def receive(self, data: dict) -> None:
+    def receive(self, data: dict) -> None:
         assert data.get("to"), "Missing key 'to' in data to send"
         assert data.get("message"), "Missing key 'message' in data to send"
 
         try:
-            client = await self.connect()
+            client = self.connect()
             client.messages.create(
                 to=data.get("to"),
                 body=data.get("message"),

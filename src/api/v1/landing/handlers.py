@@ -13,23 +13,23 @@ router = Router(tags=["Landing"])
 
 
 @router.get("site/", response=SiteRetrieveSchema)
-async def get_landing(request: HttpRequest) -> SiteRetrieveSchema:
+def get_landing(request: HttpRequest) -> SiteRetrieveSchema:
     container = get_container()
     action: LandingAction = container.resolve(LandingAction)
 
-    site = await action.get_site()
+    site = action.get_site()
     return Mapper.dataclass_to_schema(obj=site, schema=SiteRetrieveSchema)
 
 
 @router.get("service/{service_id}/", response=ServiceDetailRetrieveSchema)
-async def get_service(
+def get_service(
     request: HttpRequest,
     service_id: int,
 ) -> ServiceDetailRetrieveSchema:
     container = get_container()
     action: LandingAction = container.resolve(LandingAction)
 
-    service = await action.get_service(service_id)
+    service = action.get_service(service_id)
     return Mapper.dataclass_to_schema(
         obj=service, schema=ServiceDetailRetrieveSchema
     )

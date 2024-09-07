@@ -9,7 +9,7 @@ from services.redis_pool.connection import RedisPool
 class RedisTokenStorage(ITokenStorage):
     conn: RedisPool
 
-    async def set_token(
+    def set_token(
         self,
         key: str,
         value: str,
@@ -22,8 +22,8 @@ class RedisTokenStorage(ITokenStorage):
         value - токен
         expire - временная метка окончания срока действия токена
         """
-        redis = await self.conn()
-        result: bool = await redis.set(
+        redis = self.conn()
+        result: bool = redis.set(
             name=key,
             value=value,
             exat=round(expire),
@@ -36,9 +36,9 @@ class RedisTokenStorage(ITokenStorage):
             )
         return result
 
-    async def get_token(self, key: str, *args, **kwargs) -> str | None:
-        redis = await self.conn()
-        value: bytes = await redis.get(key)
+    def get_token(self, key: str, *args, **kwargs) -> str | None:
+        redis = self.conn()
+        value: bytes = redis.get(key)
 
         if value is None:
             return value

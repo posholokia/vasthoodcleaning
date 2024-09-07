@@ -22,9 +22,9 @@ from services.mapper import Mapper
 
 @dataclass
 class ORMSiteRepository(ISiteRepository):
-    async def get(self) -> SiteEntity:
+    def get(self) -> SiteEntity:
         site = (
-            await Site.objects.select_related(
+            Site.objects.select_related(
                 "about",
                 "results",
                 "main_screen",
@@ -56,15 +56,15 @@ class ORMSiteRepository(ISiteRepository):
                     queryset=FAQ.objects.all().order_by("id"),
                 )
             )
-            .afirst()
+            .first()
         )
         if site is None:
             raise SiteNotFoundError()
         return Mapper.model_to_dataclass(site, SiteEntity)
 
-    async def get_service_detail(self, service_pk: int) -> ServiceDetailEntity:
+    def get_service_detail(self, service_pk: int) -> ServiceDetailEntity:
         try:
-            service = await (
+            service = (
                 ServiceDetail.objects.select_related(
                     "service", "service__font_color"
                 )
@@ -74,7 +74,7 @@ class ORMSiteRepository(ISiteRepository):
                         queryset=Advantage.objects.all().order_by("id"),
                     )
                 )
-                .aget(service_id=service_pk)
+                .get(service_id=service_pk)
             )
         except ServiceDetail.DoesNotExist:
             raise ServiceNotFoundError()

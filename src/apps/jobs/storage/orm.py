@@ -3,13 +3,14 @@ from datetime import datetime
 
 from apps.jobs.models import JobStatus, JobEntity, JobModel
 from apps.jobs.storage.base import IJobRepository
+from asgiref.sync import sync_to_async
 
 
 @dataclass
 class ORMJobRepository(IJobRepository):
     model: JobModel = field(init=False, default=JobModel)
 
-    async def create(
+    def create(
         self,
         pk: str,
         schedule: datetime,
@@ -21,7 +22,7 @@ class ORMJobRepository(IJobRepository):
     ):
         if last_update is None:
             last_update = datetime.now()
-        await self.model.objects.acreate(
+        self.model.objects.create(
             pk=pk,
             schedule=schedule,
             address=address,
@@ -31,16 +32,19 @@ class ORMJobRepository(IJobRepository):
             last_updated=last_update,
         )
 
-    async def list_by_client(self, client_phone: str) -> list[JobEntity]:
-        orm_result = await self.model.objects.filter(client__phone=client_phone)
+    def list_by_client(self, client_phone: str) -> list[JobEntity]:
+        orm_result = self.model.objects.filter(client__phone=client_phone)
         return [client.to_entity() for client in orm_result]
 
-    async def exists(self, pk) -> bool:
-        return await self.model.objects.filter(pk=pk).aexists()
+    def exists(self, pk) -> bool:
+        return self.model.objects.filter(pk=pk).exists()
 
-    async def get_by_id(self, pk: str) -> JobEntity:
-        orm_result = await self.model.objects.aget(pk=pk)
+    def exists_by_client(self, pk: str, phone: str) -> bool:
+        return self.model.objects.filter(pk=pk, client__phone=phone).exists()
+
+    def get_by_id(self, pk: str) -> JobEntity:
+        orm_result = self.model.objects.get(pk=pk)
         return orm_result.to_entity()
 
-    async def update(self, pk: str, **kwargs) -> None:
-        await self.model.objects.filter(pk=pk).aupdate(**kwargs)
+    def update(self, pk: str, **kwargs) -> None:
+        self.model.objects.filter(pk=pk).update(**kwargs)

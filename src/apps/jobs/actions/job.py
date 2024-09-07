@@ -2,28 +2,40 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
-from apps.jobs.models import JobStatus, JobEntity
+from apps.jobs.models import (
+    JobStatus,
+    JobEntity,
+    JobDetailEntity,
+    DiscountType,
+)
+from apps.jobs.services.parser import JobDetailJsonParser
+
+from services.cache import cache_for_minutes
 from apps.jobs.storage.base import IJobRepository
 from loguru import logger
 
+from services.crm.base import ICRM
+
 
 @dataclass
-class WebhookJobAction:
+class JobAction:
     """
     Данные записываются по вебхукам, так как есть вероятность,
     что некоторые вкбхуки не придут или придут с задержкой,
     сценарии требуют дополнительных проверок и действий
     """
     __repository: IJobRepository
+    __crm_interface: ICRM
+    __job_parser: JobDetailJsonParser
     date_format: str = field(init=False, default="%Y-%m-%dT%H:%M:%S%z")
 
-    async def create(
+    def create(
         self,
         job_data: dict[str, Any],
     ) -> None:
         # проверяем что работы еще нет
         job_id = job_data["id"]
-        if await self.__repository.exists(pk=job_id):
+        if self.__repository.exists(pk=job_id):
             return
 
         schedule = datetime.strptime(
@@ -38,7 +50,7 @@ class WebhookJobAction:
         address = self._get_address_string(job_data["address"])
         logger.warning("test logger")
         # создаем работу
-        await self.__repository.create(
+        self.__repository.create(
             pk=job_id,
             schedule=schedule,
             address=address,
@@ -48,15 +60,36 @@ class WebhookJobAction:
             last_update=last_update,
         )
 
-    async def get_list(self, client_phone: str) -> list[JobEntity]:
-        return await self.__repository.list_by_client(client_phone)
+    def get_list(self, client_phone: str) -> list[JobEntity]:
+        return self.__repository.list_by_client(client_phone)
 
-    async def exists(self, pk: str) -> bool:
-        return await self.__repository.exists(pk)
+    @cache_for_minutes(1)
+    def get_job_detail(self, job_id: str) -> JobDetailEntity:
+        current_job = self.__repository.get_by_id(job_id)
+        job_data = self.__crm_interface.get_job_detail(job_id)
+        job_detail_entity = self.__job_parser.parse_data(job_data)
 
-    async def update(self, job_data: dict) -> None:
+        job_cost = self._calculate_job_cost(job_detail_entity)
+        if current_job.total_cost != job_cost:
+            self.__repository.update(pk=job_id, total_cost=job_cost)
+        return job_detail_entity
+
+    @staticmethod
+    def _calculate_job_cost(job: JobDetailEntity) -> int:
+        parts = sum([part.cost for part in job.parts])
+        materials = job.materials.total_cost
+        discount = job.discount.value
+        if job.discount.kind is DiscountType.fixed:
+            return parts + materials - discount
+        else:
+            return round((parts + materials) * (1 - (discount / 10000)))
+
+    def exists(self, pk: str) -> bool:
+        return self.__repository.exists(pk)
+
+    def update(self, job_data: dict) -> None:
         # получаем работу (уже должно быть проверено, что она существует)
-        job = await self.__repository.get_by_id(job_data["id"])
+        job = self.__repository.get_by_id(job_data["id"])
         # сверяем дату последнего обновления в БД с текущими данными,
         # чтобы проверить актуальность данных
         new_update_datetime = datetime.strptime(
@@ -73,7 +106,7 @@ class WebhookJobAction:
             self.date_format
         )
         job.last_updated = new_update_datetime
-        await self.__repository.update(
+        self.__repository.update(
             pk=job.id,
             schedule=job.schedule,
             address=job.address,

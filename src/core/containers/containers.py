@@ -6,7 +6,7 @@ from apps.admin_panel.permissons import AdminCanAddSitePermission
 from apps.admin_panel.permissons.permissions import (
     AdminCanDeleteSitePermission,
 )
-from apps.clients.actions import AuthClientAction, WebhookClientAction
+from apps.clients.actions import AuthClientAction, ClientAction
 from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.code_generator.storage import (
     ICodeStorage,
@@ -18,7 +18,8 @@ from apps.clients.services.jwt_tokens.storage.cache import RedisTokenStorage
 from apps.clients.storage.base import IClientRepository
 from apps.clients.storage.orm import ORMClientRepository
 from apps.clients.validators import ClientPhoneValidator
-from apps.jobs.actions.job import WebhookJobAction
+from apps.jobs.actions.job import JobAction
+from apps.jobs.services.parser import JobDetailJsonParser
 from apps.jobs.storage.base import IJobRepository
 from apps.jobs.storage.orm import ORMJobRepository
 from apps.landing.actions.actions import LandingAction
@@ -28,13 +29,15 @@ from apps.landing.storage import (
 )
 from config.settings.services import EnvironVariables
 from config import settings
-from core.di_container import (
+from core.containers.di_container import (
     Container,
     ContainerBuilder,
     TestContainer,
     Dependency as Dep,
 )
-from core.security.webhook_auth import ApiKey, ApiKeyLocal
+from core.security.auth.webhook import ApiKey, ApiKeyLocal
+from services.crm.base import ICRM
+from services.crm.house_pro.interface import HouseProCRM
 from services.notification.base import INotificationReceiver
 from services.notification.console_reciever.reciever import (
     ConsoleNotificationReceiver,
@@ -85,6 +88,9 @@ class DiContainer:
             "RedisToken", RedisPool, db_number=settings.conf.redis_db_token,
         )
         self.builder.register(
+            "RedisCache", RedisPool, db_number=settings.conf.redis_db_cache,
+        )
+        self.builder.register(
             ICodeStorage,
             RedisCodeStorage,
             conn=Dep("RedisCode")
@@ -111,8 +117,8 @@ class DiContainer:
     def __init_action_containers(self) -> None:
         self.builder.register(LandingAction, LandingAction)
         self.builder.register(AuthClientAction, AuthClientAction)
-        self.builder.register(WebhookClientAction, WebhookClientAction)
-        self.builder.register(WebhookJobAction, WebhookJobAction)
+        self.builder.register(ClientAction, ClientAction)
+        self.builder.register(JobAction, JobAction)
 
     def __init_validator_containers(self) -> None:
         self.builder.register(ClientPhoneValidator, ClientPhoneValidator)
@@ -125,6 +131,8 @@ class DiContainer:
             SMSNotificationReceiver,
         )
         self.builder.register(APIKeyHeader, ApiKey)
+        self.builder.register(ICRM, HouseProCRM)
+        self.builder.register(JobDetailJsonParser, JobDetailJsonParser)
 
     def __init_webhook_container(self) -> None:
         self.builder.register(WebhookEventRouter, WebhookEventRouter)

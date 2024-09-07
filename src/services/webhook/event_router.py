@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from enum import Enum
 
-from apps.clients.actions import WebhookClientAction
-from apps.jobs.actions.job import WebhookJobAction
+from apps.clients.actions import ClientAction
+from apps.jobs.actions.job import JobAction
 from loguru import logger
 
 
@@ -15,10 +15,10 @@ class AllowedEvents(Enum):
 
 @dataclass
 class WebhookEventRouter:
-    __client_action: WebhookClientAction
-    __job_action: WebhookJobAction
+    __client_action: ClientAction
+    __job_action: JobAction
 
-    async def route_event(self, event_data: dict):
+    def route_event(self, event_data: dict):
         try:
             event_type_str = event_data["event"]
             event_type = AllowedEvents(event_type_str)
@@ -34,7 +34,7 @@ class WebhookEventRouter:
         if event_type is AllowedEvents.customer_create:
             try:
                 customer = event_data["customer"]
-                await self.__client_action.create_if_not_exists(customer)
+                self.__client_action.create_if_not_exists(customer)
             except KeyError:
                 logger.error(
                     "В событии customer.create е найден ключ 'customer': {}",
@@ -44,7 +44,7 @@ class WebhookEventRouter:
         elif event_type is AllowedEvents.customer_delete:
             try:
                 customer = event_data["customer"]
-                await self.__client_action.delete_customer(customer)
+                self.__client_action.delete_customer(customer)
             except KeyError:
                 logger.error(
                     "В событии customer.delete е найден ключ 'customer': {}",
@@ -54,8 +54,8 @@ class WebhookEventRouter:
         elif event_type is AllowedEvents.job_created:
             try:
                 customer_data = event_data["job"]["customer"]
-                await self.__client_action.create_if_not_exists(customer_data)
-                await self.__job_action.create(event_data["job"])
+                self.__client_action.create_if_not_exists(customer_data)
+                self.__job_action.create(event_data["job"])
             except KeyError:
                 logger.error(
                     "В событии job.create е найден ключ "
@@ -63,12 +63,12 @@ class WebhookEventRouter:
                     event_data,
                 )
         elif event_type is AllowedEvents.job_updated:
-            if await self.__job_action.exists(event_data["job"]["id"]):
-                await self.__job_action.update(event_data["job"])
+            if self.__job_action.exists(event_data["job"]["id"]):
+                self.__job_action.update(event_data["job"])
             else:
                 customer_data = event_data["job"]["customer"]
-                await self.__client_action.create_if_not_exists(customer_data)
-                await self.__job_action.create(event_data["job"])
+                self.__client_action.create_if_not_exists(customer_data)
+                self.__job_action.create(event_data["job"])
 
 
 if __name__ == '__main__':

@@ -9,31 +9,31 @@ from apps.clients.storage.base import IClientRepository
 class ORMClientRepository(IClientRepository):
     model: CustomerModel = field(init=False, default=CustomerModel)
 
-    async def create_if_not_exists(self, pk: str, phone: str) -> None:
-        if not await (
+    def create_if_not_exists(self, pk: str, phone: str) -> None:
+        if not (
                 self.model.objects.
                 filter(pk=pk, phone=phone)
-                .aexists()
+                .exists()
         ):
             try:
-                await self.model.objects.acreate(pk=pk, phone=phone)
+                self.model.objects.create(pk=pk, phone=phone)
             except IntegrityError:
-                if not await (
+                if not (
                         self.model.objects.
                         filter(pk=pk, phone=phone)
-                        .aexists()
+                        .exists()
                 ):
                     raise
 
-    async def get(self, phone: str) -> ClientEntity:
-        orm_result = await self.model.objects.filter(phone=phone)
+    def get(self, phone: str) -> ClientEntity:
+        orm_result = self.model.objects.filter(phone=phone)
         return ClientEntity(
             customer_ids=[customer.id for customer in orm_result],
             phone=phone,
         )
 
-    async def delete(self, pk: str) -> None:
-        await self.model.objects.adelete(pk=pk)
+    def delete(self, pk: str) -> None:
+        self.model.objects.delete(pk=pk)
 
-    async def exists(self, pk: str) -> bool:
-        return await self.model.objects.filter(pk=pk).aexists()
+    def exists(self, pk: str) -> bool:
+        return self.model.objects.filter(pk=pk).exists()

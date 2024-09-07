@@ -1,86 +1,45 @@
 import math
-from dataclasses import dataclass, field
-
 import httpx
-
-from apps.clients.models import ClientEntity
-from services.crm.house_mock.utils import convert_data_to_dto, get_from_all_pages
-from services.crm.house_pro.dto import CustomerDTO
-from services.crm.house_pro.conf import BASE_URL, AUTH_HEADER
+from dataclasses import dataclass, field
 from loguru import logger
-
+from services.crm.base import ICRM
 from services.crm.exceptions import CRMRequestError
+from services.crm.house_pro.conf import BASE_URL, AUTH_HEADER
 
 
 @dataclass
-class HouseProInterface:
-    customers_path: str = field(init=False, default="customers")
+class HouseProMockCRM(ICRM):
+    job_lines_path: str = field(init=False, default="jobs/{pk}/line_items")
 
-    async def get_client(self, number: str) -> ClientEntity:
-        _, customers = await self._get_customer_page(
-            self.customers_path, query=number,
-        )
-        return ClientEntity(
-            customer_ids=[customer.id for customer in customers],
-            phone=number
-        )
+    def get_job_detail(self, job_id: str) -> dict:
+        path = self.job_lines_path.format(pk=job_id)
+        return self._request_get(path)
 
-    async def get_client_jobs(self, client: ClientEntity):
-        ...
-
-    @get_from_all_pages
-    async def _get_customer_page(
+    def _request_get(
         self,
         path: str,
-        query: str,
-        page: int = 1,
-        page_size: int = 3,
-    ) -> tuple[int, list[CustomerDTO]]:
-        result = await self._request_get(path, query, page, page_size)
-        total_pages = result["total_pages"]
-        customers = [
-            convert_data_to_dto(customer) for customer in result["customers"]
-        ]
-        return total_pages, customers
-
-    async def _request_get(
-        self,
-        path: str,
-        query: str = "",
-        page: int = 1,
-        page_size: int = 3,
     ) -> dict:
-        from services.crm.house_mock.mock import customers as customer_storage
-        if path == self.customers_path:
-            customers = customer_storage[(page - 1) * page_size: page * page_size]
-            total_items = len(customer_storage)
-            total_pages = math.ceil(total_items / page_size)
-            if query:
-                customer_filter = filter(
-                    lambda x: x["mobile_number"] == query, customers
-                )
-                customers = [customer for customer in customer_filter]
-            response = {
-                "page": page,
-                "page_size": page_size,
-                "total_pages": total_pages,
-                "total_items": total_items,
-                "customers": customers
-            }
-            return response
-        return {}
+        url = f"{BASE_URL}{path}"
+        with httpx.Client() as session:
+            response = session.get(url=url, headers=AUTH_HEADER)
+        if response.status_code > 400:
+            logger.error(
+                "Ошибка при отправке GET запроса в HouseCallPro. "
+                "url: {}, header: {}, status: {}, response: {}",
+                url, AUTH_HEADER, response.status_code, response.text,
+            )
+            raise CRMRequestError()
+        return response.json()
 
 
 if __name__ == '__main__':
-    import asyncio
+    hcp = HouseProMockCRM()
 
-    hcp = HouseProInterface()
-
-    async def main():
-        res = await hcp.get_client("3126848315")
+    def main():
+        res = hcp.get_job_detail("job_5af0cdda35f54fff9b006400a63fbf5a")
         print(res)
 
-    asyncio.run(main())
+    main()
 """
 curl -X GET "https://api.housecallpro.com/customers" -H "Authorization: Token ca337b03477f45518e5851518c86c7e1"
 curl -X GET "https://api.housecallpro.com/customers" -H "Authorization: Token 53922965ae0d4875a91a9ecb73f81b95"

@@ -4,7 +4,7 @@ from django.http import HttpRequest
 from ninja import Router
 
 from config.containers import get_container
-from core.security.auth_func import crm_api_key_auth
+from core.security.callable import crm_api_key_auth
 from services.webhook.event_router import WebhookEventRouter
 from .auth.handlers import router as auth_router
 from .clients.handlers import router as client_router
@@ -27,7 +27,7 @@ router.add_router("crm", jobs_router)
     description="Получение вебхуков из CRM",
     auth=crm_api_key_auth(),
 )
-async def webhook(
+def webhook(
     request: HttpRequest,
 ) -> ResponseStatusSchema:
     try:
@@ -36,5 +36,5 @@ async def webhook(
         return ResponseStatusSchema()
     container = get_container()
     webhook_router: WebhookEventRouter = container.resolve(WebhookEventRouter)
-    await webhook_router.route_event(data)
+    webhook_router.route_event(data)
     return ResponseStatusSchema()

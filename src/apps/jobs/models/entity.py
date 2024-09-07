@@ -1,6 +1,15 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
+from typing import Union
+
+
+T = Union[
+    "SingleSelectEntity",
+    "MultipleSelectEntity",
+    "NumericalRangeEntity",
+    "QuantitySelectEntity",
+]
 
 
 class JobStatus(str, Enum):
@@ -56,7 +65,7 @@ class DiscountType(Enum):
 
 @dataclass
 class DiscountEntity:
-    type: DiscountType
+    kind: DiscountType
     value: int
 
 
@@ -64,24 +73,28 @@ class DiscountEntity:
 class DetailMaterialEntity:
     name: str
     quantity: float
+    cost: int
 
 
 @dataclass
 class MaterialsEntity:
-    cost: int
+    total_cost: int
     detail: list[DetailMaterialEntity]
 
 
 @dataclass
-class JobDetailEntity:
-    job_id: str
+class JobPartEntity:
     name: str
     cost: int
-    inlines: list[
-        MultipleSelectEntity |
-        NumericalRangeEntity |
-        SingleSelectEntity |
-        QuantitySelectEntity
-    ]
-    materials: MaterialsEntity
-    discount: DiscountEntity
+    inlines: list[T] = field(default_factory=list)
+
+
+@dataclass
+class JobDetailEntity:
+    parts: list[JobPartEntity]
+    materials: MaterialsEntity | None = field(default=None)
+    discount: DiscountEntity | None = field(default=None)
+
+
+
+

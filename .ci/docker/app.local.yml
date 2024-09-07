@@ -17,7 +17,7 @@ services:
       - logs_dir:/app/logs
     healthcheck:
       test: "curl --fail http://localhost:8000/api/healthcheck"
-      interval: 2s
+      interval: 20s
       timeout: 2s
       retries: 3
       start_period: 5s

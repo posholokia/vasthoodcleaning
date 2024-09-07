@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 from ninja import Router
 
-from core.security.jwt_auth import AuthBearer
+from core.security.callable import client_jwt_auth
 
 from ..schema import ResponseStatusSchema
 
@@ -12,10 +12,10 @@ router = Router(tags=["Clients"])
 @router.get(
     path="test_auth/",
     response=ResponseStatusSchema,
-    auth=AuthBearer(),
+    auth=client_jwt_auth(),
     description="Тест проверка аутентификации",
 )
-async def test_auth(
+def test_auth(
     request: HttpRequest,
 ) -> ResponseStatusSchema:
     return ResponseStatusSchema(
