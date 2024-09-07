@@ -16,8 +16,7 @@ from apps.landing.models import (
     ServiceDetail,
     Site,
 )
-from asgiref.sync import async_to_sync
-from config.containers import get_container
+from core.containers import get_container
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from nested_admin.nested import (
@@ -127,14 +126,14 @@ class SiteAdmin(NestedModelAdmin):
         permission: AdminCanAddSitePermission = container.resolve(
             AdminCanAddSitePermission
         )
-        return async_to_sync(permission.has_permission)()
+        return permission.has_permission()
 
     def has_delete_permission(self, request, obj=None) -> bool:
         container = get_container()
         permission: AdminCanDeleteSitePermission = container.resolve(
             AdminCanDeleteSitePermission
         )
-        return async_to_sync(permission.has_permission)()
+        return permission.has_permission()
 
 
 admin.site.register(ColorFont, ColorFontAdmin)

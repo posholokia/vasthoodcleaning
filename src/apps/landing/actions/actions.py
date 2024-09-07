@@ -4,15 +4,15 @@ from apps.landing.models import (
     ServiceDetailEntity,
     SiteEntity,
 )
-from apps.landing.services.storage import ISiteRepository
+from apps.landing.storage import ISiteRepository
 
 
 @dataclass
 class LandingAction:
     storage: ISiteRepository
 
-    async def get_site(self) -> SiteEntity:
-        return await self.storage.get()
+    def get_site(self) -> SiteEntity:
+        return self.storage.get()
 
-    async def get_service(self, service_pk: int) -> ServiceDetailEntity:
-        return await self.storage.get_service_detail(service_pk)
+    def get_service(self, service_pk: int) -> ServiceDetailEntity:
+        return self.storage.get_service_detail(service_pk)

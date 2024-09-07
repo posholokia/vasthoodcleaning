@@ -8,3 +8,4 @@ class RedisConf(BaseSettings):
     redis_port: int
     redis_db_code: int
     redis_db_token: int
+    redis_db_cache: int

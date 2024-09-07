@@ -9,10 +9,10 @@ from typing import Any
 @dataclass
 class INotificationReceiver(ABC):
     @abstractmethod
-    async def connect(self) -> Any: ...
+    def connect(self) -> Any: ...
 
     @abstractmethod
-    async def receive(self, data: dict) -> None:
+    def receive(self, data: dict) -> None:
         """
         data = {
             to: message recipient number,

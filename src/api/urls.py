@@ -6,6 +6,7 @@ from django.urls import path
 from ninja import NinjaAPI
 from django.conf import settings
 
+from core.containers import get_container
 from core.constructor.exceptions import BaseHTTPException
 
 from .v1.urls import router as v1_router
@@ -37,6 +38,7 @@ def unhandled_exception(request, exc: Exception):
 
 @api.get("/healthcheck")
 def healthcheck(request: HttpRequest) -> None:
+    container = get_container()
     return None
 
 
