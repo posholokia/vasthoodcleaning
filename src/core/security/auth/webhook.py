@@ -1,8 +1,8 @@
 import hmac
 import hashlib
-from ninja.security import APIKeyHeader
 
 from config.settings import conf
+from ninja.security import APIKeyHeader
 
 
 class ApiKey(APIKeyHeader):
@@ -15,7 +15,7 @@ class ApiKey(APIKeyHeader):
         allowed_signature = hmac.new(
             key=conf.house_pro_signin_key.encode(),
             msg=signature_body.encode(),
-            digestmod=hashlib.sha256
+            digestmod=hashlib.sha256,
         ).hexdigest()
 
         return key == allowed_signature

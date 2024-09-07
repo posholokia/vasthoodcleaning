@@ -22,10 +22,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "nested_admin",
     "corsheaders",
-
     "apps.accounts.apps.AccountsConfig",
     "apps.landing.apps.LandingConfig",
     "apps.admin_panel.apps.AdminConfig",

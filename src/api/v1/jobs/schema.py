@@ -1,9 +1,14 @@
 from datetime import datetime
 from typing import Union
 
-from ninja import Schema, Field
-
-from apps.jobs.models import JobStatus, DiscountType
+from apps.jobs.models import (
+    DiscountType,
+    JobStatus,
+)
+from ninja import (
+    Field,
+    Schema,
+)
 
 
 T = Union[

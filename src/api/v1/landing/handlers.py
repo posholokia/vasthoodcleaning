@@ -3,10 +3,11 @@ from api.v1.landing.schema import (
     SiteRetrieveSchema,
 )
 from apps.landing.actions.actions import LandingAction
-from core.containers import get_container
 from django.http import HttpRequest
 from ninja import Router
 from services.mapper import Mapper
+
+from core.containers import get_container
 
 
 router = Router(tags=["Landing"])

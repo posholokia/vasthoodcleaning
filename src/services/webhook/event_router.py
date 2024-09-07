@@ -25,10 +25,7 @@ class WebhookEventRouter:
         except AttributeError:
             return
         except KeyError:
-            logger.error(
-                "Не найден ключ 'event' в вебхуке: {}",
-                event_data
-            )
+            logger.error("Не найден ключ 'event' в вебхуке: {}", event_data)
             return
 
         if event_type is AllowedEvents.customer_create:
@@ -38,7 +35,7 @@ class WebhookEventRouter:
             except KeyError:
                 logger.error(
                     "В событии customer.create е найден ключ 'customer': {}",
-                    event_data
+                    event_data,
                 )
 
         elif event_type is AllowedEvents.customer_delete:
@@ -48,7 +45,7 @@ class WebhookEventRouter:
             except KeyError:
                 logger.error(
                     "В событии customer.delete е найден ключ 'customer': {}",
-                    event_data
+                    event_data,
                 )
 
         elif event_type is AllowedEvents.job_created:
@@ -71,7 +68,6 @@ class WebhookEventRouter:
                 self.__job_action.create(event_data["job"])
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     r = WebhookEventRouter()
     r.route_event({"event": "customer.created"})

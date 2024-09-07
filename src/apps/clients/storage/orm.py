@@ -1,8 +1,14 @@
-from dataclasses import dataclass, field
-from django.db import IntegrityError
+from dataclasses import (
+    dataclass,
+    field,
+)
 
-from apps.clients.models import ClientEntity, CustomerModel
+from apps.clients.models import (
+    ClientEntity,
+    CustomerModel,
+)
 from apps.clients.storage.base import IClientRepository
+from django.db import IntegrityError
 
 
 @dataclass
@@ -10,18 +16,12 @@ class ORMClientRepository(IClientRepository):
     model: CustomerModel = field(init=False, default=CustomerModel)
 
     def create_if_not_exists(self, pk: str, phone: str) -> None:
-        if not (
-                self.model.objects.
-                filter(pk=pk, phone=phone)
-                .exists()
-        ):
+        if not (self.model.objects.filter(pk=pk, phone=phone).exists()):
             try:
                 self.model.objects.create(pk=pk, phone=phone)
             except IntegrityError:
                 if not (
-                        self.model.objects.
-                        filter(pk=pk, phone=phone)
-                        .exists()
+                    self.model.objects.filter(pk=pk, phone=phone).exists()
                 ):
                     raise
 
