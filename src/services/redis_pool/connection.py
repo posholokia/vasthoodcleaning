@@ -1,6 +1,7 @@
+import redis
+
 from dataclasses import dataclass
 
-import redis
 from config.settings import conf
 
 
