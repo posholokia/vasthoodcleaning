@@ -1,23 +1,38 @@
 from datetime import datetime
+from typing import Union
 
 from ninja import Schema, Field
 
 from apps.jobs.models import JobStatus, DiscountType
 
 
-class MultipleSelect(Schema):
+T = Union[
+    "MultipleSelectSchema",
+    "SingleSelectSchema",
+    "NumericalRangeSchema",
+    "QuantitySelectSchema",
+]
+
+
+class MultipleSelectSchema(Schema):
     name: str
     choices: list[str]
     kind: str = Field(init=False, default="multiple")
 
 
-class SingleSelect(Schema):
+class SingleSelectSchema(Schema):
     name: str
     choice: str
     kind: str = Field(init=False, default="single")
 
 
-class QuantitySelect(Schema):
+class NumericalRangeSchema(Schema):
+    name: str
+    choice: str
+    kind: str = Field(init=False, default="range")
+
+
+class QuantitySelectSchema(Schema):
     name: str
     value: int
     kind: str = Field(init=False, default="quantity")
@@ -31,32 +46,8 @@ class JobSchema(Schema):
     total_cost: int
 
 
-class MultipleSelectSchema(Schema):
-    name: str
-    choices: list[str]
-    kind: str = Field(init=False, default="multiple")
-
-
-class NumericalRangeSchema(Schema):
-    name: str
-    choice: str
-    kind: str = Field(init=False, default="range")
-
-
-class SingleSelectSchema(Schema):
-    name: str
-    choice: str
-    kind: str = Field(init=False, default="single")
-
-
-class QuantitySelectSchema(Schema):
-    name: str
-    value: int
-    kind: str = Field(init=False, default="quantity")
-
-
 class DiscountSchema(Schema):
-    type: DiscountType
+    kind: DiscountType
     value: int
 
 
@@ -66,18 +57,17 @@ class DetailMaterialSchema(Schema):
 
 
 class MaterialsSchema(Schema):
-    cost: int
+    total_cost: int
     detail: list[DetailMaterialSchema]
 
 
-class JobDetailSchema(Schema):
+class JobPartSchema(Schema):
     name: str
     cost: int
-    inlines: list[
-        MultipleSelectSchema |
-        NumericalRangeSchema |
-        SingleSelectSchema |
-        QuantitySelectSchema
-    ]
-    materials: MaterialsSchema
-    discount: DiscountSchema
+    inlines: list[T] = Field(default_factory=list)
+
+
+class JobDetailSchema(Schema):
+    parts: list[JobPartSchema]
+    materials: MaterialsSchema | None = Field(default=None)
+    discount: DiscountSchema | None = Field(default=None)

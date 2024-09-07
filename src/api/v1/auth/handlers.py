@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 from apps.clients.actions import AuthClientAction
 from apps.clients.exceptions import NotExistsRefreshToken
-from config.containers import get_container
+from core.containers import get_container
 from django.http import (
     HttpRequest,
     HttpResponse,

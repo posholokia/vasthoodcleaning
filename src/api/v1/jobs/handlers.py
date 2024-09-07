@@ -5,7 +5,7 @@ from loguru import logger
 from api.v1.jobs.schema import JobSchema, JobDetailSchema
 from apps.jobs.actions.job import JobAction
 from apps.jobs.permissions import JobPermissions
-from config.containers import get_container
+from core.containers import get_container
 from core.security.auth.jwt_auth import AuthBearer
 from services.mapper import Mapper
 
