@@ -15,7 +15,6 @@ from services.jwt_token.exceptions import (
     TokenExpireError, TokenInBlacklistError,
 )
 from services.notification.base import INotificationReceiver
-from services.notification.exceptions import SendSmsError
 
 
 @dataclass
