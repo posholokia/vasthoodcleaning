@@ -25,9 +25,9 @@ customers = [
                 "city": "South Pasadena",
                 "state": "CA",
                 "zip": "91030",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_816acd9103d2483d8f5afdee8e998aaa",
@@ -55,9 +55,9 @@ customers = [
                 "city": "Chicago",
                 "state": "IL",
                 "zip": "60605",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_8cf124d807f043b89c94aedcf5032aaa",
@@ -85,9 +85,9 @@ customers = [
                 "city": "Plymouth",
                 "state": "MN",
                 "zip": "55446",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_bfec81a415e14f499806079024e52bbb",
@@ -115,9 +115,9 @@ customers = [
                 "city": "South Pasadena",
                 "state": "CA",
                 "zip": "91030",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_816acd9103d2483d8f5afdee8e998bbb",
@@ -145,9 +145,9 @@ customers = [
                 "city": "Chicago",
                 "state": "IL",
                 "zip": "60605",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_8cf124d807f043b89c94aedcf5032bbb",
@@ -175,9 +175,9 @@ customers = [
                 "city": "Plymouth",
                 "state": "MN",
                 "zip": "55446",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_bfec81a415e14f499806079024e52ccc",
@@ -205,9 +205,9 @@ customers = [
                 "city": "South Pasadena",
                 "state": "CA",
                 "zip": "91030",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_816acd9103d2483d8f5afdee8e998ccc",
@@ -235,9 +235,9 @@ customers = [
                 "city": "Chicago",
                 "state": "IL",
                 "zip": "60605",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
     {
         "id": "cus_8cf124d807f043b89c94aedcf5032ccc",
@@ -265,8 +265,8 @@ customers = [
                 "city": "Plymouth",
                 "state": "MN",
                 "zip": "55446",
-                "country": "US"
+                "country": "US",
             }
-        ]
+        ],
     },
 ]

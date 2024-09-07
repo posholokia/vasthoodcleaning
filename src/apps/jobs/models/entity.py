@@ -1,7 +1,9 @@
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 from datetime import datetime
 from enum import Enum
-from typing import Union, TypeVar
 
 
 class JobStatus(str, Enum):
@@ -73,12 +75,15 @@ class MaterialsEntity:
     total_cost: int
     detail: list[DetailMaterialEntity]
 
+    def __bool__(self) -> bool:
+        return bool(self.total_cost or self.detail)
+
 
 T = list[
-    SingleSelectEntity |
-    MultipleSelectEntity |
-    NumericalRangeEntity |
-    QuantitySelectEntity,
+    SingleSelectEntity
+    | MultipleSelectEntity
+    | NumericalRangeEntity
+    | QuantitySelectEntity,
 ]
 
 
@@ -94,7 +99,3 @@ class JobDetailEntity:
     parts: list[JobPartEntity]
     materials: MaterialsEntity | None = field(default=None)
     discount: DiscountEntity | None = field(default=None)
-
-
-
-

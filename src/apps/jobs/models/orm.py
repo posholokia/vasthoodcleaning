@@ -1,9 +1,11 @@
 from datetime import datetime
 
-from django.db import models
-
 from apps.clients.models.orm import CustomerModel
-from apps.jobs.models.entity import JobStatus, JobEntity
+from apps.jobs.models.entity import (
+    JobEntity,
+    JobStatus,
+)
+from django.db import models
 
 
 class JobModel(models.Model):

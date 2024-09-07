@@ -1,22 +1,22 @@
 from enum import Enum
 from typing import Any
 
-from loguru import logger
-
 from apps.jobs.models import (
+    DetailMaterialEntity,
     DiscountEntity,
     DiscountType,
-    MaterialsEntity,
     JobDetailEntity,
-    DetailMaterialEntity
+    MaterialsEntity,
 )
 from apps.jobs.models.entity import (
     JobPartEntity,
     MultipleSelectEntity,
+    NumericalRangeEntity,
     QuantitySelectEntity,
     SingleSelectEntity,
-    NumericalRangeEntity, T
+    T,
 )
+from loguru import logger
 
 
 class JobLineType(Enum):
@@ -69,15 +69,14 @@ class JobDetailJsonParser:
         )
         return JobDetailEntity(
             parts=parts,
-            materials=material_entity,
-            discount=discount
+            materials=material_entity if material_entity else None,
+            discount=discount,
         )
 
     @staticmethod
     def _parse_discount(discount: dict) -> DiscountEntity:
         return DiscountEntity(
-            value=discount["amount"],
-            kind=DiscountType(discount["kind"])
+            value=discount["amount"], kind=DiscountType(discount["kind"])
         )
 
     @staticmethod
@@ -85,7 +84,7 @@ class JobDetailJsonParser:
         return DetailMaterialEntity(
             name=material["name"],
             quantity=material["quantity"],
-            cost=material["amount"]
+            cost=material["amount"],
         )
 
     def _parse_job(self, job_data: dict[str, Any]) -> JobPartEntity:
@@ -133,8 +132,7 @@ class JobDetailJsonParser:
         )
 
         return MultipleSelectEntity(
-            name=name,
-            choices=[choice["name"] for choice in choice_filter]
+            name=name, choices=[choice["name"] for choice in choice_filter]
         )
 
     @staticmethod
@@ -154,14 +152,14 @@ class JobDetailJsonParser:
             return
 
         choice = next(
-            (item["name"] for item in inline["options"]
-             if item["id"] == selected[0]),
-            None
+            (
+                item["name"]
+                for item in inline["options"]
+                if item["id"] == selected[0]
+            ),
+            None,
         )
-        return SingleSelectEntity(
-            name=inline["name"],
-            choice=choice
-        )
+        return SingleSelectEntity(name=inline["name"], choice=choice)
 
     @staticmethod
     def _parse_range_select(inline: dict) -> NumericalRangeEntity | None:
@@ -170,14 +168,14 @@ class JobDetailJsonParser:
             return
 
         choice = next(
-            (item["name"] for item in inline["options"]
-             if item["id"] == selected[0]),
-            None
+            (
+                item["name"]
+                for item in inline["options"]
+                if item["id"] == selected[0]
+            ),
+            None,
         )
-        return NumericalRangeEntity(
-            name=inline["name"],
-            choice=choice
-        )
+        return NumericalRangeEntity(name=inline["name"], choice=choice)
 
 
 if __name__ == "__main__":
@@ -220,22 +218,20 @@ if __name__ == "__main__":
                                         {
                                             "id": 353280,
                                             "name": "Studio",
-                                            "price": 14900
+                                            "price": 14900,
                                         },
                                         {
                                             "id": 353284,
                                             "name": "1 bathroom",
-                                            "price": 14900
+                                            "price": 14900,
                                         },
                                         {
                                             "id": 365671,
                                             "name": "2 bathrooms",
-                                            "price": 16000
-                                        }
+                                            "price": 16000,
+                                        },
                                     ],
-                                    "selected": [
-                                        365671
-                                    ]
+                                    "selected": [365671],
                                 },
                                 {
                                     "id": 214438,
@@ -246,20 +242,20 @@ if __name__ == "__main__":
                                         {
                                             "id": 361321,
                                             "name": "1 bathroom",
-                                            "price": 16000
+                                            "price": 16000,
                                         },
                                         {
                                             "id": 361323,
                                             "name": "2 bathrooms",
-                                            "price": 18500
+                                            "price": 18500,
                                         },
                                         {
                                             "id": 361324,
                                             "name": "3 bathrooms",
-                                            "price": 22500
-                                        }
+                                            "price": 22500,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 214439,
@@ -270,30 +266,30 @@ if __name__ == "__main__":
                                         {
                                             "id": 361325,
                                             "name": "1 bathroom",
-                                            "price": 22500
+                                            "price": 22500,
                                         },
                                         {
                                             "id": 361327,
                                             "name": "2 bathrooms",
-                                            "price": 23500
+                                            "price": 23500,
                                         },
                                         {
                                             "id": 361328,
                                             "name": "3 bathrooms",
-                                            "price": 24500
+                                            "price": 24500,
                                         },
                                         {
                                             "id": 361329,
                                             "name": "4 bathrooms",
-                                            "price": 27000
+                                            "price": 27000,
                                         },
                                         {
                                             "id": 361330,
                                             "name": "5 bathrooms",
-                                            "price": 29500
-                                        }
+                                            "price": 29500,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 214440,
@@ -304,30 +300,30 @@ if __name__ == "__main__":
                                         {
                                             "id": 361331,
                                             "name": "1 bathroom",
-                                            "price": 24500
+                                            "price": 24500,
                                         },
                                         {
                                             "id": 361333,
                                             "name": "2 bathrooms",
-                                            "price": 28000
+                                            "price": 28000,
                                         },
                                         {
                                             "id": 361334,
                                             "name": "3 bathrooms",
-                                            "price": 30000
+                                            "price": 30000,
                                         },
                                         {
                                             "id": 361335,
                                             "name": "4 bathrooms",
-                                            "price": 33000
+                                            "price": 33000,
                                         },
                                         {
                                             "id": 361336,
                                             "name": "5 bathrooms",
-                                            "price": 34000
-                                        }
+                                            "price": 34000,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 214441,
@@ -338,30 +334,30 @@ if __name__ == "__main__":
                                         {
                                             "id": 361337,
                                             "name": "1 bathroom",
-                                            "price": 37000
+                                            "price": 37000,
                                         },
                                         {
                                             "id": 361339,
                                             "name": "2 bathrooms",
-                                            "price": 39000
+                                            "price": 39000,
                                         },
                                         {
                                             "id": 361340,
                                             "name": "3 bathrooms",
-                                            "price": 42000
+                                            "price": 42000,
                                         },
                                         {
                                             "id": 361341,
                                             "name": "4 bathrooms",
-                                            "price": 46000
+                                            "price": 46000,
                                         },
                                         {
                                             "id": 361342,
                                             "name": "5 bathrooms",
-                                            "price": 47000
-                                        }
+                                            "price": 47000,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 209718,
@@ -374,73 +370,73 @@ if __name__ == "__main__":
                                             "name": "501 - 1000",
                                             "price": 0,
                                             "upper_bound": 1000,
-                                            "lower_bound": 501
+                                            "lower_bound": 501,
                                         },
                                         {
                                             "id": 353301,
                                             "name": "1001 - 1500",
                                             "price": 0,
                                             "upper_bound": 1500,
-                                            "lower_bound": 1001
+                                            "lower_bound": 1001,
                                         },
                                         {
                                             "id": 353302,
                                             "name": "1501 - 2000",
                                             "price": 0,
                                             "upper_bound": 2000,
-                                            "lower_bound": 1501
+                                            "lower_bound": 1501,
                                         },
                                         {
                                             "id": 353303,
                                             "name": "2001 - 2500",
                                             "price": 0,
                                             "upper_bound": 2500,
-                                            "lower_bound": 2001
+                                            "lower_bound": 2001,
                                         },
                                         {
                                             "id": 353304,
                                             "name": "2501 - 3000",
                                             "price": 0,
                                             "upper_bound": 3000,
-                                            "lower_bound": 2501
+                                            "lower_bound": 2501,
                                         },
                                         {
                                             "id": 353305,
                                             "name": "3001 - 3500",
                                             "price": 0,
                                             "upper_bound": 3500,
-                                            "lower_bound": 3001
+                                            "lower_bound": 3001,
                                         },
                                         {
                                             "id": 353306,
                                             "name": "3501 - 4000",
                                             "price": 0,
                                             "upper_bound": 4000,
-                                            "lower_bound": 3501
+                                            "lower_bound": 3501,
                                         },
                                         {
                                             "id": 353307,
                                             "name": "4001 - 4500",
                                             "price": 0,
                                             "upper_bound": 4500,
-                                            "lower_bound": 4001
+                                            "lower_bound": 4001,
                                         },
                                         {
                                             "id": 353308,
                                             "name": "4501 - 5000",
                                             "price": 0,
                                             "upper_bound": 5000,
-                                            "lower_bound": 4501
+                                            "lower_bound": 4501,
                                         },
                                         {
                                             "id": 353309,
                                             "name": "5001 - 2147483647",
                                             "price": 0,
                                             "upper_bound": 2147483647,
-                                            "lower_bound": 5001
-                                        }
+                                            "lower_bound": 5001,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 216681,
@@ -451,29 +447,25 @@ if __name__ == "__main__":
                                         {
                                             "id": 365635,
                                             "name": "Pet Friendly",
-                                            "price": 0
+                                            "price": 0,
                                         },
                                         {
                                             "id": 365636,
                                             "name": "Eco Friendly",
-                                            "price": 0
+                                            "price": 0,
                                         },
                                         {
                                             "id": 365637,
                                             "name": "Green",
-                                            "price": 0
+                                            "price": 0,
                                         },
                                         {
                                             "id": 365638,
                                             "name": "Other",
-                                            "price": 0
-                                        }
+                                            "price": 0,
+                                        },
                                     ],
-                                    "selected": [
-                                        365635,
-                                        365636,
-                                        365637
-                                    ]
+                                    "selected": [365635, 365636, 365637],
                                 },
                                 {
                                     "id": 209723,
@@ -481,7 +473,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 4000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209721,
@@ -489,7 +481,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 4000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209722,
@@ -497,7 +489,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 3500,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209720,
@@ -505,7 +497,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 7500,
                                     "value": 9,
-                                    "amount": 67500
+                                    "amount": 67500,
                                 },
                                 {
                                     "id": 209728,
@@ -513,7 +505,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209729,
@@ -521,7 +513,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209727,
@@ -529,7 +521,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209730,
@@ -537,7 +529,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209725,
@@ -545,7 +537,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 500,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209731,
@@ -553,9 +545,9 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 500,
                                     "value": 0,
-                                    "amount": 0
-                                }
-                            ]
+                                    "amount": 0,
+                                },
+                            ],
                         },
                         "total_price": 83500,
                         "bedroom_count": None,
@@ -570,10 +562,10 @@ if __name__ == "__main__":
                         "total_story_price": None,
                         "total_window_price": None,
                         "total_room_price": None,
-                        "total_square_footage_price": None
-                    }
+                        "total_square_footage_price": None,
+                    },
                 },
-                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_ced490a1f7874c1894567ed1d7664556"
+                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_ced490a1f7874c1894567ed1d7664556",
             },
             {
                 "object": "line_item",
@@ -610,22 +602,20 @@ if __name__ == "__main__":
                                         {
                                             "id": 353339,
                                             "name": "Studio",
-                                            "price": 14900
+                                            "price": 14900,
                                         },
                                         {
                                             "id": 361260,
                                             "name": "1 bathroom",
-                                            "price": 14900
+                                            "price": 14900,
                                         },
                                         {
                                             "id": 361261,
                                             "name": "2 bathroom",
-                                            "price": 16000
-                                        }
+                                            "price": 16000,
+                                        },
                                     ],
-                                    "selected": [
-                                        361260
-                                    ]
+                                    "selected": [361260],
                                 },
                                 {
                                     "id": 214424,
@@ -636,22 +626,20 @@ if __name__ == "__main__":
                                         {
                                             "id": 361262,
                                             "name": "1 bathroom",
-                                            "price": 16000
+                                            "price": 16000,
                                         },
                                         {
                                             "id": 361264,
                                             "name": "2 bathrooms",
-                                            "price": 18500
+                                            "price": 18500,
                                         },
                                         {
                                             "id": 361265,
                                             "name": "3 bathrooms",
-                                            "price": 22500
-                                        }
+                                            "price": 22500,
+                                        },
                                     ],
-                                    "selected": [
-                                        361264
-                                    ]
+                                    "selected": [361264],
                                 },
                                 {
                                     "id": 214425,
@@ -662,30 +650,30 @@ if __name__ == "__main__":
                                         {
                                             "id": 361266,
                                             "name": "1 bathroom",
-                                            "price": 22500
+                                            "price": 22500,
                                         },
                                         {
                                             "id": 361268,
                                             "name": "2 bathrooms",
-                                            "price": 23500
+                                            "price": 23500,
                                         },
                                         {
                                             "id": 361269,
                                             "name": "3 bathrooms",
-                                            "price": 24500
+                                            "price": 24500,
                                         },
                                         {
                                             "id": 361270,
                                             "name": "4 bathrooms",
-                                            "price": 27000
+                                            "price": 27000,
                                         },
                                         {
                                             "id": 361271,
                                             "name": "5 bathrooms",
-                                            "price": 29500
-                                        }
+                                            "price": 29500,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 209756,
@@ -696,30 +684,30 @@ if __name__ == "__main__":
                                         {
                                             "id": 353349,
                                             "name": "1 bathroom",
-                                            "price": 24500
+                                            "price": 24500,
                                         },
                                         {
                                             "id": 361296,
                                             "name": "2 bathrooms",
-                                            "price": 28000
+                                            "price": 28000,
                                         },
                                         {
                                             "id": 361297,
                                             "name": "3 bathrooms",
-                                            "price": 30000
+                                            "price": 30000,
                                         },
                                         {
                                             "id": 361298,
                                             "name": "4 bathrooms",
-                                            "price": 33000
+                                            "price": 33000,
                                         },
                                         {
                                             "id": 361299,
                                             "name": "5 bathrooms",
-                                            "price": 34000
-                                        }
+                                            "price": 34000,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 214426,
@@ -730,30 +718,30 @@ if __name__ == "__main__":
                                         {
                                             "id": 361272,
                                             "name": "1 bathroom",
-                                            "price": 37000
+                                            "price": 37000,
                                         },
                                         {
                                             "id": 361274,
                                             "name": "2 bathrooms",
-                                            "price": 39000
+                                            "price": 39000,
                                         },
                                         {
                                             "id": 361275,
                                             "name": "3 bathrooms",
-                                            "price": 42000
+                                            "price": 42000,
                                         },
                                         {
                                             "id": 361276,
                                             "name": "4 bathrooms",
-                                            "price": 46000
+                                            "price": 46000,
                                         },
                                         {
                                             "id": 361277,
                                             "name": "5 bathrooms",
-                                            "price": 47000
-                                        }
+                                            "price": 47000,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 209757,
@@ -766,73 +754,73 @@ if __name__ == "__main__":
                                             "name": "501 - 1000",
                                             "price": 0,
                                             "upper_bound": 1000,
-                                            "lower_bound": 501
+                                            "lower_bound": 501,
                                         },
                                         {
                                             "id": 353360,
                                             "name": "1001 - 1500",
                                             "price": 0,
                                             "upper_bound": 1500,
-                                            "lower_bound": 1001
+                                            "lower_bound": 1001,
                                         },
                                         {
                                             "id": 353361,
                                             "name": "1501 - 2000",
                                             "price": 0,
                                             "upper_bound": 2000,
-                                            "lower_bound": 1501
+                                            "lower_bound": 1501,
                                         },
                                         {
                                             "id": 353362,
                                             "name": "2001 - 2500",
                                             "price": 0,
                                             "upper_bound": 2500,
-                                            "lower_bound": 2001
+                                            "lower_bound": 2001,
                                         },
                                         {
                                             "id": 353363,
                                             "name": "2501 - 3000",
                                             "price": 0,
                                             "upper_bound": 3000,
-                                            "lower_bound": 2501
+                                            "lower_bound": 2501,
                                         },
                                         {
                                             "id": 353364,
                                             "name": "3001 - 3500",
                                             "price": 0,
                                             "upper_bound": 3500,
-                                            "lower_bound": 3001
+                                            "lower_bound": 3001,
                                         },
                                         {
                                             "id": 353365,
                                             "name": "3501 - 4000",
                                             "price": 0,
                                             "upper_bound": 4000,
-                                            "lower_bound": 3501
+                                            "lower_bound": 3501,
                                         },
                                         {
                                             "id": 353366,
                                             "name": "4001 - 4500",
                                             "price": 0,
                                             "upper_bound": 4500,
-                                            "lower_bound": 4001
+                                            "lower_bound": 4001,
                                         },
                                         {
                                             "id": 353367,
                                             "name": "4501 - 5000",
                                             "price": 0,
                                             "upper_bound": 5000,
-                                            "lower_bound": 4501
+                                            "lower_bound": 4501,
                                         },
                                         {
                                             "id": 353368,
                                             "name": "5001 - 2147483647",
                                             "price": 0,
                                             "upper_bound": 2147483647,
-                                            "lower_bound": 5001
-                                        }
+                                            "lower_bound": 5001,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 216680,
@@ -843,25 +831,25 @@ if __name__ == "__main__":
                                         {
                                             "id": 365632,
                                             "name": "Pet Friendly",
-                                            "price": 0
+                                            "price": 0,
                                         },
                                         {
                                             "id": 365633,
                                             "name": "Eco Friendly",
-                                            "price": 0
+                                            "price": 0,
                                         },
                                         {
                                             "id": 365634,
                                             "name": "Green",
-                                            "price": 0
+                                            "price": 0,
                                         },
                                         {
                                             "id": 365670,
                                             "name": "Other",
-                                            "price": 0
-                                        }
+                                            "price": 0,
+                                        },
                                     ],
-                                    "selected": []
+                                    "selected": [],
                                 },
                                 {
                                     "id": 209762,
@@ -869,7 +857,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 4000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209760,
@@ -877,7 +865,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 4000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209761,
@@ -885,7 +873,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 3500,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209759,
@@ -893,7 +881,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 7500,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209767,
@@ -901,7 +889,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209768,
@@ -909,7 +897,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209766,
@@ -917,7 +905,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209769,
@@ -925,7 +913,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 1000,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209764,
@@ -933,7 +921,7 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 500,
                                     "value": 0,
-                                    "amount": 0
+                                    "amount": 0,
                                 },
                                 {
                                     "id": 209770,
@@ -941,9 +929,9 @@ if __name__ == "__main__":
                                     "kind": "quantity_select",
                                     "price": 500,
                                     "value": 0,
-                                    "amount": 0
-                                }
-                            ]
+                                    "amount": 0,
+                                },
+                            ],
                         },
                         "total_price": 33400,
                         "bedroom_count": None,
@@ -958,10 +946,10 @@ if __name__ == "__main__":
                         "total_story_price": None,
                         "total_window_price": None,
                         "total_room_price": None,
-                        "total_square_footage_price": None
-                    }
+                        "total_square_footage_price": None,
+                    },
                 },
-                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_e227cd5fcc154e1b9dbde96e332c28a7"
+                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_e227cd5fcc154e1b9dbde96e332c28a7",
             },
             {
                 "object": "line_item",
@@ -978,7 +966,7 @@ if __name__ == "__main__":
                 "order_index": 3,
                 "service_item_id": "pbmat_2107d82c2df64ebe9a3012d0239828d1",
                 "service_item_type": "Pricebook::Material",
-                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_2aa134c99949480a81c5062afbaa70d7"
+                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_2aa134c99949480a81c5062afbaa70d7",
             },
             {
                 "object": "line_item",
@@ -995,7 +983,7 @@ if __name__ == "__main__":
                 "order_index": 4,
                 "service_item_id": None,
                 "service_item_type": None,
-                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_b0c8426db2e4403ca76e8adbf67e7af7"
+                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_b0c8426db2e4403ca76e8adbf67e7af7",
             },
             {
                 "object": "line_item",
@@ -1012,10 +1000,10 @@ if __name__ == "__main__":
                 "order_index": None,
                 "service_item_id": None,
                 "service_item_type": None,
-                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_a1056437e0e54c289c14ff22a691c564"
-            }
+                "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_a1056437e0e54c289c14ff22a691c564",
+            },
         ],
-        "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items"
+        "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items",
     }
 
     r = parser.parse_data(datajob)

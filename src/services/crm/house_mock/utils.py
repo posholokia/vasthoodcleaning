@@ -1,11 +1,12 @@
-from services.crm.house_mock.dto import CustomerDTO
-import math
 import asyncio
 from typing import (
+    Any,
     Callable,
     ParamSpec,
-    TypeVar, Any,
+    TypeVar,
 )
+
+from services.crm.house_mock.dto import CustomerDTO
 
 
 F_Spec = ParamSpec("F_Spec")
@@ -19,6 +20,7 @@ def get_from_all_pages(
     Если на странице не все данные, декоратор
     "дозапросит" их с остальных страниц
     """
+
     async def wrapper(
         self: Any,
         path: str,

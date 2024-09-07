@@ -1,8 +1,14 @@
-from abc import ABC, abstractmethod
+from abc import (
+    ABC,
+    abstractmethod,
+)
 from dataclasses import dataclass
 from datetime import datetime
 
-from apps.jobs.models import JobStatus, JobEntity
+from apps.jobs.models import (
+    JobEntity,
+    JobStatus,
+)
 
 
 @dataclass

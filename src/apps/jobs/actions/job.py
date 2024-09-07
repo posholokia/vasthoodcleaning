@@ -1,19 +1,20 @@
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 from datetime import datetime
 from typing import Any
 
 from apps.jobs.models import (
-    JobStatus,
-    JobEntity,
-    JobDetailEntity,
     DiscountType,
+    JobDetailEntity,
+    JobEntity,
+    JobStatus,
 )
 from apps.jobs.services.parser import JobDetailJsonParser
-
-from services.cache import cache_for_minutes
 from apps.jobs.storage.base import IJobRepository
 from loguru import logger
-
+from services.cache import cache_for_minutes
 from services.crm.base import ICRM
 
 
@@ -24,6 +25,7 @@ class JobAction:
     что некоторые вкбхуки не придут или придут с задержкой,
     сценарии требуют дополнительных проверок и действий
     """
+
     __repository: IJobRepository
     __crm_interface: ICRM
     __job_parser: JobDetailJsonParser
@@ -39,12 +41,10 @@ class JobAction:
             return
 
         schedule = datetime.strptime(
-            job_data["schedule"]["scheduled_start"],
-            self.date_format
+            job_data["schedule"]["scheduled_start"], self.date_format
         )
         last_update = datetime.strptime(
-            job_data["updated_at"],
-            self.date_format
+            job_data["updated_at"], self.date_format
         )
 
         address = self._get_address_string(job_data["address"])
@@ -102,8 +102,7 @@ class JobAction:
         job.status = JobStatus(job_data["work_status"]).value
         job.address = self._get_address_string(job_data["address"])
         job.schedule = datetime.strptime(
-            job_data["schedule"]["scheduled_start"],
-            self.date_format
+            job_data["schedule"]["scheduled_start"], self.date_format
         )
         job.last_updated = new_update_datetime
         self.__repository.update(
