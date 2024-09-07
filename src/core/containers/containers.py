@@ -51,9 +51,11 @@ from services.webhook.event_router import WebhookEventRouter
 def get_container() -> Container:
     match settings.conf.environ:
         case EnvironVariables.local:
-            return _get_test_container()
+            return _get_local_container()
         case EnvironVariables.prod:
             return _get_main_container()
+        case EnvironVariables.test:
+            return _get_test_container()
     raise Exception("Для этого типа окружения не установлен контейнер")
 
 
@@ -64,6 +66,11 @@ def _get_main_container() -> Container:
 def _get_test_container():
     container = _get_main_container().create_test_container()
     return DiTestContainer(container).initialize_container()
+
+
+def _get_local_container():
+    container = _get_main_container().create_test_container()
+    return DiLocalContainer(container).initialize_container()
 
 
 class DiContainer:
@@ -139,6 +146,18 @@ class DiContainer:
 
 
 class DiTestContainer:
+    def __init__(self, container: TestContainer):
+        self.container = container
+
+    def initialize_container(self) -> TestContainer:
+        self.container = self.container.with_overridden(
+            INotificationReceiver,
+            ConsoleNotificationReceiver,
+        )
+        return self.container
+
+
+class DiLocalContainer:
     def __init__(self, container: TestContainer):
         self.container = container
 

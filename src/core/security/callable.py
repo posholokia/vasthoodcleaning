@@ -1,6 +1,6 @@
 from ninja.security import APIKeyHeader
 
-from config.containers import get_container
+from core.containers import get_container
 from core.security.auth.jwt_auth import AuthBearer
 
 
