@@ -22,7 +22,7 @@ router.add_router("clients", client_router)
 router.add_router("crm", jobs_router)
 
 
-@router.get(
+@router.post(
     path="webhook/",
     response=ResponseStatusSchema,
     description="Получение вебхуков из CRM",
