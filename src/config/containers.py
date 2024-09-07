@@ -20,10 +20,12 @@ from apps.landing.services.storage import (
     ORMSiteRepository,
 )
 from config.settings.services import EnvironVariables
-from django.conf import settings
-from punq import (
+from config import settings
+from core.di_container import (
     Container,
-    Scope,
+    ContainerBuilder,
+    TestContainer,
+    Dependency as Dep,
 )
 from services.notification.base import INotificationReceiver
 from services.notification.console_reciever.reciever import (
@@ -35,63 +37,89 @@ from services.redis_pool.connection import RedisPool
 
 @lru_cache(1)
 def get_container() -> Container:
+    match settings.conf.environ:
+        case EnvironVariables.local:
+            return _get_test_container()
+        case EnvironVariables.prod:
+            return _get_main_container()
+    raise Exception("Для этого типа окружения не установлен контейнер")
+
+
+def _get_main_container() -> Container:
     return DiContainer().initialize_container()
 
 
+def _get_test_container():
+    container = _get_main_container().create_test_container()
+    return DiTestContainer(container).initialize_container()
+
+
 class DiContainer:
-    container = Container()
+    builder = ContainerBuilder()
 
     def initialize_container(self) -> Container:
+        self.__init_redis_containers()
         self.__init_repository_containers()
         self.__init_service_containers()
         self.__init_permissions_containers()
         self.__init_validator_containers()
         self.__init_action_containers()
 
+        self.container = self.builder.build()
         return self.container
 
-    def __init_repository_containers(self) -> None:
-        self.container.register(RedisPool, scope=Scope.singleton)
-        self.container.register(
+    def __init_redis_containers(self) -> None:
+        self.builder.register(
+            "RedisCode", RedisPool, db_number=settings.conf.redis_db_code,
+        )
+        self.builder.register(
+            "RedisToken", RedisPool, db_number=settings.conf.redis_db_token,
+        )
+        self.builder.register(
             ICodeStorage,
-            lambda: RedisCodeStorage(
-                conn=self.container.resolve(
-                    RedisPool, db_number=settings.CONF.redis_db_code
-                )
-            ),
+            RedisCodeStorage,
+            conn=Dep("RedisCode")
         )
-        self.container.register(
+        self.builder.register(
             ITokenStorage,
-            lambda: RedisTokenStorage(
-                conn=self.container.resolve(
-                    RedisPool, db_number=settings.CONF.redis_db_token
-                )
-            ),
+            RedisTokenStorage,
+            conn=Dep("RedisToken")
         )
-        self.container.register(ISiteRepository, ORMSiteRepository)
+
+    def __init_repository_containers(self) -> None:
+        self.builder.register(ISiteRepository, ORMSiteRepository)
 
     def __init_permissions_containers(self) -> None:
-        self.container.register(AdminCanAddSitePermission)
-        self.container.register(AdminCanDeleteSitePermission)
+        self.builder.register(
+            AdminCanAddSitePermission, AdminCanAddSitePermission,
+        )
+        self.builder.register(
+            AdminCanDeleteSitePermission, AdminCanDeleteSitePermission,
+        )
 
     def __init_action_containers(self) -> None:
-        self.container.register(LandingAction)
-        self.container.register(AuthClientAction)
+        self.builder.register(LandingAction, LandingAction)
+        self.builder.register(AuthClientAction, AuthClientAction)
 
     def __init_validator_containers(self) -> None:
-        self.container.register(ClientPhoneValidator)
+        self.builder.register(ClientPhoneValidator, ClientPhoneValidator)
 
     def __init_service_containers(self) -> None:
-        self.container.register(BlacklistRefreshToken)
-        self.container.register(VerificationCodeService)
+        self.builder.register(BlacklistRefreshToken, BlacklistRefreshToken)
+        self.builder.register(VerificationCodeService, VerificationCodeService)
+        self.builder.register(
+            INotificationReceiver,
+            SMSNotificationReceiver,
+        )
 
-        if settings.CONF.environ == EnvironVariables.prod:
-            self.container.register(
-                INotificationReceiver,
-                SMSNotificationReceiver,
-            )
-        elif settings.CONF.environ == EnvironVariables.local:
-            self.container.register(
-                INotificationReceiver,
-                ConsoleNotificationReceiver,
-            )
+
+class DiTestContainer:
+    def __init__(self, container: TestContainer):
+        self.container = container
+
+    def initialize_container(self) -> TestContainer:
+        self.container = self.container.with_overridden(
+            INotificationReceiver,
+            ConsoleNotificationReceiver,
+        )
+        return self.container

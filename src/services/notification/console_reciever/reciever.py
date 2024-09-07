@@ -14,5 +14,7 @@ class ConsoleNotificationReceiver(INotificationReceiver):
         assert data.get("message"), "Missing key 'message' in data to send"
 
         sys.stderr.write(
-            f"Notification: to {data['to']}, message: {data['message']}"
+            f"\n---------------------------SMS---------------------------\n"
+            f"Notification: to {data['to']}, message: {data['message']}\n"
+            f"---------------------------------------------------------\n\n"
         )

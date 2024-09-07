@@ -43,7 +43,7 @@ def healthcheck(request: HttpRequest) -> None:
 def get_webhooks(request: HttpRequest) -> HttpResponse:
     path = settings.BASE_DIR
     line_list = []
-    with open(f"{path}/log/warnings.log") as file:
+    with open(f"{path}/logs/warnings.log") as file:
         lines = file.readlines()[-10:]
         for line in lines:
             time, data = line.split("WARNING CMS WEBHOOK: body: b'")
@@ -59,10 +59,15 @@ def get_webhooks(request: HttpRequest) -> HttpResponse:
 
 
 def dict_render(data: dict[str, str | dict[str, str]],  time_log="", deep=0) -> str:
+    logger.info("data: {} | {}", type(data), data)
     tab = " " * 4
     res = "{\n"
+
+    time_log_line = f"<strong>{time_log}</strong>" if time_log else ""
+    if isinstance(data, str):
+        res += tab * (deep + 1) + data + "\n" + tab * deep + "}"
+        return res
     deep += 1
-    time_log_line = f"<strong>{time_log}</strong>"
     for key, value in data.items():
         res += tab * deep + f"{key}:  "
 

@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from loguru import logger
 
 
 load_dotenv()
@@ -122,36 +121,3 @@ CORS_ALLOWED_ORIGINS = [
 
 # Разрешаем отправлять cookie при межсайтовых запросах на разрешённые домены:
 CORS_ALLOW_CREDENTIALS = True
-
-# логгер
-logger.remove()  # Удаляем стандартный обработчик
-logger.add(
-    os.path.join(BASE_DIR, 'logs/debug.log'),
-    level='DEBUG',
-    rotation='1 MB',
-    retention='30 days',
-    format="{time} {level} {message}",
-    enqueue=True,
-    diagnose=False,
-    backtrace=False,
-)
-logger.add(
-    os.path.join(BASE_DIR, 'logs/warnings.log'),
-    level='WARNING',
-    rotation='1 MB',
-    retention='30 days',
-    format="{time} {level} {message}",
-    enqueue=True,
-    diagnose=False,
-    backtrace=False,
-)
-logger.add(
-    os.path.join(BASE_DIR, 'logs/errors.log'),
-    level='ERROR',
-    rotation='1 MB',
-    retention='30 days',
-    format="{time} {level} {message}",
-    enqueue=True,
-    diagnose=False,
-    backtrace=False,
-)
