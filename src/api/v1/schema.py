@@ -1,5 +1,5 @@
-from ninja import Schema
+from ninja import Schema, Field
 
 
 class ResponseStatusSchema(Schema):
-    response: str
+    response: str = Field(default="Status: Ok")

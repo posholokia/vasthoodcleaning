@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from apps.landing.models import Site
-from apps.landing.services.storage import ISiteRepository
+from apps.landing.storage import ISiteRepository
 
 from core.constructor.permissons import BasePermission
 
@@ -10,8 +10,8 @@ from core.constructor.permissons import BasePermission
 class AdminCanAddSitePermission(BasePermission):
     repository: ISiteRepository
 
-    async def has_permission(self) -> bool:
-        if await Site.objects.aexists():
+    def has_permission(self) -> bool:
+        if Site.objects.exists():
             return False
         return True
 
@@ -20,7 +20,7 @@ class AdminCanAddSitePermission(BasePermission):
 class AdminCanDeleteSitePermission(BasePermission):
     repository: ISiteRepository
 
-    async def has_permission(self) -> bool:
-        if await Site.objects.aexists():
+    def has_permission(self) -> bool:
+        if Site.objects.exists():
             return False
         return True

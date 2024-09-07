@@ -2,8 +2,8 @@ import json
 from datetime import datetime, timedelta
 
 from apps.clients.actions import AuthClientAction
-from apps.clients.services.exceptions import NotExistsRefreshToken
-from config.containers import get_container
+from apps.clients.exceptions import NotExistsRefreshToken
+from core.containers import get_container
 from django.http import (
     HttpRequest,
     HttpResponse,
@@ -27,14 +27,14 @@ router = Router(tags=["Auth"])
     response=ResponseStatusSchema,
     description="Request to send an SMS message with a verification code.",
 )
-async def send_sms(
+def send_sms(
     request: HttpRequest,
     client: ClientPhoneSchema,
 ) -> ResponseStatusSchema:
     container = get_container()
     action: AuthClientAction = container.resolve(AuthClientAction)
 
-    await action.send_code(phone=client.phone)
+    action.send_code(phone=client.phone)
     return ResponseStatusSchema(
         response=f"Message sent successfully to {client.phone}"
     )
@@ -47,14 +47,14 @@ async def send_sms(
     "Access token will be in the response from the api, "
     "refresh token will be set in cookies",
 )
-async def login(
+def login(
     request: HttpRequest,
     credentials: AuthRequestSchema,
 ) -> HttpResponse:
     container = get_container()
     action: AuthClientAction = container.resolve(AuthClientAction)
 
-    refresh, access = await action.login(
+    refresh, access = action.login(
         phone=credentials.phone,
         code=credentials.code,
     )
@@ -77,7 +77,7 @@ async def login(
     description="Get new access token. "
     "Send the cookie with the refresh token.",
 )
-async def refresh_token(
+def refresh_token(
     request: HttpRequest,
 ) -> AccessTokenSchema:
     refresh = request.COOKIES.get("refresh")
@@ -87,7 +87,7 @@ async def refresh_token(
 
     container = get_container()
     action: AuthClientAction = container.resolve(AuthClientAction)
-    access = await action.refresh_token(refresh=refresh)
+    access = action.refresh_token(refresh=refresh)
     return AccessTokenSchema(access=access)
 
 
@@ -96,7 +96,7 @@ async def refresh_token(
     response=ResponseStatusSchema,
     description="Ban token. Send the cookie with the refresh token.",
 )
-async def logout(
+def logout(
     request: HttpRequest,
 ) -> ResponseStatusSchema:
     refresh = request.COOKIES.get("refresh")
@@ -107,7 +107,7 @@ async def logout(
     container = get_container()
     action: AuthClientAction = container.resolve(AuthClientAction)
 
-    await action.logout(
+    action.logout(
         refresh=refresh,
     )
     return ResponseStatusSchema(

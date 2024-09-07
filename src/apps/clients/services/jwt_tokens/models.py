@@ -28,7 +28,7 @@ class RefreshToken(Token):
     access_token_cls: AccessToken = field(default_factory=AccessToken)
     sub_claim: str = "client"
 
-    async def access_token(self, refresh_token: str) -> str:
+    def access_token(self, refresh_token: str) -> str:
         """Выдает access токен по refresh токену"""
         payload = self.decode(refresh_token)
 
@@ -40,7 +40,7 @@ class RefreshToken(Token):
         self.access_token_cls[self.sub_claim] = payload[self.sub_claim]
         return self.access_token_cls.encode()
 
-    async def for_client(self, phone: str) -> str:
+    def for_client(self, phone: str) -> str:
         """Выдаем refresh токен юзеру"""
         self.set_payload()
         self[self.sub_claim] = phone
@@ -61,27 +61,27 @@ class BlacklistRefreshToken(RefreshToken):
         super().__init__()
         self.storage = storage
 
-    async def access_token(self, refresh_token: str) -> str:
+    def access_token(self, refresh_token: str) -> str:
         """Перед выдачей токена проверяем что его нет в черном списке"""
-        await self.check_blacklist(refresh_token)
-        return await super().access_token(refresh_token)
+        self.check_blacklist(refresh_token)
+        return super().access_token(refresh_token)
 
-    async def set_blacklist(self, token: str) -> None:
+    def set_blacklist(self, token: str) -> None:
         """Записываем подпись токена в хранилище в черный список"""
         payload = self.decode(token)
         key = payload["jti"]
         timestamp_exp = payload["exp"]
 
-        await self.storage.set_token(
+        self.storage.set_token(
             key=key,
             value=token,
             expire=timestamp_exp,
         )
 
-    async def check_blacklist(self, token: str) -> None:
+    def check_blacklist(self, token: str) -> None:
         """Проверяем, что токена нет в черном списке. Если есть, поднимаем ошибку"""
         payload = self.decode(token)
-        value = await self.storage.get_token(payload["jti"])
+        value = self.storage.get_token(payload["jti"])
 
         if value is not None:
             raise TokenInBlacklistError("Tокен в черном списке")
