@@ -1,6 +1,6 @@
 import re
 
-from apps.accounts.services.exceptions.user import InvalidProneNumber
+from apps.accounts.exceptions import InvalidProneNumber
 
 from core.constructor.validators import BaseValidator
 

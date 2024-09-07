@@ -8,7 +8,7 @@ from dataclasses import dataclass
 @dataclass
 class ITokenStorage(ABC):
     @abstractmethod
-    async def set_token(
+    def set_token(
         self,
         key: str,
         value: str,
@@ -18,4 +18,4 @@ class ITokenStorage(ABC):
     ): ...
 
     @abstractmethod
-    async def get_token(self, key: str, *args, **kwargs): ...
+    def get_token(self, key: str, *args, **kwargs): ...

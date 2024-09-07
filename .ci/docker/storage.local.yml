@@ -2,6 +2,7 @@ services:
   vasthood_db:
     container_name: vasthood_db
     image: public.ecr.aws/docker/library/postgres:15
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     environment:
       POSTGRES_DB: "vasthoodclean"
       POSTGRES_USER: "master"
@@ -13,6 +14,8 @@ services:
     volumes:
       - vhc_data:/var/lib/postgresql/data/
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+
 
   redis:
     container_name: redis

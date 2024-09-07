@@ -1,2239 +1,1640 @@
-jobs = [
-    {
-        "id": "job_5ca164cf8f1e4b1ba51a81e367974f8f",
-        "invoice_number": "23",
-        "description": "Airbnb Cleaning Service",
-        "customer": {
-            "id": "cus_816acd9103d2483d8f5afdee8e998aaa",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-18T18:11:06Z",
-            "updated_at": "2024-08-18T18:11:06Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_29c19df094384c8d87b4683bba262911",
-            "type": "service",
-            "street": "12 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "needs scheduling",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-29T10:26:56Z",
-        "updated_at": "2024-08-29T10:28:01Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_0f9a7aa91bde46259cd6365db87c4ebf",
-        "invoice_number": "22",
-        "description": "Apartments Cleaning",
-        "customer": {
-            "id": "cus_bfec81a415e14f499806079024e52aaa",
-            "first_name": "Kathleen",
-            "last_name": "Gandara",
-            "email": "photokathy@yahoo.com",
-            "mobile_number": "6262982737",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-28T20:35:29Z",
-            "updated_at": "2024-08-28T20:35:29Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_2489d8fe3ca1416fa34952fcb4ec0dcd",
-            "type": "service",
-            "street": "711 Orange Grove Avenue",
-            "street_line_2": "",
-            "city": "South Pasadena",
-            "state": "CA",
-            "zip": "91030",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_932a8fc3a351425fb0028d1e557058de",
-                "content": "Apartments Cleaning:\nDescription:\n- Kitchen and bathroom only"
-            }
-        ],
-        "work_status": "scheduled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-30T17:00:00Z",
-            "scheduled_end": "2024-08-30T17:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 14900,
-        "outstanding_balance": 14900,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-28T20:35:29Z",
-        "updated_at": "2024-08-28T20:35:30Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_360dde95efb04ce29ccd8de2558b4410",
-        "invoice_number": "21",
-        "description": "Mobile Carwash & Detailing",
-        "customer": {
-            "id": "cus_816acd9103d2483d8f5afdee8e998bbb",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-18T18:11:06Z",
-            "updated_at": "2024-08-18T18:11:06Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_29c19df094384c8d87b4683bba262911",
-            "type": "service",
-            "street": "12 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_4d608f336aaf418eab40596796b0f01d",
-                "content": "kjjk\n"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": "2024-08-28T02:00:16Z",
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-28T17:00:00Z",
-            "scheduled_end": "2024-08-28T18:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 54350,
-        "outstanding_balance": 54350,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [
-            "test job tag"
-        ],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": {
-                "id": "jbt_deea0746ba044e1ab08abd787b8f8139",
-                "name": "One-time clean"
+lines = [
+{
+    "object": "list",
+    "data": [
+        {
+            "object": "line_item",
+            "id": "rli_f9b395d6728b436d8e540bb10351bf67",
+            "name": "House Cleaning",
+            "description": "What is included::\r\nBedroom, Living Room & Common Areas\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Bathroom Cleaning\r\n•  Wash and sanitize the toilet, shower, tub and sink\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Kitchen Cleaning\r\n•  Dust accessible surfaces\r\n•  Wipe down exterior of stove, oven and fridge\r\n\r\n\n5 bedrooms: none\nSquare feet: 501 - 1000\nPatio - $75: 0\nInside Fridge Cleaning - $40: 0\nBalcony - $35: 1\nInside Oven Cleaning - $40: 1\nShutters (per 1 Shutter section) - $5: 1\nMaking Beds (each) - $10: 1\nLoading /Unloading Dishwasher Machine - $10: 1\nLoading/Unloading Washer-Dryer 1 cycle - $10 : 0\nWindow /Track Cleaning (per regular windows) - $10: 0\nSliding Door Window Cleaning (per slider) + tracks - $5: 0\n1 bedroom: 1 bathroom\n4 bedrooms : none\n2 bedrooms: 1 bathroom, 3 bathrooms\n3 bedrooms : 1 bathroom, 3 bathrooms, 5 bathrooms\nExtra: Pet Friendly, Eco Friendly",
+            "unit_price": 139900,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "labor",
+            "taxable": False,
+            "amount": 139900,
+            "order_index": None,
+            "service_item_id": None,
+            "service_item_type": None,
+            "pricing_form": {
+                "object": "request_line_item_pricing_form",
+                "data": {
+                    "object": "request_line_item_pricing_form",
+                    "industry_uuid": None,
+                    "pricebook_price_form_uuid": "pbpf_756743e77c2c41b9869cc3973ffce926",
+                    "form": {
+                        "id": "pbpf_756743e77c2c41b9869cc3973ffce926",
+                        "name": "House Cleaning",
+                        "description": "What is included::\r\nBedroom, Living Room & Common Areas\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Bathroom Cleaning\r\n•  Wash and sanitize the toilet, shower, tub and sink\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Kitchen Cleaning\r\n•  Dust accessible surfaces\r\n•  Wipe down exterior of stove, oven and fridge\r\n\r\n",
+                        "fields": [
+                            {
+                                "id": 209776,
+                                "name": "5 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 353379,
+                                        "name": "1 bathroom",
+                                        "price": 37000
+                                    },
+                                    {
+                                        "id": 361233,
+                                        "name": "2 bathrooms",
+                                        "price": 39000
+                                    },
+                                    {
+                                        "id": 361234,
+                                        "name": "3 bathrooms",
+                                        "price": 42000
+                                    },
+                                    {
+                                        "id": 361235,
+                                        "name": "4 bathrooms",
+                                        "price": 46000
+                                    },
+                                    {
+                                        "id": 361236,
+                                        "name": "5 bathrooms",
+                                        "price": 47000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 209777,
+                                "name": "Square feet",
+                                "kind": "numerical_range",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 353389,
+                                        "name": "501 - 1000",
+                                        "price": 0,
+                                        "upper_bound": 1000,
+                                        "lower_bound": 501
+                                    },
+                                    {
+                                        "id": 353390,
+                                        "name": "1001 - 1500",
+                                        "price": 0,
+                                        "upper_bound": 1500,
+                                        "lower_bound": 1001
+                                    },
+                                    {
+                                        "id": 353391,
+                                        "name": "1501 - 2000",
+                                        "price": 0,
+                                        "upper_bound": 2000,
+                                        "lower_bound": 1501
+                                    },
+                                    {
+                                        "id": 353392,
+                                        "name": "2001 - 2500",
+                                        "price": 0,
+                                        "upper_bound": 2500,
+                                        "lower_bound": 2001
+                                    },
+                                    {
+                                        "id": 353393,
+                                        "name": "2501 - 3000",
+                                        "price": 0,
+                                        "upper_bound": 3000,
+                                        "lower_bound": 2501
+                                    },
+                                    {
+                                        "id": 353394,
+                                        "name": "3001 - 3500",
+                                        "price": 0,
+                                        "upper_bound": 3500,
+                                        "lower_bound": 3001
+                                    },
+                                    {
+                                        "id": 353395,
+                                        "name": "3501 - 4000",
+                                        "price": 0,
+                                        "upper_bound": 4000,
+                                        "lower_bound": 3501
+                                    },
+                                    {
+                                        "id": 353396,
+                                        "name": "4001 - 4500",
+                                        "price": 0,
+                                        "upper_bound": 4500,
+                                        "lower_bound": 4001
+                                    },
+                                    {
+                                        "id": 353397,
+                                        "name": "4501 - 5000",
+                                        "price": 0,
+                                        "upper_bound": 5000,
+                                        "lower_bound": 4501
+                                    },
+                                    {
+                                        "id": 353398,
+                                        "name": "5001 +",
+                                        "price": 0,
+                                        "upper_bound": 2147483647,
+                                        "lower_bound": 5001
+                                    }
+                                ],
+                                "selected": [
+                                    353389
+                                ]
+                            },
+                            {
+                                "id": 209779,
+                                "name": "Patio - $75",
+                                "kind": "quantity_select",
+                                "price": 7500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209780,
+                                "name": "Inside Fridge Cleaning - $40",
+                                "kind": "quantity_select",
+                                "price": 4000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209781,
+                                "name": "Balcony - $35",
+                                "kind": "quantity_select",
+                                "price": 3500,
+                                "value": 1,
+                                "amount": 3500
+                            },
+                            {
+                                "id": 209782,
+                                "name": "Inside Oven Cleaning - $40",
+                                "kind": "quantity_select",
+                                "price": 4000,
+                                "value": 1,
+                                "amount": 4000
+                            },
+                            {
+                                "id": 209784,
+                                "name": "Shutters (per 1 Shutter section) - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 1,
+                                "amount": 500
+                            },
+                            {
+                                "id": 209786,
+                                "name": "Making Beds (each) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 1,
+                                "amount": 1000
+                            },
+                            {
+                                "id": 209787,
+                                "name": "Loading /Unloading Dishwasher Machine - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 1,
+                                "amount": 1000
+                            },
+                            {
+                                "id": 209788,
+                                "name": "Loading/Unloading Washer-Dryer 1 cycle - $10 ",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209789,
+                                "name": "Window /Track Cleaning (per regular windows) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209790,
+                                "name": "Sliding Door Window Cleaning (per slider) + tracks - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 214411,
+                                "name": "1 bedroom",
+                                "kind": "multiple_select",
+                                "amount": 14900,
+                                "options": [
+                                    {
+                                        "id": 361208,
+                                        "name": "1 bathroom",
+                                        "price": 14900
+                                    },
+                                    {
+                                        "id": 361231,
+                                        "name": "2 bathrooms",
+                                        "price": 16000
+                                    }
+                                ],
+                                "selected": [
+                                    361208
+                                ]
+                            },
+                            {
+                                "id": 214412,
+                                "name": "4 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361218,
+                                        "name": "1 bathroom",
+                                        "price": 24500
+                                    },
+                                    {
+                                        "id": 361238,
+                                        "name": "2 bathrooms",
+                                        "price": 28000
+                                    },
+                                    {
+                                        "id": 361239,
+                                        "name": "3 bathrooms",
+                                        "price": 30000
+                                    },
+                                    {
+                                        "id": 361240,
+                                        "name": "4 bathrooms",
+                                        "price": 33000
+                                    },
+                                    {
+                                        "id": 361241,
+                                        "name": "5 bathrooms",
+                                        "price": 34000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214413,
+                                "name": "2 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 38500,
+                                "options": [
+                                    {
+                                        "id": 361223,
+                                        "name": "1 bathroom",
+                                        "price": 16000
+                                    },
+                                    {
+                                        "id": 361243,
+                                        "name": "2 bathrooms",
+                                        "price": 18500
+                                    },
+                                    {
+                                        "id": 361244,
+                                        "name": "3 bathrooms",
+                                        "price": 22500
+                                    }
+                                ],
+                                "selected": [
+                                    361223,
+                                    361244
+                                ]
+                            },
+                            {
+                                "id": 214414,
+                                "name": "3 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 76500,
+                                "options": [
+                                    {
+                                        "id": 361226,
+                                        "name": "1 bathroom",
+                                        "price": 22500
+                                    },
+                                    {
+                                        "id": 361246,
+                                        "name": "2 bathrooms",
+                                        "price": 23500
+                                    },
+                                    {
+                                        "id": 361247,
+                                        "name": "3 bathrooms",
+                                        "price": 24500
+                                    },
+                                    {
+                                        "id": 361248,
+                                        "name": "4 bathrooms",
+                                        "price": 27000
+                                    },
+                                    {
+                                        "id": 361249,
+                                        "name": "5 bathrooms",
+                                        "price": 29500
+                                    }
+                                ],
+                                "selected": [
+                                    361226,
+                                    361247,
+                                    361249
+                                ]
+                            },
+                            {
+                                "id": 216634,
+                                "name": "Extra",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 365532,
+                                        "name": "Pet Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365533,
+                                        "name": "Eco Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365534,
+                                        "name": "Green",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365535,
+                                        "name": "Other",
+                                        "price": 0
+                                    }
+                                ],
+                                "selected": [
+                                    365532,
+                                    365533
+                                ]
+                            }
+                        ]
+                    },
+                    "total_price": 139900,
+                    "bedroom_count": None,
+                    "bathroom_count": None,
+                    "story_count": None,
+                    "room_count": None,
+                    "window_count": None,
+                    "square_footage_lower_bound": None,
+                    "square_footage_upper_bound": None,
+                    "total_bedroom_price": None,
+                    "total_bathroom_price": None,
+                    "total_story_price": None,
+                    "total_window_price": None,
+                    "total_room_price": None,
+                    "total_square_footage_price": None
+                }
             },
-            "business_unit": None
-        },
-        "created_at": "2024-08-26T16:19:35Z",
-        "updated_at": "2024-08-29T00:53:28Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_2c16f2e6470b4bbf80d909347f08fa04",
-        "invoice_number": "20",
-        "description": "",
-        "customer": {
-            "id": "cus_816acd9103d2483d8f5afdee8e998bbb",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-18T18:11:06Z",
-            "updated_at": "2024-08-18T18:11:06Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_29c19df094384c8d87b4683bba262911",
-            "type": "service",
-            "street": "12 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-24T21:32:17Z",
-        "updated_at": "2024-08-26T00:08:30Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_c39eda43b80b4aa49f02f2ac3ed85a93",
-        "invoice_number": "19",
-        "description": "",
-        "customer": {
-            "id": "cus_816acd9103d2483d8f5afdee8e998ccc",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-18T18:11:06Z",
-            "updated_at": "2024-08-18T18:11:06Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_29c19df094384c8d87b4683bba262911",
-            "type": "service",
-            "street": "12 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-24T21:26:47Z",
-        "updated_at": "2024-08-24T21:30:30Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_f8ad3ae14fad4ac684218280f2e62a18",
-        "invoice_number": "18",
-        "description": "Mobile Carwash & Detailing",
-        "customer": {
-            "id": "cus_64bc7e2b5e064393a795910ef373c774",
-            "first_name": "Test",
-            "last_name": "Testtest",
-            "email": "test@gmail.com",
-            "mobile_number": "3243544543",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-22T07:30:35Z",
-            "updated_at": "2024-08-23T03:22:04Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_e7c82efa4f224feaa2402d0074dd2b19",
-            "type": "service",
-            "street": "la",
-            "street_line_2": "la",
-            "city": "la",
-            "state": "LA",
-            "zip": "34344",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_85a00a15fec9458c970db0947cc5f8d9",
-                "content": "Mobile Carwash & Detailing:\nDescription:\n- no description provided\n\n\nHouse Cleaning:\nDescription:\n- no description provided"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-24T20:30:00Z",
-            "scheduled_end": "2024-08-24T20:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 195400,
-        "outstanding_balance": 195400,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-22T07:30:35Z",
-        "updated_at": "2024-08-28T01:41:02Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_14c31dc95f3c43a9be2511f437cb09da",
-        "invoice_number": "17",
-        "description": "Airbnb Cleaning Service",
-        "customer": {
-            "id": "cus_a0ed9f75481a4cd993d51d5429552647",
-            "first_name": "Johny",
-            "last_name": "Test",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-11T19:58:08Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_ac1994931cc04f84afd241cad3bd2e54",
-            "type": "service",
-            "street": "12 E Harrison St",
-            "street_line_2": "",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 56500,
-        "outstanding_balance": 56500,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": "est_d034c59f5576424faac10ffffe3c0c73",
-        "original_estimate_uuids": [
-            "est_d034c59f5576424faac10ffffe3c0c73"
-        ],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-18T18:26:18Z",
-        "updated_at": "2024-08-18T18:26:30Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_5af0cdda35f54fff9b006400a63fbf5a",
-        "invoice_number": "16",
-        "description": "Mobile Carwash & Detailing",
-        "customer": {
-            "id": "cus_816acd9103d2483d8f5afdee8e998ccc",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-18T18:11:06Z",
-            "updated_at": "2024-08-18T18:11:06Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_29c19df094384c8d87b4683bba262911",
-            "type": "service",
-            "street": "12 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_cad40c48250d495490f34afc4ebca49e",
-                "content": "Mobile Carwash & Detailing:\nDescription:\n- 11\n\n\nApartments Cleaning:\nDescription:\n- 33"
-            }
-        ],
-        "work_status": "scheduled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-24T18:30:00Z",
-            "scheduled_end": "2024-08-24T18:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 26130,
-        "outstanding_balance": 26130,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-18T18:11:06Z",
-        "updated_at": "2024-08-23T22:20:59Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_bad75568e98e4d3eac5cbb0225263903",
-        "invoice_number": "15",
-        "description": "Deep Cleaning",
-        "customer": {
-            "id": "cus_22dfd4ba33d74ed4b310cbf6bc624e91",
-            "first_name": "TTT",
-            "last_name": "AAAA",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-16T02:48:37Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_487f4ef4c4b4469596fb065a71ba1cbd",
-            "type": "service",
-            "street": "2 E 8th St",
-            "street_line_2": "",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_90574b335eb14d8cbd2a63b4c5780b16",
-                "content": "Deep Cleaning:\nDescription:\n- asd\n\n\nAirbnb Cleaning Service:\nDescription:\n- qwdqwd"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-22T15:30:00Z",
-            "scheduled_end": "2024-08-22T15:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-16T02:48:37Z",
-        "updated_at": "2024-08-18T18:15:10Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_4611a3f4ad314db2b4b7113bdc1e34c0",
-        "invoice_number": "14",
-        "description": "House Cleaning",
-        "customer": {
-            "id": "cus_0e6ffa73c9004900b73a4fb51713b422",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-16T02:43:51Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_6cf8673f5ced446baf9353d054b36448",
-            "type": "service",
-            "street": "2 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_eed7c95f9873486da8cf820df7c56ef7",
-                "content": "House Cleaning:\nDescription:\n- asdas\n\n\nApartments Cleaning:\nDescription:\n- 111"
-            }
-        ],
-        "work_status": "user canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-18T16:00:00Z",
-            "scheduled_end": "2024-08-18T16:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-16T02:43:51Z",
-        "updated_at": "2024-08-16T15:43:17Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_07e6b08f199747b3a0ea53e2f37cc04d",
-        "invoice_number": "13",
-        "description": "House Cleaning",
-        "customer": {
-            "id": "cus_d101d4e07a904ec481b87917771dd04d",
-            "first_name": "Aleksandr",
-            "last_name": "Elin",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-16T02:42:37Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_459c4b385d0743acbd0f94ed38a91c75",
-            "type": "service",
-            "street": "2 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_2b413927c9ac4111a68871de2af69a89",
-                "content": "House Cleaning:\nDescription:\n- asd"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-18T16:00:00Z",
-            "scheduled_end": "2024-08-18T16:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-16T02:42:37Z",
-        "updated_at": "2024-08-18T18:15:26Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_8ea8b4cdec264ebd8c137bb86e498671",
-        "invoice_number": "12",
-        "description": "House Cleaning",
-        "customer": {
-            "id": "cus_8cf124d807f043b89c94aedcf5032aaa",
-            "first_name": "Arkadii",
-            "last_name": "Astvatsaturov",
-            "email": "arkady017@gmail.com",
-            "mobile_number": "7639103848",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-16T02:41:39Z",
-            "updated_at": "2024-08-16T02:41:39Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_43431eb867f2457eb639bdffc0ac43f3",
-            "type": "service",
-            "street": "4893 Orchid Ln N",
-            "street_line_2": "",
-            "city": "Plymouth",
-            "state": "MN",
-            "zip": "55446",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_748dffb3be7647ea8ad12a39c057404e",
-                "content": "House Cleaning:\nDescription:\n- no description provided\n\n\nApartments Cleaning:\nDescription:\n- no description provided\n\n\nMobile Carwash & Detailing:\nDescription:\n- no description provided"
-            }
-        ],
-        "work_status": "scheduled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-17T15:30:00Z",
-            "scheduled_end": "2024-08-17T15:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 59000,
-        "outstanding_balance": 59000,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": "Online Booking",
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-16T02:41:39Z",
-        "updated_at": "2024-08-16T02:41:39Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_1d3380b0a81c453ab441a4dc1950a89d",
-        "invoice_number": "11",
-        "description": "Airbnb Cleaning Service",
-        "customer": {
-            "id": "cus_a0ed9f75481a4cd993d51d5429552647",
-            "first_name": "Johny",
-            "last_name": "Test",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-11T19:58:08Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_ac1994931cc04f84afd241cad3bd2e54",
-            "type": "service",
-            "street": "12 E Harrison St",
-            "street_line_2": "",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-12T18:45:00Z",
-            "scheduled_end": "2024-08-12T21:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 56500,
-        "outstanding_balance": 56500,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": "est_d034c59f5576424faac10ffffe3c0c73",
-        "original_estimate_uuids": [
-            "est_d034c59f5576424faac10ffffe3c0c73"
-        ],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-11T22:31:50Z",
-        "updated_at": "2024-08-18T18:19:48Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_55e54862b89d457797edf928a436458f",
-        "invoice_number": "10",
-        "description": "Apartments Cleaning",
-        "customer": {
-            "id": "cus_a0ed9f75481a4cd993d51d5429552647",
-            "first_name": "Johny",
-            "last_name": "Test",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-11T19:58:08Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_ac1994931cc04f84afd241cad3bd2e54",
-            "type": "service",
-            "street": "12 E Harrison St",
-            "street_line_2": "",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_5954f39e81b0474aaeda178f412aff23",
-                "content": "Apartments Cleaning:\nDescription:\n- test"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 32700,
-        "outstanding_balance": 32700,
-        "assigned_employees": [],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-11T19:58:08Z",
-        "updated_at": "2024-08-18T18:24:18Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_8a593df923a749e6bccbf9a7f16f70c0",
-        "invoice_number": "9",
-        "description": "Airbnb Cleaning Service",
-        "customer": {
-            "id": "cus_55c24f62b92844be8803ef951ef02d52",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-11T00:24:42Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_a17f473b7e874c20a9de8261a0b32253",
-            "type": "service",
-            "street": "12 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_ad27d760af6241f4b5b2d9b684f663d9",
-                "content": "Airbnb Cleaning Service:\nDescription:\n- no description provided"
-            }
-        ],
-        "work_status": "user canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-12T10:30:00Z",
-            "scheduled_end": "2024-08-12T10:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 17500,
-        "outstanding_balance": 17500,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-11T00:24:42Z",
-        "updated_at": "2024-08-18T18:24:06Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_dd33d292af724545bd190d055c97423d",
-        "invoice_number": "8",
-        "description": "House Cleaning",
-        "customer": {
-            "id": "cus_24e3ad50614a47ea8850144207fcf565",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-08-09T03:29:46Z",
-            "updated_at": "2024-08-11T19:07:44Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_f3f9b93f98f94b3ba686bd64c70d2b13",
-            "type": "service",
-            "street": "2 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_62138d26994b45b9ac6bf1ea6d1a32a5",
-                "content": "House Cleaning:\nDescription:\n- ттт"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 17500,
-        "outstanding_balance": 17500,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [
-            "Delete from client"
-        ],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-09T03:29:46Z",
-        "updated_at": "2024-08-18T18:22:30Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_b6996cb9fcdc45d89e02f06ab4880deb",
-        "invoice_number": "7",
-        "description": "Mobile Carwash & Detailing",
-        "customer": {
-            "id": "cus_85e189ef1f0a463bbad7bacf4056e5b9",
-            "first_name": "Alexander",
-            "last_name": "Elin",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": "3126848315",
-            "work_number": "3126848315",
-            "company": "Alex's company name))",
-            "notifications_enabled": True,
-            "lead_source": "Housecall Pro Test",
-            "notes": "horoshiy paren'",
-            "created_at": "2024-06-21T22:04:12Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_a44dfbf2e27140e1b45442c2445f4e57",
-            "type": "billing",
-            "street": "2607 Tyler Ave",
-            "street_line_2": "12",
-            "city": "El Monte",
-            "state": "CA",
-            "zip": "91733",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_97bacfb4a5e943ca9d7b355e9bf734db",
-                "content": "Mobile Carwash & Detailing:\nDescription:\n- no description provided"
+            "url": "/jobs/job_3e618da401fd4aaa83e4137342f804fd/line_items/rli_f9b395d6728b436d8e540bb10351bf67"
+        },
+        {
+            "object": "line_item",
+            "id": "rli_0cfd1f38eadd4d63b012ae74bc0efb41",
+            "name": "Move in / Move Out Cleaning",
+            "description": "Move In/Out Cleaning for a Smooth Transition\r\nOur professional cleaning services ensure your home is spotless, whether you're moving in or out. Let us handle the thorough cleaning needed to make your move stress-free.\r\n\n1 bedroom: 1 bathroom\nSquare feet: 501 - 1000\nInside Fridge Cleaning - $45: 1\nInside Oven Cleaning - $45: 0\nBalcony - $35: 0\nPatio - $75: 1\nShutters (per 1 Shutter section) - $5: 0\nMaking Beds (each) - $20: 0\nLoading /Unloading Dishwasher Machine - $30: 0\nLoading/Unloading Washer-Dryer 1 cycle - $20 : 1\nWindow /Track Cleaning (per regular windows) - $10: 1\nSliding Door Window Cleaning (per slider) + tracks - $5: 1\n2 bedrooms : none\n3 bedrooms : none\n4 bedrooms : 1 bathroom, 2 bathrooms, 3 bathrooms, 4 bathrooms\n5 bedrooms: 5 bathrooms\nExtra: Green, Other",
+            "unit_price": 222500,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "labor",
+            "taxable": False,
+            "amount": 222500,
+            "order_index": None,
+            "service_item_id": None,
+            "service_item_type": None,
+            "pricing_form": {
+                "object": "request_line_item_pricing_form",
+                "data": {
+                    "object": "request_line_item_pricing_form",
+                    "industry_uuid": None,
+                    "pricebook_price_form_uuid": "pbpf_c98372e4942a4808958f85222d23fee7",
+                    "form": {
+                        "id": "pbpf_c98372e4942a4808958f85222d23fee7",
+                        "name": "Move in / Move Out Cleaning",
+                        "description": "Move In/Out Cleaning for a Smooth Transition\r\nOur professional cleaning services ensure your home is spotless, whether you're moving in or out. Let us handle the thorough cleaning needed to make your move stress-free.\r\n",
+                        "fields": [
+                            {
+                                "id": 209696,
+                                "name": "1 bedroom",
+                                "kind": "multiple_select",
+                                "amount": 17500,
+                                "options": [
+                                    {
+                                        "id": 353251,
+                                        "name": "Studio",
+                                        "price": 17500
+                                    },
+                                    {
+                                        "id": 361343,
+                                        "name": "1 bathroom",
+                                        "price": 17500
+                                    },
+                                    {
+                                        "id": 361344,
+                                        "name": "2 bathroom",
+                                        "price": 18500
+                                    }
+                                ],
+                                "selected": [
+                                    361343
+                                ]
+                            },
+                            {
+                                "id": 209698,
+                                "name": "Square feet",
+                                "kind": "numerical_range",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 353271,
+                                        "name": "501 - 1000",
+                                        "price": 0,
+                                        "upper_bound": 1000,
+                                        "lower_bound": 501
+                                    },
+                                    {
+                                        "id": 353272,
+                                        "name": "1001 - 1500",
+                                        "price": 0,
+                                        "upper_bound": 1500,
+                                        "lower_bound": 1001
+                                    },
+                                    {
+                                        "id": 353273,
+                                        "name": "1501 - 2000",
+                                        "price": 0,
+                                        "upper_bound": 2000,
+                                        "lower_bound": 1501
+                                    },
+                                    {
+                                        "id": 353274,
+                                        "name": "2001 - 2500",
+                                        "price": 0,
+                                        "upper_bound": 2500,
+                                        "lower_bound": 2001
+                                    },
+                                    {
+                                        "id": 353275,
+                                        "name": "2501 - 3000",
+                                        "price": 0,
+                                        "upper_bound": 3000,
+                                        "lower_bound": 2501
+                                    },
+                                    {
+                                        "id": 353276,
+                                        "name": "3001 - 3500",
+                                        "price": 0,
+                                        "upper_bound": 3500,
+                                        "lower_bound": 3001
+                                    },
+                                    {
+                                        "id": 353277,
+                                        "name": "3501 - 4000",
+                                        "price": 0,
+                                        "upper_bound": 4000,
+                                        "lower_bound": 3501
+                                    },
+                                    {
+                                        "id": 353278,
+                                        "name": "4001 - 4500",
+                                        "price": 0,
+                                        "upper_bound": 4500,
+                                        "lower_bound": 4001
+                                    },
+                                    {
+                                        "id": 353279,
+                                        "name": "4501 - 5000",
+                                        "price": 0,
+                                        "upper_bound": 5000,
+                                        "lower_bound": 4501
+                                    }
+                                ],
+                                "selected": [
+                                    353271
+                                ]
+                            },
+                            {
+                                "id": 209699,
+                                "name": "Inside Fridge Cleaning - $45",
+                                "kind": "quantity_select",
+                                "price": 4500,
+                                "value": 1,
+                                "amount": 4500
+                            },
+                            {
+                                "id": 209700,
+                                "name": "Inside Oven Cleaning - $45",
+                                "kind": "quantity_select",
+                                "price": 4500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209702,
+                                "name": "Balcony - $35",
+                                "kind": "quantity_select",
+                                "price": 3500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209703,
+                                "name": "Patio - $75",
+                                "kind": "quantity_select",
+                                "price": 7500,
+                                "value": 1,
+                                "amount": 7500
+                            },
+                            {
+                                "id": 209705,
+                                "name": "Shutters (per 1 Shutter section) - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209707,
+                                "name": "Making Beds (each) - $20",
+                                "kind": "quantity_select",
+                                "price": 2000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209708,
+                                "name": "Loading /Unloading Dishwasher Machine - $30",
+                                "kind": "quantity_select",
+                                "price": 3000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209709,
+                                "name": "Loading/Unloading Washer-Dryer 1 cycle - $20 ",
+                                "kind": "quantity_select",
+                                "price": 2000,
+                                "value": 1,
+                                "amount": 2000
+                            },
+                            {
+                                "id": 209710,
+                                "name": "Window /Track Cleaning (per regular windows) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 1,
+                                "amount": 1000
+                            },
+                            {
+                                "id": 209711,
+                                "name": "Sliding Door Window Cleaning (per slider) + tracks - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 1,
+                                "amount": 500
+                            },
+                            {
+                                "id": 214442,
+                                "name": "2 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361345,
+                                        "name": "1 bathroom",
+                                        "price": 18500
+                                    },
+                                    {
+                                        "id": 361347,
+                                        "name": "2 bathrooms",
+                                        "price": 21000
+                                    },
+                                    {
+                                        "id": 361348,
+                                        "name": "3 bathrooms",
+                                        "price": 27000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214443,
+                                "name": "3 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361349,
+                                        "name": "1 bathroom",
+                                        "price": 27000
+                                    },
+                                    {
+                                        "id": 361351,
+                                        "name": "2 bathrooms",
+                                        "price": 28000
+                                    },
+                                    {
+                                        "id": 361352,
+                                        "name": "3 bathrooms",
+                                        "price": 29000
+                                    },
+                                    {
+                                        "id": 361353,
+                                        "name": "4 bathrooms",
+                                        "price": 31500
+                                    },
+                                    {
+                                        "id": 361354,
+                                        "name": "5 bathrooms",
+                                        "price": 34000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214444,
+                                "name": "4 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 133500,
+                                "options": [
+                                    {
+                                        "id": 361355,
+                                        "name": "1 bathroom",
+                                        "price": 29000
+                                    },
+                                    {
+                                        "id": 361357,
+                                        "name": "2 bathrooms",
+                                        "price": 32500
+                                    },
+                                    {
+                                        "id": 361358,
+                                        "name": "3 bathrooms",
+                                        "price": 34500
+                                    },
+                                    {
+                                        "id": 361359,
+                                        "name": "4 bathrooms",
+                                        "price": 37500
+                                    },
+                                    {
+                                        "id": 361360,
+                                        "name": "5 bathrooms",
+                                        "price": 38500
+                                    }
+                                ],
+                                "selected": [
+                                    361355,
+                                    361358,
+                                    361359,
+                                    361357
+                                ]
+                            },
+                            {
+                                "id": 214445,
+                                "name": "5 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 56000,
+                                "options": [
+                                    {
+                                        "id": 361361,
+                                        "name": "1 bathroom",
+                                        "price": 46000
+                                    },
+                                    {
+                                        "id": 361363,
+                                        "name": "2 bathrooms",
+                                        "price": 48000
+                                    },
+                                    {
+                                        "id": 361364,
+                                        "name": "3 bathrooms",
+                                        "price": 51000
+                                    },
+                                    {
+                                        "id": 361365,
+                                        "name": "4 bathrooms",
+                                        "price": 55000
+                                    },
+                                    {
+                                        "id": 361366,
+                                        "name": "5 bathrooms",
+                                        "price": 56000
+                                    }
+                                ],
+                                "selected": [
+                                    361366
+                                ]
+                            },
+                            {
+                                "id": 216690,
+                                "name": "Extra",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 365649,
+                                        "name": "Pet Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365650,
+                                        "name": "Eco Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365651,
+                                        "name": "Green",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365652,
+                                        "name": "Other",
+                                        "price": 0
+                                    }
+                                ],
+                                "selected": [
+                                    365651,
+                                    365652
+                                ]
+                            }
+                        ]
+                    },
+                    "total_price": 222500,
+                    "bedroom_count": None,
+                    "bathroom_count": None,
+                    "story_count": None,
+                    "room_count": None,
+                    "window_count": None,
+                    "square_footage_lower_bound": None,
+                    "square_footage_upper_bound": None,
+                    "total_bedroom_price": None,
+                    "total_bathroom_price": None,
+                    "total_story_price": None,
+                    "total_window_price": None,
+                    "total_room_price": None,
+                    "total_square_footage_price": None
+                }
             },
-            {
-                "id": "nte_c4028e5d27b04082b228b3b81db31fd6",
-                "content": "Проверяю АПИ"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-08T16:45:00Z",
-            "scheduled_end": "2024-08-08T17:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [
-            "Customer Portal",
-            "CRM Tag test",
-            "1"
-        ],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-08T12:11:24Z",
-        "updated_at": "2024-08-18T18:22:20Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_5b6a8c0cf54242a883d25cb653a618d8",
-        "invoice_number": "6",
-        "description": "Post Construction Cleaning",
-        "customer": {
-            "id": "cus_85e189ef1f0a463bbad7bacf4056e5b9",
-            "first_name": "Alexander",
-            "last_name": "Elin",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": "3126848315",
-            "work_number": "3126848315",
-            "company": "Alex's company name))",
-            "notifications_enabled": True,
-            "lead_source": "Housecall Pro Test",
-            "notes": "horoshiy paren'",
-            "created_at": "2024-06-21T22:04:12Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_a44dfbf2e27140e1b45442c2445f4e57",
-            "type": "billing",
-            "street": "2607 Tyler Ave",
-            "street_line_2": "12",
-            "city": "El Monte",
-            "state": "CA",
-            "zip": "91733",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_933215cdddd44c87ac037b0653df3476",
-                "content": "Post Construction Cleaning:\nDescription:\n- test"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-08-09T16:30:00Z",
-            "scheduled_end": "2024-08-09T17:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 110,
-        "outstanding_balance": 0,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [
-            "Customer Portal"
-        ],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-07T16:15:56Z",
-        "updated_at": "2024-08-18T18:22:10Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_d0bc894379d34772994bb0802ffa61c4",
-        "invoice_number": "5",
-        "description": "Airbnb Cleaning Service",
-        "customer": {
-            "id": "cus_e575b68b2c9c4b6ea16bcba201ff00b7",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": "Housecall Pro Test",
-            "notes": None,
-            "created_at": "2024-08-07T16:09:50Z",
-            "updated_at": "2024-08-11T19:07:44Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": [
-                "test tag"
-            ]
-        },
-        "address": {
-            "id": "adr_4429177adad14f9f9e5c9de05ef8d693",
-            "type": "service",
-            "street": "2 E 8th St",
-            "street_line_2": "1803",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            False
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": "2024-08-07T16:14:33Z",
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-10-10T00:00:00Z",
-            "scheduled_end": "2024-10-10T01:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 31222,
-        "outstanding_balance": 31222,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-08-07T16:09:50Z",
-        "updated_at": "2024-08-18T18:21:58Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_d585983a8af24cbdb7e556dc4f1a8c08",
-        "invoice_number": "4",
-        "description": "1 Bedroom 1 Bathroom Appartment",
-        "customer": {
-            "id": "cus_759ad9ade1ec4b5ca8db0950a16b50e3",
-            "first_name": "Aleksandr",
-            "last_name": "El",
-            "email": "9254017@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": None,
-            "work_number": None,
-            "company": None,
-            "notifications_enabled": True,
-            "lead_source": None,
-            "notes": None,
-            "created_at": "2024-06-26T00:45:54Z",
-            "updated_at": "2024-08-09T03:25:20Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_31afba5624dc4bb6838c477fddb6098c",
-            "type": "service",
-            "street": "2 E 8th St",
-            "street_line_2": "18",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60605",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_22beb2f58de54a5d9b5266ccc6e17c1e",
-                "content": "1 Bedroom 1 Bathroom Appartment:\nDescription:\n- mnmn"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-06-28T17:30:00Z",
-            "scheduled_end": "2024-06-28T20:30:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 37800,
-        "outstanding_balance": 37800,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-06-26T00:45:54Z",
-        "updated_at": "2024-08-18T18:21:47Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_92cbff3fca2e4a4abc6a9ecd3cbb4006",
-        "invoice_number": "3",
-        "description": "1 Bedroom 1 Bathroom Appartment",
-        "customer": {
-            "id": "cus_85e189ef1f0a463bbad7bacf4056e5b9",
-            "first_name": "Alexander",
-            "last_name": "Elin",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": "3126848315",
-            "work_number": "3126848315",
-            "company": "Alex's company name))",
-            "notifications_enabled": True,
-            "lead_source": "Housecall Pro Test",
-            "notes": "horoshiy paren'",
-            "created_at": "2024-06-21T22:04:12Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_a44dfbf2e27140e1b45442c2445f4e57",
-            "type": "billing",
-            "street": "2607 Tyler Ave",
-            "street_line_2": "12",
-            "city": "El Monte",
-            "state": "CA",
-            "zip": "91733",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-06-26T18:00:00Z",
-            "scheduled_end": "2024-06-26T19:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 47070,
-        "outstanding_balance": 47070,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": {
-                "id": "jbt_deea0746ba044e1ab08abd787b8f8139",
-                "name": "One-time clean"
+            "url": "/jobs/job_3e618da401fd4aaa83e4137342f804fd/line_items/rli_0cfd1f38eadd4d63b012ae74bc0efb41"
+        }
+    ],
+    "url": "/jobs/job_3e618da401fd4aaa83e4137342f804fd/line_items"
+},
+{
+    "object": "list",
+    "data": [
+        {
+            "object": "line_item",
+            "id": "rli_ced490a1f7874c1894567ed1d7664556",
+            "name": "Airbnb Cleaning Service",
+            "description": "What is included::\r\nBedroom, Living Room & Common Areas\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Bathroom Cleaning\r\n•  Wash and sanitize the toilet, shower, tub and sink\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Kitchen Cleaning\r\n•  Dust accessible surfaces\r\n•  Wipe down exterior of stove, oven and fridge\r\n\r\n\n1 bedroom: 2 bathrooms\n2 bedrooms: none\n3 bedrooms : none\n4 bedrooms: none\n5 bedrooms: none\nSquare feet: none\nExtra: none\nInside Oven Cleaning - $40: 0\nInside Fridge Cleaning - $40: 0\nBalcony - $35: 0\nPatio - $75: 0\nLoading /Unloading Dishwasher Machine - $10: 0\nLoading/Unloading Washer-Dryer 1 cycle - $10 : 0\nMaking Beds (each) - $10: 0\nWindow /Track Cleaning (per regular windows) - $10: 0\nShutters (per 1 Shutter section) - $5: 0\nSliding Door Window Cleaning (per slider) + tracks - $5: 0",
+            "unit_price": 16000,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "labor",
+            "taxable": False,
+            "amount": 16000,
+            "order_index": 1,
+            "service_item_id": None,
+            "service_item_type": None,
+            "pricing_form": {
+                "object": "request_line_item_pricing_form",
+                "data": {
+                    "object": "request_line_item_pricing_form",
+                    "industry_uuid": None,
+                    "pricebook_price_form_uuid": "pbpf_53825d6d712243e28002d0fd4a5d66b1",
+                    "form": {
+                        "id": "pbpf_53825d6d712243e28002d0fd4a5d66b1",
+                        "name": "Airbnb Cleaning Service",
+                        "description": "What is included::\r\nBedroom, Living Room & Common Areas\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Bathroom Cleaning\r\n•  Wash and sanitize the toilet, shower, tub and sink\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Kitchen Cleaning\r\n•  Dust accessible surfaces\r\n•  Wipe down exterior of stove, oven and fridge\r\n\r\n",
+                        "fields": [
+                            {
+                                "id": 209716,
+                                "name": "1 bedroom",
+                                "kind": "multiple_select",
+                                "amount": 16000,
+                                "options": [
+                                    {
+                                        "id": 353280,
+                                        "name": "Studio",
+                                        "price": 14900
+                                    },
+                                    {
+                                        "id": 353284,
+                                        "name": "1 bathroom",
+                                        "price": 14900
+                                    },
+                                    {
+                                        "id": 365671,
+                                        "name": "2 bathrooms",
+                                        "price": 16000
+                                    }
+                                ],
+                                "selected": [
+                                    365671
+                                ]
+                            },
+                            {
+                                "id": 214438,
+                                "name": "2 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361321,
+                                        "name": "1 bathroom",
+                                        "price": 16000
+                                    },
+                                    {
+                                        "id": 361323,
+                                        "name": "2 bathrooms",
+                                        "price": 18500
+                                    },
+                                    {
+                                        "id": 361324,
+                                        "name": "3 bathrooms",
+                                        "price": 22500
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214439,
+                                "name": "3 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361325,
+                                        "name": "1 bathroom",
+                                        "price": 22500
+                                    },
+                                    {
+                                        "id": 361327,
+                                        "name": "2 bathrooms",
+                                        "price": 23500
+                                    },
+                                    {
+                                        "id": 361328,
+                                        "name": "3 bathrooms",
+                                        "price": 24500
+                                    },
+                                    {
+                                        "id": 361329,
+                                        "name": "4 bathrooms",
+                                        "price": 27000
+                                    },
+                                    {
+                                        "id": 361330,
+                                        "name": "5 bathrooms",
+                                        "price": 29500
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214440,
+                                "name": "4 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361331,
+                                        "name": "1 bathroom",
+                                        "price": 24500
+                                    },
+                                    {
+                                        "id": 361333,
+                                        "name": "2 bathrooms",
+                                        "price": 28000
+                                    },
+                                    {
+                                        "id": 361334,
+                                        "name": "3 bathrooms",
+                                        "price": 30000
+                                    },
+                                    {
+                                        "id": 361335,
+                                        "name": "4 bathrooms",
+                                        "price": 33000
+                                    },
+                                    {
+                                        "id": 361336,
+                                        "name": "5 bathrooms",
+                                        "price": 34000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214441,
+                                "name": "5 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361337,
+                                        "name": "1 bathroom",
+                                        "price": 37000
+                                    },
+                                    {
+                                        "id": 361339,
+                                        "name": "2 bathrooms",
+                                        "price": 39000
+                                    },
+                                    {
+                                        "id": 361340,
+                                        "name": "3 bathrooms",
+                                        "price": 42000
+                                    },
+                                    {
+                                        "id": 361341,
+                                        "name": "4 bathrooms",
+                                        "price": 46000
+                                    },
+                                    {
+                                        "id": 361342,
+                                        "name": "5 bathrooms",
+                                        "price": 47000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 209718,
+                                "name": "Square feet",
+                                "kind": "numerical_range",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 353300,
+                                        "name": "501 - 1000",
+                                        "price": 0,
+                                        "upper_bound": 1000,
+                                        "lower_bound": 501
+                                    },
+                                    {
+                                        "id": 353301,
+                                        "name": "1001 - 1500",
+                                        "price": 0,
+                                        "upper_bound": 1500,
+                                        "lower_bound": 1001
+                                    },
+                                    {
+                                        "id": 353302,
+                                        "name": "1501 - 2000",
+                                        "price": 0,
+                                        "upper_bound": 2000,
+                                        "lower_bound": 1501
+                                    },
+                                    {
+                                        "id": 353303,
+                                        "name": "2001 - 2500",
+                                        "price": 0,
+                                        "upper_bound": 2500,
+                                        "lower_bound": 2001
+                                    },
+                                    {
+                                        "id": 353304,
+                                        "name": "2501 - 3000",
+                                        "price": 0,
+                                        "upper_bound": 3000,
+                                        "lower_bound": 2501
+                                    },
+                                    {
+                                        "id": 353305,
+                                        "name": "3001 - 3500",
+                                        "price": 0,
+                                        "upper_bound": 3500,
+                                        "lower_bound": 3001
+                                    },
+                                    {
+                                        "id": 353306,
+                                        "name": "3501 - 4000",
+                                        "price": 0,
+                                        "upper_bound": 4000,
+                                        "lower_bound": 3501
+                                    },
+                                    {
+                                        "id": 353307,
+                                        "name": "4001 - 4500",
+                                        "price": 0,
+                                        "upper_bound": 4500,
+                                        "lower_bound": 4001
+                                    },
+                                    {
+                                        "id": 353308,
+                                        "name": "4501 - 5000",
+                                        "price": 0,
+                                        "upper_bound": 5000,
+                                        "lower_bound": 4501
+                                    },
+                                    {
+                                        "id": 353309,
+                                        "name": "5001 - 2147483647",
+                                        "price": 0,
+                                        "upper_bound": 2147483647,
+                                        "lower_bound": 5001
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 216681,
+                                "name": "Extra",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 365635,
+                                        "name": "Pet Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365636,
+                                        "name": "Eco Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365637,
+                                        "name": "Green",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365638,
+                                        "name": "Other",
+                                        "price": 0
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 209723,
+                                "name": "Inside Oven Cleaning - $40",
+                                "kind": "quantity_select",
+                                "price": 4000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209721,
+                                "name": "Inside Fridge Cleaning - $40",
+                                "kind": "quantity_select",
+                                "price": 4000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209722,
+                                "name": "Balcony - $35",
+                                "kind": "quantity_select",
+                                "price": 3500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209720,
+                                "name": "Patio - $75",
+                                "kind": "quantity_select",
+                                "price": 7500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209728,
+                                "name": "Loading /Unloading Dishwasher Machine - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209729,
+                                "name": "Loading/Unloading Washer-Dryer 1 cycle - $10 ",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209727,
+                                "name": "Making Beds (each) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209730,
+                                "name": "Window /Track Cleaning (per regular windows) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209725,
+                                "name": "Shutters (per 1 Shutter section) - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209731,
+                                "name": "Sliding Door Window Cleaning (per slider) + tracks - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 0,
+                                "amount": 0
+                            }
+                        ]
+                    },
+                    "total_price": 16000,
+                    "bedroom_count": None,
+                    "bathroom_count": None,
+                    "story_count": None,
+                    "room_count": None,
+                    "window_count": None,
+                    "square_footage_lower_bound": None,
+                    "square_footage_upper_bound": None,
+                    "total_bedroom_price": None,
+                    "total_bathroom_price": None,
+                    "total_story_price": None,
+                    "total_window_price": None,
+                    "total_room_price": None,
+                    "total_square_footage_price": None
+                }
             },
-            "business_unit": None
+            "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_ced490a1f7874c1894567ed1d7664556"
         },
-        "created_at": "2024-06-26T00:11:34Z",
-        "updated_at": "2024-08-18T18:21:35Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_e3536684b3c249b79b4e27d952ce8528",
-        "invoice_number": "2",
-        "description": "Home Cleaning",
-        "customer": {
-            "id": "cus_85e189ef1f0a463bbad7bacf4056e5b9",
-            "first_name": "Alexander",
-            "last_name": "Elin",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": "3126848315",
-            "work_number": "3126848315",
-            "company": "Alex's company name))",
-            "notifications_enabled": True,
-            "lead_source": "Housecall Pro Test",
-            "notes": "horoshiy paren'",
-            "created_at": "2024-06-21T22:04:12Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_a44dfbf2e27140e1b45442c2445f4e57",
-            "type": "billing",
-            "street": "2607 Tyler Ave",
-            "street_line_2": "12",
-            "city": "El Monte",
-            "state": "CA",
-            "zip": "91733",
-            "country": "US"
-        },
-        "notes": [],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": None,
-            "scheduled_end": None,
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 15900,
-        "outstanding_balance": 15900,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [
-            "test tag"
-        ],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": None,
-            "business_unit": None
-        },
-        "created_at": "2024-06-21T22:19:22Z",
-        "updated_at": "2024-08-18T18:21:24Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    },
-    {
-        "id": "job_6e01b0362d94442eb97d77f04ea39ab3",
-        "invoice_number": "1",
-        "description": "Home Cleaning",
-        "customer": {
-            "id": "cus_85e189ef1f0a463bbad7bacf4056e5b9",
-            "first_name": "Alexander",
-            "last_name": "Elin",
-            "email": "elin.alexander88@gmail.com",
-            "mobile_number": "3126848315",
-            "home_number": "3126848315",
-            "work_number": "3126848315",
-            "company": "Alex's company name))",
-            "notifications_enabled": True,
-            "lead_source": "Housecall Pro Test",
-            "notes": "horoshiy paren'",
-            "created_at": "2024-06-21T22:04:12Z",
-            "updated_at": "2024-08-18T17:00:01Z",
-            "company_name": "VAST CLEANING",
-            "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",
-            "tags": []
-        },
-        "address": {
-            "id": "adr_a44dfbf2e27140e1b45442c2445f4e57",
-            "type": "billing",
-            "street": "2607 Tyler Ave",
-            "street_line_2": "12",
-            "city": "El Monte",
-            "state": "CA",
-            "zip": "91733",
-            "country": "US"
-        },
-        "notes": [
-            {
-                "id": "nte_1b4ca94574744b9fab85082e6818370e",
-                "content": "Test private note\nGdh"
-            }
-        ],
-        "work_status": "pro canceled",
-        "work_timestamps": {
-            "on_my_way_at": None,
-            "started_at": None,
-            "completed_at": None
-        },
-        "schedule": {
-            "scheduled_start": "2024-06-24T23:00:00Z",
-            "scheduled_end": "2024-06-25T01:00:00Z",
-            "arrival_window": 0,
-            "appointments": []
-        },
-        "total_amount": 15900,
-        "outstanding_balance": 15900,
-        "assigned_employees": [
-            {
-                "id": "pro_d732eca4f2804f588828b9b5522973ab",
-                "first_name": "Arkadii",
-                "last_name": "Astvatsaturov",
-                "email": "arkady017@gmail.com",
-                "mobile_number": "7639103848",
-                "color_hex": "EF9159",
-                "avatar_url": "/assets/add_image_thumb.png",
-                "role": "field tech",
-                "tags": [],
-                "permissions": {
-                    "can_add_and_edit_job": True,
-                    "can_be_booked_online": True,
-                    "can_call_and_text_with_customers": True,
-                    "can_chat_with_customers": True,
-                    "can_delete_and_cancel_job": True,
-                    "can_edit_message_on_invoice": True,
-                    "can_see_street_view_data": True,
-                    "can_share_job": False,
-                    "can_take_payment_see_prices": True,
-                    "can_see_customers": True,
-                    "can_see_full_schedule": True,
-                    "can_see_future_jobs": True,
-                    "can_see_marketing_campaigns": True,
-                    "can_see_reporting": True,
-                    "can_edit_settings": True,
-                    "is_point_of_contact": False,
-                    "is_admin": True
-                },
-                "company_name": "VAST CLEANING",
-                "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-            }
-        ],
-        "tags": [],
-        "original_estimate_id": None,
-        "original_estimate_uuids": [],
-        "lead_source": None,
-        "job_fields": {
-            "job_type": {
-                "id": "jbt_bbf3cd80537948e7bd9fc94637e4c198",
-                "name": "Recurring clean"
+        {
+            "object": "line_item",
+            "id": "rli_e227cd5fcc154e1b9dbde96e332c28a7",
+            "name": "Apartments Cleaning",
+            "description": "What is included::\r\nBedroom, Living Room & Common Areas\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Bathroom Cleaning\r\n•  Wash and sanitize the toilet, shower, tub and sink\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Kitchen Cleaning\r\n•  Dust accessible surfaces\r\n•  Wipe down exterior of stove, oven and fridge\r\n\r\n\n1 bedroom: 1 bathroom\n2 bedrooms: 2 bathrooms\n3 bedrooms : none\n4 bedrooms : none\n5 bedrooms: none\nSquare feet: none\nExtra: none\nInside Oven Cleaning - $40: 0\nInside Fridge Cleaning - $40: 0\nBalcony - $35: 0\nPatio - $75: 0\nLoading /Unloading Dishwasher Machine - $10: 0\nLoading/Unloading Washer-Dryer 1 cycle - $10 : 0\nMaking Beds (each) - $10: 0\nWindow /Track Cleaning (per regular windows) - $10: 0\nShutters (per 1 Shutter section) - $5: 0\nSliding Door Window Cleaning (per slider) + tracks - $5: 0",
+            "unit_price": 33400,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "labor",
+            "taxable": False,
+            "amount": 33400,
+            "order_index": 2,
+            "service_item_id": None,
+            "service_item_type": None,
+            "pricing_form": {
+                "object": "request_line_item_pricing_form",
+                "data": {
+                    "object": "request_line_item_pricing_form",
+                    "industry_uuid": None,
+                    "pricebook_price_form_uuid": "pbpf_678170a6b77a4c7eac7db5429a17a670",
+                    "form": {
+                        "id": "pbpf_678170a6b77a4c7eac7db5429a17a670",
+                        "name": "Apartments Cleaning",
+                        "description": "What is included::\r\nBedroom, Living Room & Common Areas\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Bathroom Cleaning\r\n•  Wash and sanitize the toilet, shower, tub and sink\r\n•  Dust accessible surfaces\r\n•  Wipe down mirrors and glass fixtures\r\n•  Mop & vacuum floors\r\n•  Take out garbage\r\n•  Kitchen Cleaning\r\n•  Dust accessible surfaces\r\n•  Wipe down exterior of stove, oven and fridge\r\n\r\n",
+                        "fields": [
+                            {
+                                "id": 209755,
+                                "name": "1 bedroom",
+                                "kind": "multiple_select",
+                                "amount": 14900,
+                                "options": [
+                                    {
+                                        "id": 353339,
+                                        "name": "Studio",
+                                        "price": 14900
+                                    },
+                                    {
+                                        "id": 361260,
+                                        "name": "1 bathroom",
+                                        "price": 14900
+                                    },
+                                    {
+                                        "id": 361261,
+                                        "name": "2 bathroom",
+                                        "price": 16000
+                                    }
+                                ],
+                                "selected": [
+                                    361260
+                                ]
+                            },
+                            {
+                                "id": 214424,
+                                "name": "2 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 18500,
+                                "options": [
+                                    {
+                                        "id": 361262,
+                                        "name": "1 bathroom",
+                                        "price": 16000
+                                    },
+                                    {
+                                        "id": 361264,
+                                        "name": "2 bathrooms",
+                                        "price": 18500
+                                    },
+                                    {
+                                        "id": 361265,
+                                        "name": "3 bathrooms",
+                                        "price": 22500
+                                    }
+                                ],
+                                "selected": [
+                                    361264
+                                ]
+                            },
+                            {
+                                "id": 214425,
+                                "name": "3 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361266,
+                                        "name": "1 bathroom",
+                                        "price": 22500
+                                    },
+                                    {
+                                        "id": 361268,
+                                        "name": "2 bathrooms",
+                                        "price": 23500
+                                    },
+                                    {
+                                        "id": 361269,
+                                        "name": "3 bathrooms",
+                                        "price": 24500
+                                    },
+                                    {
+                                        "id": 361270,
+                                        "name": "4 bathrooms",
+                                        "price": 27000
+                                    },
+                                    {
+                                        "id": 361271,
+                                        "name": "5 bathrooms",
+                                        "price": 29500
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 209756,
+                                "name": "4 bedrooms ",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 353349,
+                                        "name": "1 bathroom",
+                                        "price": 24500
+                                    },
+                                    {
+                                        "id": 361296,
+                                        "name": "2 bathrooms",
+                                        "price": 28000
+                                    },
+                                    {
+                                        "id": 361297,
+                                        "name": "3 bathrooms",
+                                        "price": 30000
+                                    },
+                                    {
+                                        "id": 361298,
+                                        "name": "4 bathrooms",
+                                        "price": 33000
+                                    },
+                                    {
+                                        "id": 361299,
+                                        "name": "5 bathrooms",
+                                        "price": 34000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 214426,
+                                "name": "5 bedrooms",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 361272,
+                                        "name": "1 bathroom",
+                                        "price": 37000
+                                    },
+                                    {
+                                        "id": 361274,
+                                        "name": "2 bathrooms",
+                                        "price": 39000
+                                    },
+                                    {
+                                        "id": 361275,
+                                        "name": "3 bathrooms",
+                                        "price": 42000
+                                    },
+                                    {
+                                        "id": 361276,
+                                        "name": "4 bathrooms",
+                                        "price": 46000
+                                    },
+                                    {
+                                        "id": 361277,
+                                        "name": "5 bathrooms",
+                                        "price": 47000
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 209757,
+                                "name": "Square feet",
+                                "kind": "numerical_range",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 353359,
+                                        "name": "501 - 1000",
+                                        "price": 0,
+                                        "upper_bound": 1000,
+                                        "lower_bound": 501
+                                    },
+                                    {
+                                        "id": 353360,
+                                        "name": "1001 - 1500",
+                                        "price": 0,
+                                        "upper_bound": 1500,
+                                        "lower_bound": 1001
+                                    },
+                                    {
+                                        "id": 353361,
+                                        "name": "1501 - 2000",
+                                        "price": 0,
+                                        "upper_bound": 2000,
+                                        "lower_bound": 1501
+                                    },
+                                    {
+                                        "id": 353362,
+                                        "name": "2001 - 2500",
+                                        "price": 0,
+                                        "upper_bound": 2500,
+                                        "lower_bound": 2001
+                                    },
+                                    {
+                                        "id": 353363,
+                                        "name": "2501 - 3000",
+                                        "price": 0,
+                                        "upper_bound": 3000,
+                                        "lower_bound": 2501
+                                    },
+                                    {
+                                        "id": 353364,
+                                        "name": "3001 - 3500",
+                                        "price": 0,
+                                        "upper_bound": 3500,
+                                        "lower_bound": 3001
+                                    },
+                                    {
+                                        "id": 353365,
+                                        "name": "3501 - 4000",
+                                        "price": 0,
+                                        "upper_bound": 4000,
+                                        "lower_bound": 3501
+                                    },
+                                    {
+                                        "id": 353366,
+                                        "name": "4001 - 4500",
+                                        "price": 0,
+                                        "upper_bound": 4500,
+                                        "lower_bound": 4001
+                                    },
+                                    {
+                                        "id": 353367,
+                                        "name": "4501 - 5000",
+                                        "price": 0,
+                                        "upper_bound": 5000,
+                                        "lower_bound": 4501
+                                    },
+                                    {
+                                        "id": 353368,
+                                        "name": "5001 - 2147483647",
+                                        "price": 0,
+                                        "upper_bound": 2147483647,
+                                        "lower_bound": 5001
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 216680,
+                                "name": "Extra",
+                                "kind": "multiple_select",
+                                "amount": 0,
+                                "options": [
+                                    {
+                                        "id": 365632,
+                                        "name": "Pet Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365633,
+                                        "name": "Eco Friendly",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365634,
+                                        "name": "Green",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 365670,
+                                        "name": "Other",
+                                        "price": 0
+                                    }
+                                ],
+                                "selected": []
+                            },
+                            {
+                                "id": 209762,
+                                "name": "Inside Oven Cleaning - $40",
+                                "kind": "quantity_select",
+                                "price": 4000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209760,
+                                "name": "Inside Fridge Cleaning - $40",
+                                "kind": "quantity_select",
+                                "price": 4000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209761,
+                                "name": "Balcony - $35",
+                                "kind": "quantity_select",
+                                "price": 3500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209759,
+                                "name": "Patio - $75",
+                                "kind": "quantity_select",
+                                "price": 7500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209767,
+                                "name": "Loading /Unloading Dishwasher Machine - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209768,
+                                "name": "Loading/Unloading Washer-Dryer 1 cycle - $10 ",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209766,
+                                "name": "Making Beds (each) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209769,
+                                "name": "Window /Track Cleaning (per regular windows) - $10",
+                                "kind": "quantity_select",
+                                "price": 1000,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209764,
+                                "name": "Shutters (per 1 Shutter section) - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 0,
+                                "amount": 0
+                            },
+                            {
+                                "id": 209770,
+                                "name": "Sliding Door Window Cleaning (per slider) + tracks - $5",
+                                "kind": "quantity_select",
+                                "price": 500,
+                                "value": 0,
+                                "amount": 0
+                            }
+                        ]
+                    },
+                    "total_price": 33400,
+                    "bedroom_count": None,
+                    "bathroom_count": None,
+                    "story_count": None,
+                    "room_count": None,
+                    "window_count": None,
+                    "square_footage_lower_bound": None,
+                    "square_footage_upper_bound": None,
+                    "total_bedroom_price": None,
+                    "total_bathroom_price": None,
+                    "total_story_price": None,
+                    "total_window_price": None,
+                    "total_room_price": None,
+                    "total_square_footage_price": None
+                }
             },
-            "business_unit": None
+            "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_e227cd5fcc154e1b9dbde96e332c28a7"
         },
-        "created_at": "2024-06-21T22:14:54Z",
-        "updated_at": "2024-08-18T18:21:16Z",
-        "company_name": "VAST CLEANING",
-        "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab"
-    }
-]
+        {
+            "object": "line_item",
+            "id": "rli_2aa134c99949480a81c5062afbaa70d7",
+            "name": "Chemical - Windex",
+            "description": "Test",
+            "unit_price": 1200,
+            "unit_cost": 500,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "materials",
+            "taxable": False,
+            "amount": 1200,
+            "order_index": 3,
+            "service_item_id": "pbmat_2107d82c2df64ebe9a3012d0239828d1",
+            "service_item_type": "Pricebook::Material",
+            "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_2aa134c99949480a81c5062afbaa70d7"
+        },
+        {
+            "object": "line_item",
+            "id": "rli_b0c8426db2e4403ca76e8adbf67e7af7",
+            "name": "test material 2",
+            "description": "",
+            "unit_price": 200,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "materials",
+            "taxable": False,
+            "amount": 200,
+            "order_index": 4,
+            "service_item_id": None,
+            "service_item_type": None,
+            "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_b0c8426db2e4403ca76e8adbf67e7af7"
+        },
+        {
+            "object": "line_item",
+            "id": "rli_4140b345f7074db3a2adca57751dec3a",
+            "name": "",
+            "description": "",
+            "unit_price": 2000,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "fixed discount",
+            "taxable": False,
+            "amount": 2000,
+            "order_index": None,
+            "service_item_id": None,
+            "service_item_type": None,
+            "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_4140b345f7074db3a2adca57751dec3a"
+        },
+        {
+            "object": "line_item",
+            "id": "rli_f63b67660ec746fda90988c12acd8c86",
+            "name": "",
+            "description": "",
+            "unit_price": 3000,
+            "unit_cost": 0,
+            "unit_of_measure": None,
+            "quantity": 1.0,
+            "kind": "fixed discount",
+            "taxable": False,
+            "amount": 3000,
+            "order_index": None,
+            "service_item_id": None,
+            "service_item_type": None,
+            "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items/rli_f63b67660ec746fda90988c12acd8c86"
+        }
+    ],
+    "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items"
+}
+    ]

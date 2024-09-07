@@ -1,3 +1,6 @@
+import dataclasses
+import time
+from functools import lru_cache
 from types import UnionType
 from typing import (
     Any,
@@ -101,10 +104,17 @@ class Mapper:
                 isinstance(value, list)
                 and len(value) > 0
                 and hasattr(value[0], "__dataclass_fields__")
+                and isinstance(field_type, tuple)
             ):
-                attrs[field] = [
-                    cls.dataclass_to_schema(field_type, item) for item in value
-                ]
+                attrs[field] = []
+                for v in value:
+                    for ft in field_type:
+                        try:
+                            attrs[field].append(
+                                cls.dataclass_to_schema(ft, v)
+                            )
+                        except AttributeError:
+                            continue
             elif hasattr(value, "__dataclass_fields__"):
                 attrs[field] = cls.dataclass_to_schema(field_type, value)
             else:
@@ -115,13 +125,55 @@ class Mapper:
     def _extract_field_type_schema(field_type: Any) -> Any:
         if isinstance(field_type, list):
             field_type = field_type[0]
+            if isinstance(field_type, UnionType):
+                return next(t for t in field_type.__args__ if t is not type(None))
         if isinstance(field_type, UnionType):
             return next(t for t in field_type.__args__ if t is not type(None))
         elif hasattr(field_type, "__origin__"):
             if field_type.__origin__ is list:
-                return field_type.__args__[0]
+                field_type_list = field_type.__args__[0]
+                if isinstance(field_type_list, UnionType):
+                    return field_type_list.__args__
+                return field_type_list
             if field_type.__origin__ is Union:
                 return next(
                     t for t in field_type.__args__ if t is not type(None)
                 )
         return field_type
+
+
+if __name__ == '__main__':
+    from pydantic import BaseModel
+
+    @dataclasses.dataclass
+    class A:
+        a: int
+
+    @dataclasses.dataclass
+    class B:
+        b: str
+
+    @dataclasses.dataclass
+    class C:
+        dep: list[A | B]
+
+
+    class SA(BaseModel):
+        a: int
+
+
+    class SB(BaseModel):
+        b: str
+
+
+    class SC(BaseModel):
+        dep:  list[SA | SB]
+
+
+    a = A(1)
+    b = B("abc")
+    c = C(dep=[a, b])
+
+    start = time.time()
+    cs = Mapper.dataclass_to_schema(SC, c)
+    print('-' * 20, f"\n{cs}\n", "-" * 20, f"\n{time.time() - start}")
