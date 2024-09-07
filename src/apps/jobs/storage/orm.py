@@ -1,9 +1,15 @@
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 from datetime import datetime
 
-from apps.jobs.models import JobStatus, JobEntity, JobModel
+from apps.jobs.models import (
+    JobEntity,
+    JobModel,
+    JobStatus,
+)
 from apps.jobs.storage.base import IJobRepository
-from asgiref.sync import sync_to_async
 
 
 @dataclass

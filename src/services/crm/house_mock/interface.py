@@ -1,10 +1,16 @@
-import math
+from dataclasses import (
+    dataclass,
+    field,
+)
+
 import httpx
-from dataclasses import dataclass, field
 from loguru import logger
 from services.crm.base import ICRM
 from services.crm.exceptions import CRMRequestError
-from services.crm.house_pro.conf import BASE_URL, AUTH_HEADER
+from services.crm.house_pro.conf import (
+    AUTH_HEADER,
+    BASE_URL,
+)
 
 
 @dataclass
@@ -26,13 +32,16 @@ class HouseProMockCRM(ICRM):
             logger.error(
                 "Ошибка при отправке GET запроса в HouseCallPro. "
                 "url: {}, header: {}, status: {}, response: {}",
-                url, AUTH_HEADER, response.status_code, response.text,
+                url,
+                AUTH_HEADER,
+                response.status_code,
+                response.text,
             )
             raise CRMRequestError()
         return response.json()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     hcp = HouseProMockCRM()
 
     def main():

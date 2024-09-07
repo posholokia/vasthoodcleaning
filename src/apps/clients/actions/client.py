@@ -10,8 +10,7 @@ class ClientAction:
 
     def create_if_not_exists(self, customer_data: dict) -> None:
         self.__client_repository.create_if_not_exists(
-            pk=customer_data["id"],
-            phone=customer_data["mobile_number"]
+            pk=customer_data["id"], phone=customer_data["mobile_number"]
         )
 
     def exists_customer(self, pk: str) -> bool:

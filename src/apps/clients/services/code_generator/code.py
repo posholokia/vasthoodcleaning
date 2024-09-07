@@ -1,19 +1,24 @@
 import time
 import random
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 
 from apps.clients.services.code_generator.exceptions import (
     TooOftenSendingError,
 )
 from apps.clients.services.code_generator.storage import ICodeStorage
-from config.settings.services import EnvironVariables
 from config.settings import conf
+from config.settings.services import EnvironVariables
 
 
 @dataclass
 class VerificationCodeService:
     storage: ICodeStorage
-    code_interval: int = field(init=False, default=60)  # допустимый интервал между смс
+    code_interval: int = field(
+        init=False, default=60
+    )  # допустимый интервал между смс
 
     def generate_code(self, phone: str) -> str:
         if conf.environ == EnvironVariables.prod:

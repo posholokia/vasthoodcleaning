@@ -1,5 +1,9 @@
 from dataclasses import dataclass
 
+from apps.landing.exceptions import (
+    ServiceNotFoundError,
+    SiteNotFoundError,
+)
 from apps.landing.models import (
     AboutBlock,
     Advantage,
@@ -10,10 +14,6 @@ from apps.landing.models import (
     ServiceDetailEntity,
     Site,
     SiteEntity,
-)
-from apps.landing.exceptions import (
-    ServiceNotFoundError,
-    SiteNotFoundError,
 )
 from apps.landing.storage import ISiteRepository
 from django.db.models import Prefetch

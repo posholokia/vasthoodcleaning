@@ -1,20 +1,22 @@
 from dataclasses import dataclass
 
-from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.exceptions import (
     InvalidCredentials,
     JWTTokenExpired,
     JWTTokenInvalid,
-    TokenInBlacklist,
     SmsServiceError,
+    TokenInBlacklist,
 )
+from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.validators import ClientPhoneValidator
 from services.jwt_token.exceptions import (
     DecodeJWTError,
-    TokenExpireError, TokenInBlacklistError,
+    TokenExpireError,
+    TokenInBlacklistError,
 )
 from services.notification.base import INotificationReceiver
+from services.notification.exceptions import SendSmsError
 
 
 @dataclass

@@ -1,14 +1,18 @@
 import json
-from datetime import datetime, timedelta
+from datetime import (
+    datetime,
+    timedelta,
+)
 
 from apps.clients.actions import AuthClientAction
 from apps.clients.exceptions import NotExistsRefreshToken
-from core.containers import get_container
 from django.http import (
     HttpRequest,
     HttpResponse,
 )
 from ninja import Router
+
+from core.containers import get_container
 
 from ..schema import ResponseStatusSchema
 from .schema import (
@@ -66,7 +70,7 @@ def login(
         secure=True,
         httponly=True,
         samesite="Lax",
-        expires=datetime.now() + timedelta(days=1)
+        expires=datetime.now() + timedelta(days=1),
     )
     return response
 
@@ -98,7 +102,7 @@ def refresh_token(
 )
 def logout(
     request: HttpRequest,
-) -> ResponseStatusSchema:
+) -> HttpResponse:
     refresh = request.COOKIES.get("refresh")
 
     if refresh is None:
@@ -107,9 +111,10 @@ def logout(
     container = get_container()
     action: AuthClientAction = container.resolve(AuthClientAction)
 
-    action.logout(
-        refresh=refresh,
-    )
-    return ResponseStatusSchema(
+    action.logout(refresh=refresh)
+    response_obj = ResponseStatusSchema(
         response="You have successfully logged out",
     )
+    response = HttpResponse(content=response_obj.json())
+    response.delete_cookie(key="refresh", samesite="Lax")
+    return response

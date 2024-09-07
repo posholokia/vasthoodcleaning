@@ -1,6 +1,5 @@
-import dataclasses
 import time
-from functools import lru_cache
+import dataclasses
 from types import UnionType
 from typing import (
     Any,
@@ -110,9 +109,7 @@ class Mapper:
                 for v in value:
                     for ft in field_type:
                         try:
-                            attrs[field].append(
-                                cls.dataclass_to_schema(ft, v)
-                            )
+                            attrs[field].append(cls.dataclass_to_schema(ft, v))
                         except AttributeError:
                             continue
             elif hasattr(value, "__dataclass_fields__"):
@@ -126,7 +123,9 @@ class Mapper:
         if isinstance(field_type, list):
             field_type = field_type[0]
             if isinstance(field_type, UnionType):
-                return next(t for t in field_type.__args__ if t is not type(None))
+                return next(
+                    t for t in field_type.__args__ if t is not type(None)
+                )
         if isinstance(field_type, UnionType):
             return next(t for t in field_type.__args__ if t is not type(None))
         elif hasattr(field_type, "__origin__"):
@@ -142,7 +141,7 @@ class Mapper:
         return field_type
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from pydantic import BaseModel
 
     @dataclasses.dataclass
@@ -157,18 +156,14 @@ if __name__ == '__main__':
     class C:
         dep: list[A | B]
 
-
     class SA(BaseModel):
         a: int
-
 
     class SB(BaseModel):
         b: str
 
-
     class SC(BaseModel):
-        dep:  list[SA | SB]
-
+        dep: list[SA | SB]
 
     a = A(1)
     b = B("abc")
@@ -176,4 +171,4 @@ if __name__ == '__main__':
 
     start = time.time()
     cs = Mapper.dataclass_to_schema(SC, c)
-    print('-' * 20, f"\n{cs}\n", "-" * 20, f"\n{time.time() - start}")
+    print("-" * 20, f"\n{cs}\n", "-" * 20, f"\n{time.time() - start}")

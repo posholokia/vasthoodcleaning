@@ -2,7 +2,10 @@ from abc import (
     ABC,
     abstractmethod,
 )
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 
 from apps.clients.services.code_generator.exceptions import SaveCodeError
 from services.redis_pool.connection import RedisPool

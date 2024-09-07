@@ -1,14 +1,17 @@
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 from typing import Any
 
 import httpx
-
-from services.crm.base import ICRM
-from services.crm.house_pro.dto import CustomerDTO
-from services.crm.house_pro.conf import BASE_URL, AUTH_HEADER
 from loguru import logger
-
+from services.crm.base import ICRM
 from services.crm.exceptions import CRMRequestError
+from services.crm.house_pro.conf import (
+    AUTH_HEADER,
+    BASE_URL,
+)
 
 
 @dataclass
@@ -20,8 +23,8 @@ class HouseProCRM(ICRM):
         return self._request_get(path)
 
     def _request_get(
-            self,
-            path: str,
+        self,
+        path: str,
     ) -> dict:
         url = f"{BASE_URL}{path}"
         with httpx.Client() as session:
@@ -30,14 +33,16 @@ class HouseProCRM(ICRM):
             logger.error(
                 "Ошибка при отправке GET запроса в HouseCallPro. "
                 "url: {}, header: {}, status: {}, response: {}",
-                url, AUTH_HEADER, response.status_code, response.text,
+                url,
+                AUTH_HEADER,
+                response.status_code,
+                response.text,
             )
             raise CRMRequestError()
         return response.json()
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     hcp = HouseProCRM()
 
     def main():

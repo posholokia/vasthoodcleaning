@@ -3,10 +3,9 @@ from dataclasses import dataclass
 from django.conf import settings
 from loguru import logger
 from services.notification.base import INotificationReceiver
+from services.notification.exceptions import SendSmsError
 from twilio.base.exceptions import TwilioException
 from twilio.rest import Client
-
-from services.notification.exceptions import SendSmsError
 
 
 @dataclass

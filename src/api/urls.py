@@ -1,16 +1,19 @@
 import json
 
-from django.http import HttpRequest, HttpResponse
+from django.conf import settings
+from django.http import (
+    HttpRequest,
+    HttpResponse,
+)
 from django.shortcuts import render
 from django.urls import path
+from loguru import logger
 from ninja import NinjaAPI
-from django.conf import settings
 
-from core.containers import get_container
 from core.constructor.exceptions import BaseHTTPException
+from core.containers import get_container
 
 from .v1.urls import router as v1_router
-from loguru import logger
 
 
 api = NinjaAPI()
@@ -38,7 +41,7 @@ def unhandled_exception(request, exc: Exception):
 
 @api.get("/healthcheck")
 def healthcheck(request: HttpRequest) -> None:
-    container = get_container()
+    get_container()
     return None
 
 
@@ -54,14 +57,12 @@ def get_webhooks(request: HttpRequest) -> HttpResponse:
             line_list.append((time, json.loads(data.encode())))
 
     html = [dict_render(time_log=obj[0], data=obj[1]) for obj in line_list]
-    return render(
-        request,
-        "index.html",
-        {"data": [obj for obj in html]}
-    )
+    return render(request, "index.html", {"data": [obj for obj in html]})
 
 
-def dict_render(data: dict[str, str | dict[str, str]],  time_log="", deep=0) -> str:
+def dict_render(
+    data: dict[str, str | dict[str, str]], time_log="", deep=0
+) -> str:
     logger.info("data: {} | {}", type(data), data)
     tab = " " * 4
     res = "{\n"
@@ -79,7 +80,11 @@ def dict_render(data: dict[str, str | dict[str, str]],  time_log="", deep=0) -> 
         elif isinstance(value, list):
             res += "["
             for item in value:
-                res += "\n" + (tab * (deep+1)) + (dict_render(item, deep=deep+1) + ",\n" + tab * deep)
+                res += (
+                    "\n"
+                    + (tab * (deep + 1))
+                    + (dict_render(item, deep=deep + 1) + ",\n" + tab * deep)
+                )
             res += "],\n"
         else:
             res += str(value) + ",\n"
@@ -90,7 +95,4 @@ def dict_render(data: dict[str, str | dict[str, str]],  time_log="", deep=0) -> 
 api.add_router("v1/", v1_router)
 
 
-urlpatterns = [
-    path("", api.urls),
-    path("webhooks/", get_webhooks)
-]
+urlpatterns = [path("", api.urls), path("webhooks/", get_webhooks)]

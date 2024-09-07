@@ -16,13 +16,14 @@ from apps.landing.models import (
     ServiceDetail,
     Site,
 )
-from core.containers import get_container
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from nested_admin.nested import (
     NestedModelAdmin,
     NestedStackedInline,
 )
+
+from core.containers import get_container
 
 
 admin.site.unregister(Group)

@@ -1,15 +1,15 @@
 from .entity import (
+    DetailMaterialEntity,
+    DiscountEntity,
+    DiscountType,
+    JobDetailEntity,
     JobEntity,
     JobStatus,
+    MaterialsEntity,
     MultipleSelectEntity,
     NumericalRangeEntity,
-    SingleSelectEntity,
     QuantitySelectEntity,
-    DiscountType,
-    DiscountEntity,
-    DetailMaterialEntity,
-    MaterialsEntity,
-    JobDetailEntity,
+    SingleSelectEntity,
 )
 from .orm import JobModel
 
