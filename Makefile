@@ -6,7 +6,7 @@ APP_FILE = ./.ci/docker/app.local.yml
 STORAGE_FILE = ./.ci/docker/storage.local.yml
 APP_CONTAINER = vasthood_django
 DB_CONTAINER = vasthood_db
-MANAGE = python src/manage.py
+MANAGE = python manage.py
 
 
 .PHONY: run

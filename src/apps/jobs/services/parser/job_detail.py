@@ -33,153 +33,202 @@ class JobInlinesType(Enum):
     single: str = "single_select"
 
 
-class JobDetailJsonParser:
-    def parse_data(self, job_lines_data: dict[str, Any]):
-        parts = []
-        materials = []
-        # Скидки взаимозамещают друг друга в CRM
-        fixed_discounts = []  # может быть либо несколько фиксированных скидок
-        discount = None  # или одна процентная
+def parse_job_detail(job_lines_data: dict[str, Any]) -> JobDetailEntity:
+    """
+    Парсер детальной информации о заказанной работе.
 
-        for line in job_lines_data["data"]:
-            try:
-                kind = JobLineType(line["kind"])
-            except ValueError:
-                logger.warning("Неизвестный тип line {}", line["kind"])
-                continue
+    :param job_lines_data: json со списком всех лайнов заказа
+    :return: детальная информация о заказе
+    """
+    parts: list[JobPartEntity] = []  # список услуг в рамках одной работы
+    materials: list[DetailMaterialEntity] = []  # список выбранных материалов
+    # фиксированная и процентная скидки взаимозамещают друг друга в CRM
+    fixed_discounts: list[DiscountEntity] = []  # список фиксированных скидок
+    discount: DiscountEntity | None = None  # процентная скидка
 
-            if kind is JobLineType.job:
-                parts.append(self._parse_job(line))
-            elif kind is JobLineType.materials:
-                materials.append(self._parse_materials(line))
-            elif kind is JobLineType.fixed_discount:
-                fixed_discounts.append(self._parse_discount(line))
-            elif kind is JobLineType.percent_discount:
-                discount = self._parse_discount(line)
+    for line in job_lines_data["data"]:
+        try:
+            kind = JobLineType(line["kind"])
+        except ValueError:
+            logger.warning("Неизвестный тип line {}", line["kind"])
+            continue
 
-        # пересобираем скидки в одну
-        if fixed_discounts:
-            discount = DiscountEntity(
-                value=sum([discount.value for discount in fixed_discounts]),
-                kind=DiscountType.fixed,
-            )
-        material_entity = MaterialsEntity(
-            total_cost=sum([material.cost for material in materials]),
-            detail=materials,
+        if kind is JobLineType.job:
+            parts.append(_parse_job(line))
+        elif kind is JobLineType.materials:
+            materials.append(_parse_materials(line))
+        elif kind is JobLineType.fixed_discount:
+            fixed_discounts.append(_parse_discount(line))
+        elif kind is JobLineType.percent_discount:
+            discount = _parse_discount(line)
+
+    # если скидки фиксированные, пересобираем их в одну
+    if fixed_discounts:
+        discount = DiscountEntity(
+            value=sum([discount.value for discount in fixed_discounts]),
+            kind=DiscountType.fixed,
         )
-        return JobDetailEntity(
-            parts=parts,
-            materials=material_entity if material_entity else None,
-            discount=discount,
-        )
+    material_entity = MaterialsEntity(
+        total_cost=sum([material.cost for material in materials]),
+        detail=materials,
+    )
+    cost_before_discount = (
+        sum([part.cost for part in parts]) + material_entity.total_cost
+    )
+    return JobDetailEntity(
+        parts=parts,
+        cost_before_discount=cost_before_discount,
+        materials=material_entity if material_entity else None,
+        discount=discount,
+    )
 
-    @staticmethod
-    def _parse_discount(discount: dict) -> DiscountEntity:
-        return DiscountEntity(
-            value=discount["amount"], kind=DiscountType(discount["kind"])
-        )
 
-    @staticmethod
-    def _parse_materials(material: dict) -> DetailMaterialEntity:
-        return DetailMaterialEntity(
-            name=material["name"],
-            quantity=material["quantity"],
-            cost=material["amount"],
-        )
+def _parse_discount(discount: dict) -> DiscountEntity:
+    """
+    Парсит данные о скидке.
 
-    def _parse_job(self, job_data: dict[str, Any]) -> JobPartEntity:
-        name = job_data.get("name")
-        cost = job_data.get("amount")
-        inlines = self._parse_job_inlines(
-            job_data["pricing_form"]["data"]["form"]["fields"]
-        )
-        return JobPartEntity(
-            name=name,
-            cost=cost,
-            inlines=inlines,
-        )
+    :param discount: json с данными о скидке
+    :return: скидка
+    """
+    return DiscountEntity(
+        value=discount["amount"], kind=DiscountType(discount["kind"])
+    )
 
-    def _parse_job_inlines(self, fields: list[dict[str, Any]]) -> list[T]:
-        inlines: list[T] = []
-        for field_ in fields:
-            try:
-                kind = JobInlinesType(field_["kind"])
-            except ValueError:
-                logger.warning("Неизвестный тип inline {}", field_["kind"])
-                continue
 
-            if kind is JobInlinesType.multiple:
-                inlines.append(self._parse_multiple_select(field_))
-            elif kind is JobInlinesType.quantity:
-                inlines.append(self._parse_quantity_select(field_))
-            elif kind is JobInlinesType.single:
-                inlines.append(self._parse_single_select(field_))
-            elif kind is JobInlinesType.range:
-                inlines.append(self._parse_range_select(field_))
+def _parse_materials(material: dict) -> DetailMaterialEntity:
+    """
+    Парсит данные о материалах.
 
-        inline_filter = filter(lambda x: x is not None, inlines)
-        return [inline for inline in inline_filter]
+    :param material: json с данными о материале
+    :return: материал
+    """
+    return DetailMaterialEntity(
+        name=material["name"],
+        quantity=material["quantity"],
+        cost=material["amount"],
+    )
 
-    @staticmethod
-    def _parse_multiple_select(inline: dict) -> MultipleSelectEntity | None:
-        selected: list[int] = inline["selected"]
-        if not selected:
-            return
 
-        name: str = inline["name"]
-        choice_filter = filter(
-            lambda x: x["id"] in selected, inline["options"]
-        )
+def _parse_job(job_data: dict[str, Any]) -> JobPartEntity:
+    """
+    Парсит данные о работе в рамках заказа.
 
-        return MultipleSelectEntity(
-            name=name, choices=[choice["name"] for choice in choice_filter]
-        )
+    :param job_data: json с данными о работе
+    :return: работа
+    """
+    name = job_data.get("name")
+    cost = job_data.get("amount")
+    inlines = _parse_job_inlines(
+        job_data["pricing_form"]["data"]["form"]["fields"]
+    )
+    return JobPartEntity(name=name, cost=cost, inlines=inlines)
 
-    @staticmethod
-    def _parse_quantity_select(inline: dict) -> QuantitySelectEntity | None:
-        value = inline["value"]
-        if not value:
-            return
-        return QuantitySelectEntity(
-            name=inline["name"],
-            value=value,
-        )
 
-    @staticmethod
-    def _parse_single_select(inline: dict) -> SingleSelectEntity | None:
-        selected: list[int] = inline["selected"]
-        if not selected:
-            return
+def _parse_job_inlines(fields: list[dict[str, Any]]) -> list[T]:
+    """
+    Парсинг выбранных параметров в работе.
 
-        choice = next(
-            (
-                item["name"]
-                for item in inline["options"]
-                if item["id"] == selected[0]
-            ),
-            None,
-        )
-        return SingleSelectEntity(name=inline["name"], choice=choice)
+    :param fields: json c выбранными параметрами
+    :return: параметр
+    """
+    inlines: list[T] = []
+    for field_ in fields:
+        try:
+            kind = JobInlinesType(field_["kind"])
+        except ValueError:
+            logger.warning("Неизвестный тип inline {}", field_["kind"])
+            continue
 
-    @staticmethod
-    def _parse_range_select(inline: dict) -> NumericalRangeEntity | None:
-        selected: list[int] = inline["selected"]
-        if not selected:
-            return
+        if kind is JobInlinesType.multiple:
+            inlines.append(_parse_multiple_select(field_))
+        elif kind is JobInlinesType.quantity:
+            inlines.append(_parse_quantity_select(field_))
+        elif kind is JobInlinesType.single:
+            inlines.append(_parse_single_select(field_))
+        elif kind is JobInlinesType.range:
+            inlines.append(_parse_range_select(field_))
 
-        choice = next(
-            (
-                item["name"]
-                for item in inline["options"]
-                if item["id"] == selected[0]
-            ),
-            None,
-        )
-        return NumericalRangeEntity(name=inline["name"], choice=choice)
+    inline_filter = filter(lambda x: x is not None, inlines)
+    return [inline for inline in inline_filter]
+
+
+def _parse_multiple_select(inline: dict) -> MultipleSelectEntity | None:
+    """
+    Парсинг параметра множественного выбора.
+
+    :param inline: json c конкретным параметром множественного выбора
+    :return: множественный параметр
+    """
+    selected: list[int] = inline["selected"]
+    if not selected:
+        return
+
+    name: str = inline["name"]
+    choice_filter = filter(lambda x: x["id"] in selected, inline["options"])
+
+    return MultipleSelectEntity(
+        name=name, choices=[choice["name"] for choice in choice_filter]
+    )
+
+
+def _parse_quantity_select(inline: dict) -> QuantitySelectEntity | None:
+    """
+    Парсинг параметра количественного выбора.
+
+    :param inline: json c конкретным параметром количественного выбора
+    :return: количественный параметр
+    """
+    value = inline["value"]
+    if not value:
+        return
+    return QuantitySelectEntity(name=inline["name"], value=value)
+
+
+def _parse_single_select(inline: dict) -> SingleSelectEntity | None:
+    """
+    Парсинг параметра единственного выбора.
+
+    :param inline: json c конкретным параметром единственного выбора
+    :return: единственный параметр
+    """
+    selected: list[int] = inline["selected"]
+    if not selected:
+        return
+
+    choice = next(
+        (
+            item["name"]
+            for item in inline["options"]
+            if item["id"] == selected[0]
+        ),
+        None,
+    )
+    return SingleSelectEntity(name=inline["name"], choice=choice)
+
+
+def _parse_range_select(inline: dict) -> NumericalRangeEntity | None:
+    """
+    Парсинг параметра выбора выпадающего списка.
+
+    :param inline: json c конкретным параметром из выпадающего списка
+    :return: выбранный параметр
+    """
+    selected: list[int] = inline["selected"]
+    if not selected:
+        return
+
+    choice = next(
+        (
+            item["name"]
+            for item in inline["options"]
+            if item["id"] == selected[0]
+        ),
+        None,
+    )
+    return NumericalRangeEntity(name=inline["name"], choice=choice)
 
 
 if __name__ == "__main__":
-    parser = JobDetailJsonParser()
     datajob = {
         "object": "list",
         "data": [
@@ -1006,5 +1055,5 @@ if __name__ == "__main__":
         "url": "/jobs/job_5af0cdda35f54fff9b006400a63fbf5a/line_items",
     }
 
-    r = parser.parse_data(datajob)
+    r = parse_job_detail(datajob)
     print(r)

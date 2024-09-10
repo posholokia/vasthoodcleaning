@@ -25,6 +25,9 @@ class ORMClientRepository(IClientRepository):
                 ):
                     raise
 
+    def get_or_create(self, pk: str, phone: str) -> CustomerModel:
+        return self.model.objects.get_or_create(id=pk, phone=phone)[0]
+
     def get(self, phone: str) -> ClientEntity:
         orm_result = self.model.objects.filter(phone=phone)
         return ClientEntity(

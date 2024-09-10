@@ -17,7 +17,6 @@ from apps.landing.models import (
 )
 from apps.landing.storage import ISiteRepository
 from django.db.models import Prefetch
-from services.mapper import Mapper
 
 
 @dataclass
@@ -60,7 +59,7 @@ class ORMSiteRepository(ISiteRepository):
         )
         if site is None:
             raise SiteNotFoundError()
-        return Mapper.model_to_dataclass(site, SiteEntity)
+        return site.to_entity()
 
     def get_service_detail(self, service_pk: int) -> ServiceDetailEntity:
         try:
@@ -78,4 +77,4 @@ class ORMSiteRepository(ISiteRepository):
             )
         except ServiceDetail.DoesNotExist:
             raise ServiceNotFoundError()
-        return Mapper.model_to_dataclass(service, ServiceDetailEntity)
+        return service.to_entity()

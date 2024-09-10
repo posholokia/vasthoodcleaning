@@ -14,7 +14,7 @@ class JobModel(models.Model):
     address = models.CharField(max_length=256)
     status = models.CharField(max_length=32)
     total_cost = models.IntegerField()
-    last_updated = models.DateTimeField(default=datetime.now())
+    last_updated = models.DateTimeField(auto_now_add=True)
     client = models.ForeignKey(
         CustomerModel,
         on_delete=models.CASCADE,

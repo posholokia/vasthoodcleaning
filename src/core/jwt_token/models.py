@@ -14,7 +14,7 @@ from jwt.exceptions import (
     ExpiredSignatureError,
 )
 from loguru import logger
-from services.jwt_token.exceptions import (
+from core.jwt_token.exceptions import (
     DecodeJWTError,
     TokenExpireError,
     TokenTypeUndefined,

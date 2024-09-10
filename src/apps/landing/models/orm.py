@@ -1,4 +1,18 @@
-from apps.landing.models.entity import ColorFontEnum
+from apps.landing.models.entity import (
+    ColorFontEnum,
+    MainScreenEntity,
+    ServiceEntity,
+    FontColorEntity,
+    ServiceDetailEntity,
+    AdvantageEntity,
+    AboutEntity,
+    AboutBlockEntity,
+    ResultPhotoEntity,
+    ResultEntity,
+    FooterEntity,
+    FAQEntity,
+    SiteEntity,
+)
 from django.db import models
 
 
@@ -8,6 +22,27 @@ class Site(models.Model):
 
     def __str__(self):
         return "Site landing"
+
+    def to_entity(self) -> SiteEntity:
+        about = self.about.to_entity() if hasattr(self, "about") else None
+        results = (
+            self.results.to_entity() if hasattr(self, "results") else None
+        )
+        main_screen = (
+            self.main_screen.to_entity() if hasattr(self, "footer") else None
+        )
+        footer = self.footer.to_entity() if hasattr(self, "footer") else None
+        return SiteEntity(
+            id=self.id,
+            whatsapp=self.whatsapp,
+            phone=self.phone,
+            about=about,
+            results=results,
+            services=[s.to_entity() for s in self.services.all()],
+            main_screen=main_screen,
+            faq=[f.to_entity() for f in self.faq.all()],
+            footer=footer,
+        )
 
 
 class MainScreen(models.Model):
@@ -29,6 +64,14 @@ class MainScreen(models.Model):
     def __str__(self):
         return "Main screen"
 
+    def to_entity(self) -> MainScreenEntity:
+        return MainScreenEntity(
+            id=self.id,
+            title=self.title,
+            text=self.text,
+            subtext=self.subtext,
+        )
+
 
 class Service(models.Model):
     name = models.CharField("Service name", max_length=100)
@@ -43,6 +86,15 @@ class Service(models.Model):
 
     def __str__(self):
         return f"Service {self.name}"
+
+    def to_entity(self) -> ServiceEntity:
+        return ServiceEntity(
+            id=self.id,
+            name=self.name,
+            font_color=self.font_color.to_entity(),
+            image=str(self.image),
+            discount_message=self.discount_message,
+        )
 
     class Meta:
         verbose_name = "Service"
@@ -59,6 +111,15 @@ class ServiceDetail(models.Model):
     def __str__(self):
         return f"Details for service {self.service.name}"
 
+    def to_entity(self) -> ServiceDetailEntity:
+        return ServiceDetailEntity(
+            id=self.id,
+            service=self.service.to_entity(),
+            quality_title=self.quality_title,
+            quality_text=self.quality_text,
+            advantage=[a.to_entity() for a in self.advantage.all()],
+        )
+
     class Meta:
         verbose_name = "Service detail"
         verbose_name_plural = "Service details"
@@ -71,12 +132,19 @@ class Advantage(models.Model):
         ServiceDetail, on_delete=models.CASCADE, related_name="advantage"
     )
 
+    def __str__(self):
+        return f"Advantage {self.title}"
+
+    def to_entity(self) -> AdvantageEntity:
+        return AdvantageEntity(
+            id=self.id,
+            title=self.title,
+            text=self.text,
+        )
+
     class Meta:
         verbose_name = "Advantage"
         verbose_name_plural = "Advantages"
-
-    def __str__(self):
-        return f"Advantage {self.title}"
 
 
 class About(models.Model):
@@ -88,6 +156,14 @@ class About(models.Model):
 
     def __str__(self):
         return "About"
+
+    def to_entity(self) -> AboutEntity:
+        return AboutEntity(
+            id=self.id,
+            title=self.title,
+            text=self.text,
+            blocks=[b.to_entity() for b in self.blocks.all()],
+        )
 
     class Meta:
         verbose_name = "About"
@@ -103,6 +179,15 @@ class AboutBlock(models.Model):
         About, on_delete=models.CASCADE, related_name="blocks"
     )
 
+    def to_entity(self) -> AboutBlockEntity:
+        return AboutBlockEntity(
+            id=self.id,
+            first_title=self.first_title,
+            first_description=self.first_description,
+            second_title=self.second_title,
+            second_description=self.second_description,
+        )
+
 
 class OurResultsPhoto(models.Model):
     image = models.ImageField("Result photo", upload_to="results/")
@@ -111,6 +196,12 @@ class OurResultsPhoto(models.Model):
         on_delete=models.CASCADE,
         related_name="result_photos",
     )
+
+    def to_entity(self) -> ResultPhotoEntity:
+        return ResultPhotoEntity(
+            id=self.id,
+            image=str(self.image),
+        )
 
     class Meta:
         verbose_name = "Photo"
@@ -125,6 +216,13 @@ class OurResults(models.Model):
 
     def __str__(self):
         return "Our results"
+
+    def to_entity(self) -> ResultEntity:
+        return ResultEntity(
+            id=self.id,
+            description=self.description,
+            result_photos=[p.to_entity() for p in self.result_photos.all()],
+        )
 
     class Meta:
         verbose_name = "Our results"
@@ -143,6 +241,12 @@ class ColorFont(models.Model):
     def __str__(self):
         return f"{self.get_color_display()}"
 
+    def to_entity(self) -> FontColorEntity:
+        return FontColorEntity(
+            id=self.id,
+            color=ColorFontEnum(self.color),
+        )
+
 
 class Footer(models.Model):
     email = models.EmailField("Email")
@@ -154,6 +258,14 @@ class Footer(models.Model):
 
     def __str__(self):
         return "Footer"
+
+    def to_entity(self) -> FooterEntity:
+        return FooterEntity(
+            id=self.id,
+            email=self.address,
+            operating_mode=self.address,
+            address=self.address,
+        )
 
     class Meta:
         verbose_name = "Footer"
@@ -169,6 +281,13 @@ class FAQ(models.Model):
 
     def __str__(self):
         return "FAQ"
+
+    def to_entity(self) -> FAQEntity:
+        return FAQEntity(
+            id=self.id,
+            question=self.question,
+            answer=self.answer,
+        )
 
     class Meta:
         verbose_name = "FAQ"

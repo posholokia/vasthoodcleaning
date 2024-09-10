@@ -22,20 +22,63 @@ class IJobRepository(ABC):
         status: JobStatus,
         total_cost: int,
         client_id: str,
-        last_update: datetime,
-    ): ...
+        last_updated: datetime,
+    ) -> None:
+        """
+        Создание работы
+
+        :param pk: id работы из crm
+        :param schedule: время начала работы
+        :param address: адрес проведения работы
+        :param status: статус работы
+        :param total_cost: общая стоимость
+        :param client_id: id кастомера, создавшего работу
+        :param last_updated: дата последнего обновления
+        :return: None
+        """
 
     @abstractmethod
-    def list_by_client(self, client_phone: str) -> list[JobEntity]: ...
+    def list_by_client(self, client_phone: str) -> list[JobEntity]:
+        """
+        Получить все работы по номеру телефона клиента
+
+        :param client_phone: номер телефона клиента
+        :return: список работ
+        """
 
     @abstractmethod
-    def exists(self, pk) -> bool: ...
+    def exists(self, pk: str) -> bool:
+        """
+        Проверка, что работа существует по id.
+
+        :param pk: id работы.
+        :return: bool
+        """
 
     @abstractmethod
-    def exists_by_client(self, pk: str, phone: str) -> bool: ...
+    def exists_by_client(self, pk: str, phone: str) -> bool:
+        """
+        Проверка, что эта работа указанного клиента
+
+        :param pk: id работы.
+        :param phone: номер телефона клиента
+        :return: bool
+        """
 
     @abstractmethod
-    def get_by_id(self, pk: str) -> JobEntity: ...
+    def get_by_id(self, pk: str) -> JobEntity | None:
+        """
+        Получить работу по id.
+
+        :param pk: id работы
+        :return: работа
+        """
 
     @abstractmethod
-    def update(self, **kwargs) -> None: ...
+    def update(self, **kwargs) -> None:
+        """
+        Обновить работу.
+
+        :param kwargs: field_name: value, которые надо обновить.
+        :return: None
+        """

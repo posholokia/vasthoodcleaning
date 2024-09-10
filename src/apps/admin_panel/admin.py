@@ -23,8 +23,6 @@ from nested_admin.nested import (
     NestedStackedInline,
 )
 
-from core.containers import get_container
-
 
 admin.site.unregister(Group)
 
@@ -123,17 +121,11 @@ class SiteAdmin(NestedModelAdmin):
     ]
 
     def has_add_permission(self, request) -> bool:
-        container = get_container()
-        permission: AdminCanAddSitePermission = container.resolve(
-            AdminCanAddSitePermission
-        )
+        permission = AdminCanAddSitePermission()
         return permission.has_permission()
 
     def has_delete_permission(self, request, obj=None) -> bool:
-        container = get_container()
-        permission: AdminCanDeleteSitePermission = container.resolve(
-            AdminCanDeleteSitePermission
-        )
+        permission = AdminCanDeleteSitePermission()
         return permission.has_permission()
 
 

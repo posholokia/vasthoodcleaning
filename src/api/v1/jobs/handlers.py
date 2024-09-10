@@ -6,7 +6,7 @@ from apps.jobs.actions.job import JobAction
 from apps.jobs.permissions import JobPermissions
 from django.http import HttpRequest
 from ninja import Router
-from services.mapper import Mapper
+from core.mapper import dataclass_to_schema
 
 from core.containers import get_container
 from core.security.auth.jwt_auth import AuthBearer
@@ -26,7 +26,7 @@ def get_jobs(request: HttpRequest) -> list[JobSchema]:
     container = get_container()
     action: JobAction = container.resolve(JobAction)
     jobs = action.get_list(client_phone.lstrip("+1"))
-    return [Mapper.dataclass_to_schema(JobSchema, job) for job in jobs]
+    return [dataclass_to_schema(JobSchema, job) for job in jobs]
 
 
 @router.get(
@@ -45,4 +45,4 @@ def get_job_detail(job_id: str, request: HttpRequest) -> JobDetailSchema:
 
     action: JobAction = container.resolve(JobAction)
     job = action.get_job_detail(job_id, client_phone)
-    return Mapper.dataclass_to_schema(JobDetailSchema, job)
+    return dataclass_to_schema(JobDetailSchema, job)
