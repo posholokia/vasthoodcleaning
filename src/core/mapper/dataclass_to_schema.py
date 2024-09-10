@@ -62,13 +62,14 @@ def dataclass_to_schema(schema: Type[TSchema], obj: Any) -> TSchema:
             isinstance(value, Sequence)
             and len(value) > 0
             and hasattr(value[0], "__dataclass_fields__")
-            and isinstance(field_type, tuple)
+            and isinstance(field_type, Sequence)
         ):
             attrs[field] = []
             for v in value:
                 for ft in field_type:
                     try:
                         attrs[field].append(dataclass_to_schema(ft, v))
+                        break
                     except AttributeError:
                         continue
 

@@ -25,7 +25,7 @@ def get_jobs(request: HttpRequest) -> list[JobSchema]:
     client_phone = request.auth  # type: ignore
     container = get_container()
     action: JobAction = container.resolve(JobAction)
-    jobs = action.get_list(client_phone.lstrip("+1"))
+    jobs = action.get_list(client_phone)
     return [dataclass_to_schema(JobSchema, job) for job in jobs]
 
 
@@ -36,7 +36,7 @@ def get_jobs(request: HttpRequest) -> list[JobSchema]:
     description="Getting detailed information about the job.\n"
     "materials and discount can be null.",
 )
-def get_job_detail(job_id: str, request: HttpRequest) -> JobDetailSchema:
+def get_job_detail(request: HttpRequest, job_id: str) -> JobDetailSchema:
     client_phone = request.auth  # type: ignore
     container = get_container()
 

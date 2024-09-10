@@ -124,14 +124,14 @@ def _parse_job(job_data: dict[str, Any]) -> JobPartEntity:
     return JobPartEntity(name=name, cost=cost, inlines=inlines)
 
 
-def _parse_job_inlines(fields: list[dict[str, Any]]) -> list[T]:
+def _parse_job_inlines(fields: list[dict[str, Any]]) -> T:
     """
     Парсинг выбранных параметров в работе.
 
     :param fields: json c выбранными параметрами
     :return: параметр
     """
-    inlines: list[T] = []
+    inlines: T = []
     for field_ in fields:
         try:
             kind = JobInlinesType(field_["kind"])

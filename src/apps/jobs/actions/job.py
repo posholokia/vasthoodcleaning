@@ -86,6 +86,10 @@ class JobAction:
         :return: стоимость со скидкой
         """
         discount = job.discount
+
+        if not discount:
+            return job.cost_before_discount
+
         if discount.kind is DiscountType.fixed:
             return job.cost_before_discount - discount.value
         else:

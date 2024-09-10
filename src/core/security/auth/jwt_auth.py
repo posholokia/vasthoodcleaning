@@ -14,6 +14,6 @@ class AuthBearer(HttpBearer):
             container = get_container()
             token_service = container.resolve(BlacklistRefreshToken)
             payload = token_service.decode(token)
-            return payload.get("client")
+            return payload.get("client").lstrip("+1")
         except BaseJWTException:
             return None
