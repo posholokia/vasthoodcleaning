@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from apps.clients.models.orm import CustomerModel
 from apps.jobs.models.entity import (
     JobEntity,

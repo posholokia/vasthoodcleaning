@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Union, TypeVar
 
 from apps.jobs.models import (
     DiscountType,

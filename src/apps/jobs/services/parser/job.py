@@ -1,7 +1,10 @@
 from datetime import datetime
 from typing import Any
 
-from apps.jobs.models import JobEntity, JobStatus
+from apps.jobs.models import (
+    JobEntity,
+    JobStatus,
+)
 
 
 def parse_job(job_data: dict[str, Any]) -> JobEntity:

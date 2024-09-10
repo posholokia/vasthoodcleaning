@@ -1,6 +1,10 @@
 import pickle
 from datetime import timedelta
-from typing import ParamSpec, TypeVar, Callable
+from typing import (
+    Callable,
+    ParamSpec,
+    TypeVar,
+)
 
 from config.settings import conf
 from services.redis_connection.connection import RedisPool
@@ -19,7 +23,7 @@ def cache_for_minutes(time_minutes: int = 1) -> Callable[F_Spec, F_Return]:
     ) -> Callable[F_Spec, F_Return]:
         def wrapper(*args: F_Spec.args, **kwargs: F_Spec.kwargs) -> F_Return:
             cache = conn()
-            key = pickle.dumps((hash(func), args, kwargs))
+            key = pickle.dumps((func.__name__, args, kwargs))
 
             cached_func = cache.get(key)
             if cached_func:

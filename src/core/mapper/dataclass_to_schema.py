@@ -1,14 +1,12 @@
 from types import UnionType
-
 from typing import (
     Any,
+    Sequence,
     Type,
     TypeVar,
     Union,
-    Sequence,
 )
 
-import loguru
 
 TSchema = TypeVar("TSchema")
 
@@ -97,13 +95,17 @@ def _extract_field_type_schema(field_type: Any) -> Any:
 
 if __name__ == "__main__":
     import dataclasses
-    from annotated_types import Ge, Le
-    from pydantic import BaseModel
     from typing import (
-        Optional,
-        Generic,
         Annotated,
+        Generic,
+        Optional,
     )
+
+    from annotated_types import (
+        Ge,
+        Le,
+    )
+    from pydantic import BaseModel
 
     def test_list_union():
         @dataclasses.dataclass

@@ -10,13 +10,14 @@ from apps.clients.exceptions import (
 from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.validators import ClientPhoneValidator
+from services.notification.base import INotificationReceiver
+from services.notification.exceptions import SendSmsError
+
 from core.jwt_token.exceptions import (
     DecodeJWTError,
     TokenExpireError,
     TokenInBlacklistError,
 )
-from services.notification.base import INotificationReceiver
-from services.notification.exceptions import SendSmsError
 
 
 @dataclass

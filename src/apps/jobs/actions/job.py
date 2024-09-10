@@ -2,18 +2,14 @@ from dataclasses import (
     dataclass,
     field,
 )
-from datetime import datetime
-from typing import Any
 
 from apps.jobs.models import (
     DiscountType,
     JobDetailEntity,
     JobEntity,
-    JobStatus,
 )
 from apps.jobs.services.parser import parse_job_detail
 from apps.jobs.storage.base import IJobRepository
-from loguru import logger
 from services.cache import cache_for_minutes
 from services.crm.base import ICRM
 

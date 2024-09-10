@@ -5,9 +5,9 @@ from api.v1.landing.schema import (
 from apps.landing.actions.actions import LandingAction
 from django.http import HttpRequest
 from ninja import Router
-from core.mapper import dataclass_to_schema
 
 from core.containers import get_container
+from core.mapper import dataclass_to_schema
 
 
 router = Router(tags=["Landing"])

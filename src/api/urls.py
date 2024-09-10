@@ -1,6 +1,4 @@
-from django.http import (
-    HttpRequest,
-)
+from django.http import HttpRequest
 from django.urls import path
 from loguru import logger
 from ninja import NinjaAPI

@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 
-from apps.clients.models import ClientEntity, CustomerModel
+from apps.clients.models import (
+    ClientEntity,
+    CustomerModel,
+)
 from apps.clients.storage.base import IClientRepository
 
 

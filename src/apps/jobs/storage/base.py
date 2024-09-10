@@ -40,7 +40,8 @@ class IJobRepository(ABC):
     @abstractmethod
     def list_by_client(self, client_phone: str) -> list[JobEntity]:
         """
-        Получить все работы по номеру телефона клиента
+        Получить все работы по номеру телефона клиента,
+        за исключением отмененных.
 
         :param client_phone: номер телефона клиента
         :return: список работ
@@ -51,7 +52,7 @@ class IJobRepository(ABC):
         """
         Проверка, что работа существует по id.
 
-        :param pk: id работы.
+        :param pk: id работы
         :return: bool
         """
 
@@ -79,6 +80,6 @@ class IJobRepository(ABC):
         """
         Обновить работу.
 
-        :param kwargs: field_name: value, которые надо обновить.
+        :param kwargs: field_name: value, которые надо обновить
         :return: None
         """

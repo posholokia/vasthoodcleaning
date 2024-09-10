@@ -5,6 +5,7 @@ from dataclasses import (
 from datetime import timedelta
 
 from apps.clients.services.jwt_tokens.storage.base import ITokenStorage
+
 from core.jwt_token.exceptions import (
     InvalidTokenType,
     TokenInBlacklistError,

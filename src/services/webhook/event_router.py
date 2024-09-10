@@ -4,9 +4,8 @@ from typing import Any
 
 from apps.clients.actions import ClientAction
 from apps.jobs.actions.job import JobAction
-from loguru import logger
-
 from apps.jobs.services.parser.job import parse_job
+from loguru import logger
 
 
 class AllowedEvents(Enum):

@@ -39,7 +39,9 @@ class ORMJobRepository(IJobRepository):
         )
 
     def list_by_client(self, client_phone: str) -> list[JobEntity]:
-        orm_result = self.model.objects.filter(client__phone=client_phone)
+        orm_result = self.model.objects.filter(
+            client__phone=client_phone
+        ).exclude(status=JobStatus.canceled.value)
         return [client.to_entity() for client in orm_result]
 
     def exists(self, pk) -> bool:

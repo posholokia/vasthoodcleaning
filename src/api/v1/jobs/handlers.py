@@ -6,9 +6,9 @@ from apps.jobs.actions.job import JobAction
 from apps.jobs.permissions import JobPermissions
 from django.http import HttpRequest
 from ninja import Router
-from core.mapper import dataclass_to_schema
 
 from core.containers import get_container
+from core.mapper import dataclass_to_schema
 from core.security.auth.jwt_auth import AuthBearer
 
 
