@@ -21,6 +21,7 @@ class JobEntity:
     address: str
     status: JobStatus
     total_cost: int
+    paid: bool = field(default=False)
     last_updated: datetime = field(default_factory=datetime.now)
 
 

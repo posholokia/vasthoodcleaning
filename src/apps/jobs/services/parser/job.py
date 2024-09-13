@@ -24,6 +24,7 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
     address: str = _get_address_string(job_data["address"])
     status: str = job_data["work_status"]
     total_cost: int = job_data["total_amount"]
+    paid: bool = not job_data["outstanding_balance"]
 
     return JobEntity(
         id=job_id,
@@ -31,6 +32,7 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
         address=address,
         status=JobStatus(status),
         total_cost=total_cost,
+        paid=paid,
         last_updated=last_updated,
     )
 

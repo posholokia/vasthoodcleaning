@@ -127,6 +127,7 @@ class JobAction:
             address=job.address,
             status=job.status,
             total_cost=job.total_cost,
+            paid=job.paid,
             last_updated=job.last_updated,
         )
 

@@ -39,6 +39,7 @@ class JobSchema(Schema):
     schedule: datetime | None
     address: str
     status: JobStatus
+    paid: bool
     total_cost: int
 
 

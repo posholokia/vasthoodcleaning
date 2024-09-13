@@ -152,7 +152,7 @@ class DiTestContainer:
         self.container = self.container.with_overridden(
             INotificationReceiver, ConsoleNotificationReceiver
         )
-        self.container = self.container.with_overridden(ICRM, HouseProMockCRM)
+        self.container = self.container.with_overridden(ICRM, HouseProCRM)
         return self.container
 
 
