@@ -6,6 +6,10 @@ from ninja.security import APIKeyHeader
 
 
 class ApiKey(APIKeyHeader):
+    """
+    Аутентификация для входящих запросов на вебхук из crm.
+    """
+
     param_name = "Api-Signature"
 
     def authenticate(self, request, key):
@@ -22,6 +26,11 @@ class ApiKey(APIKeyHeader):
 
 
 class ApiKeyLocal(APIKeyHeader):
+    """
+    Аутентификация для входящих запросов на вебхук из crm.
+    Для локальной разработки принимает любой key.
+    """
+
     param_name = "Api-Signature"
 
     def authenticate(self, request, key):

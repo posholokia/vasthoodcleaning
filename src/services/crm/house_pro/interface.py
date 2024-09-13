@@ -22,10 +22,8 @@ class HouseProCRM(ICRM):
         path = self.job_lines_path.format(pk=job_id)
         return self._request_get(path)
 
-    def _request_get(
-        self,
-        path: str,
-    ) -> dict:
+    @staticmethod
+    def _request_get(path: str) -> dict:
         url = f"{BASE_URL}{path}"
         with httpx.Client() as session:
             response = session.get(url=url, headers=AUTH_HEADER)

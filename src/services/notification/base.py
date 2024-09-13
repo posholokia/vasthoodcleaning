@@ -3,19 +3,16 @@ from abc import (
     abstractmethod,
 )
 from dataclasses import dataclass
-from typing import Any
 
 
 @dataclass
 class INotificationReceiver(ABC):
     @abstractmethod
-    def connect(self) -> Any: ...
-
-    @abstractmethod
-    def receive(self, data: dict) -> None:
+    def send(self, to_: str, message: str) -> None:
         """
-        data = {
-            to: message recipient number,
-            body: message text
-        }
+        Отправить уведомление пользователю.
+
+        :param to_: получатель сообщения
+        :param message: текст сообщения
+        :return: None
         """

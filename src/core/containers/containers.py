@@ -1,9 +1,5 @@
 from functools import lru_cache
 
-from apps.admin_panel.permissons import AdminCanAddSitePermission
-from apps.admin_panel.permissons.permissions import (
-    AdminCanDeleteSitePermission,
-)
 from apps.clients.actions import (
     AuthClientAction,
     ClientAction,
@@ -20,7 +16,7 @@ from apps.clients.storage.base import IClientRepository
 from apps.clients.storage.orm import ORMClientRepository
 from apps.clients.validators import ClientPhoneValidator
 from apps.jobs.actions.job import JobAction
-from apps.jobs.services.parser import JobDetailJsonParser
+from apps.jobs.permissions import JobPermissions
 from apps.jobs.storage.base import IJobRepository
 from apps.jobs.storage.orm import ORMJobRepository
 from apps.landing.actions.actions import LandingAction
@@ -32,13 +28,14 @@ from config import settings
 from config.settings.services import EnvironVariables
 from ninja.security import APIKeyHeader
 from services.crm.base import ICRM
+from services.crm.house_mock.interface import HouseProMockCRM
 from services.crm.house_pro.interface import HouseProCRM
 from services.notification.base import INotificationReceiver
-from services.notification.console_reciever.reciever import (
+from services.notification.console_sender.sender import (
     ConsoleNotificationReceiver,
 )
-from services.notification.sms_receiver.reciever import SMSNotificationReceiver
-from services.redis_pool.connection import RedisPool
+from services.notification.sms_sender.sender import SMSNotificationReceiver
+from services.redis_connection.connection import RedisPool
 from services.webhook.event_router import WebhookEventRouter
 
 from core.containers.di_container import (
@@ -122,14 +119,7 @@ class DiContainer:
         self.builder.register(IJobRepository, ORMJobRepository)
 
     def __init_permissions_containers(self) -> None:
-        self.builder.register(
-            AdminCanAddSitePermission,
-            AdminCanAddSitePermission,
-        )
-        self.builder.register(
-            AdminCanDeleteSitePermission,
-            AdminCanDeleteSitePermission,
-        )
+        self.builder.register(JobPermissions, JobPermissions)
 
     def __init_action_containers(self) -> None:
         self.builder.register(LandingAction, LandingAction)
@@ -149,7 +139,6 @@ class DiContainer:
         )
         self.builder.register(APIKeyHeader, ApiKey)
         self.builder.register(ICRM, HouseProCRM)
-        self.builder.register(JobDetailJsonParser, JobDetailJsonParser)
 
     def __init_webhook_container(self) -> None:
         self.builder.register(WebhookEventRouter, WebhookEventRouter)
@@ -161,9 +150,9 @@ class DiTestContainer:
 
     def initialize_container(self) -> TestContainer:
         self.container = self.container.with_overridden(
-            INotificationReceiver,
-            ConsoleNotificationReceiver,
+            INotificationReceiver, ConsoleNotificationReceiver
         )
+        self.container = self.container.with_overridden(ICRM, HouseProCRM)
         return self.container
 
 
@@ -173,10 +162,10 @@ class DiLocalContainer:
 
     def initialize_container(self) -> TestContainer:
         self.container = self.container.with_overridden(
-            INotificationReceiver,
-            ConsoleNotificationReceiver,
+            INotificationReceiver, ConsoleNotificationReceiver
         )
         self.container = self.container.with_overridden(
             APIKeyHeader, ApiKeyLocal
         )
+        self.container = self.container.with_overridden(ICRM, HouseProMockCRM)
         return self.container

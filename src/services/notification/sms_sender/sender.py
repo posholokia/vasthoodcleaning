@@ -10,19 +10,19 @@ from twilio.rest import Client
 
 @dataclass
 class SMSNotificationReceiver(INotificationReceiver):
-    def connect(self) -> Client:
+    """
+    Отправка уведомлений по СМС.
+    """
+
+    def __init__(self):
         client = Client(settings.conf.account_sid, settings.conf.auth_token)
-        return client
+        self.client = client
 
-    def receive(self, data: dict) -> None:
-        assert data.get("to"), "Missing key 'to' in data to send"
-        assert data.get("message"), "Missing key 'message' in data to send"
-
+    def send(self, to_: str, message: str) -> None:
         try:
-            client = self.connect()
-            client.messages.create(
-                to=data.get("to"),
-                body=data.get("message"),
+            self.client.messages.create(
+                to=to_,
+                body=message,
                 from_=settings.conf.from_number,
             )
         except TwilioException as e:

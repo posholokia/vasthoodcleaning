@@ -10,23 +10,35 @@ from apps.clients.exceptions import (
 from apps.clients.services.code_generator.code import VerificationCodeService
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from apps.clients.validators import ClientPhoneValidator
-from services.jwt_token.exceptions import (
+from services.notification.base import INotificationReceiver
+from services.notification.exceptions import SendSmsError
+
+from core.jwt_token.exceptions import (
     DecodeJWTError,
     TokenExpireError,
     TokenInBlacklistError,
 )
-from services.notification.base import INotificationReceiver
-from services.notification.exceptions import SendSmsError
 
 
 @dataclass
 class AuthClientAction:
+    """
+    Обработка событий аутентификации.
+    """
+
     code_service: VerificationCodeService
     token_service: BlacklistRefreshToken
     notification_service: INotificationReceiver
     validator: ClientPhoneValidator
 
     def login(self, phone: str, code: str) -> tuple[str, str]:
+        """
+        Аутентификация клиента по одноразовому коду.
+
+        :param phone: номер телефона клиента
+        :param code: одноразовый код
+        return: пару access и refresh токенов
+        """
         self.validator.validate(phone)
         if self.code_service.check_code(phone, code):
             refresh = self.token_service.for_client(phone)
@@ -37,19 +49,28 @@ class AuthClientAction:
             raise InvalidCredentials()
 
     def send_code(self, phone: str) -> None:
+        """
+        Отправить одноразовый код подтверждения для аутентификации.
+
+        :param phone: номер телефона клиента
+        :return: None
+        """
         self.validator.validate(phone)
         code = self.code_service.generate_code(phone)
         try:
-            self.notification_service.receive(
-                {
-                    "to": phone,
-                    "message": f"You code {code}",
-                }
+            self.notification_service.send(
+                to_=phone, message=f"You code {code}"
             )
         except SendSmsError:
             raise SmsServiceError()
 
     def refresh_token(self, refresh: str) -> str:
+        """
+        Обновить access токен по refresh токену.
+
+        :param refresh: refresh токен
+        :return: access токен
+        """
         try:
             access = self.token_service.access_token(refresh)
         except DecodeJWTError:
@@ -61,6 +82,12 @@ class AuthClientAction:
         return access
 
     def logout(self, refresh: str) -> None:
+        """
+        Выйти из системы и забанить refresh токен.
+
+        :param refresh: refresh токен
+        :return: None
+        """
         try:
             self.token_service.set_blacklist(refresh)
         except DecodeJWTError:

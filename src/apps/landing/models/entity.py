@@ -3,10 +3,7 @@ from dataclasses import (
     field,
 )
 from enum import Enum
-from typing import (
-    Annotated,
-    Optional,
-)
+from typing import Annotated
 
 from annotated_types import (
     MaxLen,
@@ -23,8 +20,8 @@ class ColorFontEnum(Enum):
 class MainScreenEntity:
     id: int
     title: Annotated[str, MinLen(1), MaxLen(100)]  # заголовок
-    text: str = ""  # над заголовком
-    subtext: str = ""  # под заголовком
+    text: str = field(default="")  # над заголовком
+    subtext: str = field(default="")  # под заголовком
 
 
 @dataclass
@@ -46,7 +43,7 @@ class ServiceEntity:
     name: Annotated[str, MinLen(1), MaxLen(100)]
     font_color: FontColorEntity
     image: str
-    discount_message: Annotated[str, MaxLen(100)] = ""
+    discount_message: Annotated[str, MaxLen(100)] = field(default="")
 
 
 @dataclass
@@ -108,9 +105,9 @@ class SiteEntity:
     id: int
     whatsapp: Annotated[str, MinLen(1), MaxLen(256)]
     phone: Annotated[str, MinLen(1), MaxLen(32)]
-    about: Optional[AboutEntity] = None
-    results: Optional[ResultEntity] = None
-    services: list[ServiceEntity] = field(default_factory=list)
-    main_screen: Optional[MainScreenEntity] = None
+    about: AboutEntity | None = field(default=None)
+    results: ResultEntity | None = field(default=None)
+    services: list[ServiceEntity] = field(default=list)
+    main_screen: MainScreenEntity | None = field(default=None)
     faq: list[FAQEntity] = field(default_factory=list)
-    footer: Optional[FooterEntity] = None
+    footer: FooterEntity | None = field(default=None)

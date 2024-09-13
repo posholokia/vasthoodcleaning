@@ -1,8 +1,4 @@
-from .customers import customers
-from .jobs import jobs
+from .jobs import job_orders
 
 
-__all__ = (
-    customers,
-    jobs,
-)
+__all__ = (job_orders,)

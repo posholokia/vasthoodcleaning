@@ -24,10 +24,10 @@ class ORMJobRepository(IJobRepository):
         status: JobStatus,
         total_cost: int,
         client_id: str,
-        last_update: datetime | None = None,
-    ):
-        if last_update is None:
-            last_update = datetime.now()
+        last_updated: datetime | None = None,
+    ) -> None:
+        if last_updated is None:
+            last_updated = datetime.now()
         self.model.objects.create(
             pk=pk,
             schedule=schedule,
@@ -35,11 +35,13 @@ class ORMJobRepository(IJobRepository):
             status=status,
             total_cost=total_cost,
             client_id=client_id,
-            last_updated=last_update,
+            last_updated=last_updated,
         )
 
     def list_by_client(self, client_phone: str) -> list[JobEntity]:
-        orm_result = self.model.objects.filter(client__phone=client_phone)
+        orm_result = self.model.objects.filter(
+            client__phone=client_phone
+        ).exclude(status=JobStatus.canceled.value)
         return [client.to_entity() for client in orm_result]
 
     def exists(self, pk) -> bool:
@@ -48,9 +50,18 @@ class ORMJobRepository(IJobRepository):
     def exists_by_client(self, pk: str, phone: str) -> bool:
         return self.model.objects.filter(pk=pk, client__phone=phone).exists()
 
-    def get_by_id(self, pk: str) -> JobEntity:
-        orm_result = self.model.objects.get(pk=pk)
+    def get_by_id(self, pk: str) -> JobEntity | None:
+        try:
+            orm_result = self.model.objects.get(pk=pk)
+        except self.model.DoesNotExist:
+            return None
         return orm_result.to_entity()
 
     def update(self, pk: str, **kwargs) -> None:
         self.model.objects.filter(pk=pk).update(**kwargs)
+
+    def delete(self, pk: str) -> None:
+        try:
+            self.model.objects.get(pk=pk).delete()
+        except self.model.DoesNotExist:
+            return

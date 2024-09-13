@@ -5,11 +5,12 @@ from dataclasses import (
 from datetime import timedelta
 
 from apps.clients.services.jwt_tokens.storage.base import ITokenStorage
-from services.jwt_token.exceptions import (
+
+from core.jwt_token.exceptions import (
     InvalidTokenType,
     TokenInBlacklistError,
 )
-from services.jwt_token.models import (
+from core.jwt_token.models import (
     Token,
     TokenType,
 )
@@ -29,7 +30,12 @@ class RefreshToken(Token):
     sub_claim: str = "client"
 
     def access_token(self, refresh_token: str) -> str:
-        """Выдает access токен по refresh токену"""
+        """
+        Выдает access токен по refresh токену
+
+        :param refresh_token: jwt refresh токен
+        :return access token
+        """
         payload = self.decode(refresh_token)
 
         # проверяем что access токен обновляется по refresh токену
@@ -41,7 +47,12 @@ class RefreshToken(Token):
         return self.access_token_cls.encode()
 
     def for_client(self, phone: str) -> str:
-        """Выдаем refresh токен юзеру"""
+        """
+        Выдаем refresh токен юзеру
+
+        :param phone: телефонный номер клиента
+        :return refresh token
+        """
         self.set_payload()
         self[self.sub_claim] = phone
         return self.encode()
@@ -54,32 +65,46 @@ class BlacklistRefreshToken(RefreshToken):
     Черный список хранится в хранилище, при выдаче нового access
     токена проверяем что его нет в черном списке, тогда
     выдаем токен. Бан осуществляется по подписи токена jti - uuid4.
-    :: storage: хранилище забаненных токенов.
     """
 
     def __init__(self, storage: ITokenStorage):
+        """
+        :param storage: хранилище токенов
+        """
         super().__init__()
         self.storage = storage
 
     def access_token(self, refresh_token: str) -> str:
-        """Перед выдачей токена проверяем что его нет в черном списке"""
+        """
+        Перед выдачей токена проверяем что его нет в черном списке
+
+        :param refresh_token: jwt refresh токен
+        :return access token
+        """
         self.check_blacklist(refresh_token)
         return super().access_token(refresh_token)
 
     def set_blacklist(self, token: str) -> None:
-        """Записываем подпись токена в хранилище в черный список"""
+        """
+        Записываем подпись токена в хранилище в черный список
+
+        :param token: jwt refresh токен
+        :return None
+        """
         payload = self.decode(token)
         key = payload["jti"]
         timestamp_exp = payload["exp"]
 
-        self.storage.set_token(
-            key=key,
-            value=token,
-            expire=timestamp_exp,
-        )
+        self.storage.set_token(key=key, value=token, expire=timestamp_exp)
 
     def check_blacklist(self, token: str) -> None:
-        """Проверяем, что токена нет в черном списке. Если есть, поднимаем ошибку"""
+        """
+        Проверяем, что токена нет в черном списке.
+        Если есть, поднимаем ошибку.
+
+        :param token: jwt токен access/refresh
+        :return None
+        """
         payload = self.decode(token)
         value = self.storage.get_token(payload["jti"])
 

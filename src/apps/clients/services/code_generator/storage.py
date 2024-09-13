@@ -8,19 +8,42 @@ from dataclasses import (
 )
 
 from apps.clients.services.code_generator.exceptions import SaveCodeError
-from services.redis_pool.connection import RedisPool
+from services.redis_connection.connection import RedisPool
 
 
 @dataclass
 class ICodeStorage(ABC):
-    @abstractmethod
-    def save_code(self, phone: str, code: str) -> None: ...
+    """
+    Хранилище одноразовых кодов отправленных клиентам.
+    """
 
     @abstractmethod
-    def get_code(self, phone: str) -> str | None: ...
+    def save_code(self, phone: str, code: str) -> None:
+        """
+        Сохранить одноразовый код.
+
+        :param phone: номер телефона клиента
+        :param code: одноразовый код, сгенерированный для клиента
+        :return: None
+        """
 
     @abstractmethod
-    def delete_code(self, phone: str) -> None: ...
+    def get_code(self, phone: str) -> str | None:
+        """
+        Получить код из хранилища.
+
+        :param phone: номер телефона клиента
+        :return: одноразовый код или None
+        """
+
+    @abstractmethod
+    def delete_code(self, phone: str) -> None:
+        """
+        Удалить код из хранилища после успешной валидации.
+
+        :param phone: номер телефона клиента
+        :return: None
+        """
 
 
 @dataclass
@@ -30,11 +53,7 @@ class RedisCodeStorage(ICodeStorage):
 
     def save_code(self, phone: str, code: str) -> None:
         redis = self.conn()
-        saved = redis.set(
-            name=phone,
-            value=code,
-            ex=self.code_exp,
-        )
+        saved = redis.set(name=phone, value=code, ex=self.code_exp)
         if not saved:
             raise SaveCodeError()
 
