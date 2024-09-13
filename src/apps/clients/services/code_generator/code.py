@@ -15,12 +15,22 @@ from config.settings.services import EnvironVariables
 
 @dataclass
 class VerificationCodeService:
+    """
+    Сервис генерации и проверки одноразового кода для аутентификации.
+    """
+
     storage: ICodeStorage
-    code_interval: int = field(
+    code_interval: int = field(  # допустимый интервал между смс
         init=False, default=60
-    )  # допустимый интервал между смс
+    )
 
     def generate_code(self, phone: str) -> str:
+        """
+        Генератор одноразового кода.
+
+        :param phone: номер телефона клиента
+        :return: одноразовый код
+        """
         if conf.environ == EnvironVariables.prod:
             digest = "0123456789"
         else:
@@ -40,6 +50,13 @@ class VerificationCodeService:
         return code
 
     def check_code(self, phone: str, user_code: str) -> bool:
+        """
+        Проверка корректности введенного клиентом кода.
+
+        :param phone: номер телефона клиента
+        :param user_code: шестизначный код, который ввел клиент
+        :return: bool
+        """
         code_with_exp = self.storage.get_code(phone)
 
         if code_with_exp is None:

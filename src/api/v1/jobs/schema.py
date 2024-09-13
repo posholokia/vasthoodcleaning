@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Union
 
 from apps.jobs.models import (
     DiscountType,
@@ -9,14 +8,6 @@ from ninja import (
     Field,
     Schema,
 )
-
-
-T = Union[
-    "MultipleSelectSchema",
-    "SingleSelectSchema",
-    "NumericalRangeSchema",
-    "QuantitySelectSchema",
-]
 
 
 class MultipleSelectSchema(Schema):
@@ -48,6 +39,7 @@ class JobSchema(Schema):
     schedule: datetime | None
     address: str
     status: JobStatus
+    paid: bool
     total_cost: int
 
 
@@ -66,13 +58,22 @@ class MaterialsSchema(Schema):
     detail: list[DetailMaterialSchema]
 
 
+T = list[
+    MultipleSelectSchema
+    | SingleSelectSchema
+    | NumericalRangeSchema
+    | QuantitySelectSchema
+]
+
+
 class JobPartSchema(Schema):
     name: str
     cost: int
-    inlines: list[T] = Field(default_factory=list)
+    inlines: T = Field(default_factory=list)
 
 
 class JobDetailSchema(Schema):
     parts: list[JobPartSchema]
+    cost_before_discount: int
     materials: MaterialsSchema | None = Field(default=None)
     discount: DiscountSchema | None = Field(default=None)

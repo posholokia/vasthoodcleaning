@@ -23,7 +23,12 @@ class ORMClientRepository(IClientRepository):
                 if not (
                     self.model.objects.filter(pk=pk, phone=phone).exists()
                 ):
-                    raise
+                    raise Exception(
+                        "Клиент не существует, но и создать его не удалось"
+                    )
+
+    def get_or_create(self, pk: str, phone: str) -> CustomerModel:
+        return self.model.objects.get_or_create(id=pk, phone=phone)[0]
 
     def get(self, phone: str) -> ClientEntity:
         orm_result = self.model.objects.filter(phone=phone)
@@ -33,7 +38,10 @@ class ORMClientRepository(IClientRepository):
         )
 
     def delete(self, pk: str) -> None:
-        self.model.objects.delete(pk=pk)
+        try:
+            self.model.objects.get(pk=pk).delete()
+        except self.model.DoesNotExist:
+            return None
 
     def exists(self, pk: str) -> bool:
         return self.model.objects.filter(pk=pk).exists()

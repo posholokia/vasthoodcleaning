@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from apps.clients.models.orm import CustomerModel
 from apps.jobs.models.entity import (
     JobEntity,
@@ -14,7 +12,8 @@ class JobModel(models.Model):
     address = models.CharField(max_length=256)
     status = models.CharField(max_length=32)
     total_cost = models.IntegerField()
-    last_updated = models.DateTimeField(default=datetime.now())
+    paid = models.BooleanField(default=False)
+    last_updated = models.DateTimeField(auto_now_add=True)
     client = models.ForeignKey(
         CustomerModel,
         on_delete=models.CASCADE,
@@ -28,5 +27,6 @@ class JobModel(models.Model):
             address=self.address,
             status=JobStatus(self.status),
             total_cost=self.total_cost,
+            paid=self.paid,
             last_updated=self.last_updated,
         )

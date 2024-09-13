@@ -21,6 +21,7 @@ class JobEntity:
     address: str
     status: JobStatus
     total_cost: int
+    paid: bool = field(default=False)
     last_updated: datetime = field(default_factory=datetime.now)
 
 
@@ -83,7 +84,7 @@ T = list[
     SingleSelectEntity
     | MultipleSelectEntity
     | NumericalRangeEntity
-    | QuantitySelectEntity,
+    | QuantitySelectEntity
 ]
 
 
@@ -97,5 +98,6 @@ class JobPartEntity:
 @dataclass
 class JobDetailEntity:
     parts: list[JobPartEntity]
+    cost_before_discount: int
     materials: MaterialsEntity | None = field(default=None)
     discount: DiscountEntity | None = field(default=None)
