@@ -262,8 +262,8 @@ class Footer(models.Model):
     def to_entity(self) -> FooterEntity:
         return FooterEntity(
             id=self.id,
-            email=self.address,
-            operating_mode=self.address,
+            email=self.email,
+            operating_mode=self.operating_mode,
             address=self.address,
         )
 
