@@ -13,6 +13,10 @@ class AllowedEvents(Enum):
     customer_delete: str = "customer.deleted"
     job_created: str = "job.created"
     job_updated: str = "job.updated"
+    job_deleted: str = "job.deleted"
+    job_started: str = "job.started"
+    job_on_my_way: str = "job.on_my_way"
+    job_scheduled: str = "job.scheduled"
 
 
 @dataclass
@@ -40,52 +44,78 @@ class WebhookEventRouter:
             logger.error("Не найден ключ 'event' в вебхуке: {}", event_data)
             return
 
-        if event_type is AllowedEvents.customer_create:
-            try:
-                self.client_action.create_if_not_exists(
-                    event_data["customer"]["id"],
-                    event_data["customer"]["mobile_number"],
-                )
-            except KeyError as e:
-                logger.error(
-                    "Ошибка при обработке события customer.create: {}\n"
-                    "data: {}",
-                    e,
-                    event_data,
-                )
+        match event_type:
+            case AllowedEvents.customer_create:
+                try:
+                    self.client_action.create_if_not_exists(
+                        event_data["customer"]["id"],
+                        event_data["customer"]["mobile_number"],
+                    )
+                except KeyError as e:
+                    logger.error(
+                        "Ошибка при обработке события customer.create: {}\n"
+                        "data: {}",
+                        e,
+                        event_data,
+                    )
 
-        elif event_type is AllowedEvents.customer_delete:
-            try:
-                self.client_action.delete_customer(
-                    event_data["customer"]["id"]
-                )
-            except KeyError as e:
-                logger.error(
-                    "Ошибка при обработке события customer.delete: {}\n"
-                    "data: {}",
-                    e,
-                    event_data,
-                )
+            case AllowedEvents.customer_delete:
+                try:
+                    self.client_action.delete_customer(
+                        event_data["customer"]["id"]
+                    )
+                except KeyError as e:
+                    logger.error(
+                        "Ошибка при обработке события customer.delete: {}\n"
+                        "data: {}",
+                        e,
+                        event_data,
+                    )
 
-        elif event_type is AllowedEvents.job_created:
-            try:
-                self._job_create_handler(event_data["job"])
-            except KeyError as e:
-                logger.error(
-                    "Ошибка при обработке события job.create: {}\ndata: {}",
-                    e,
-                    event_data,
-                )
+            case AllowedEvents.job_created:
+                try:
+                    self._job_create_handler(event_data["job"])
+                except KeyError as e:
+                    logger.error(
+                        "Ошибка при обработке события job.create: {}\ndata: {}",
+                        e,
+                        event_data,
+                    )
 
-        elif event_type is AllowedEvents.job_updated:
-            try:
-                self._job_update_handler(event_data["job"])
-            except KeyError as e:
-                logger.error(
-                    "Ошибка при обработке события job.update: {}\ndata: {}",
-                    e,
-                    event_data,
-                )
+            case (
+                AllowedEvents.job_updated
+                | AllowedEvents.job_started
+                | AllowedEvents.job_on_my_way
+                | AllowedEvents.job_scheduled
+            ):
+                try:
+                    self._job_update_handler(event_data["job"])
+                except KeyError as e:
+                    logger.error(
+                        "Ошибка при обработке события job.update: {}\ndata: {}",
+                        e,
+                        event_data,
+                    )
+
+            case AllowedEvents.job_deleted:
+                try:
+                    self._job_delete_handler(event_data["job"])
+                except KeyError as e:
+                    logger.error(
+                        "Ошибка при обработке события job.deleted: {}\ndata: {}",
+                        e,
+                        event_data,
+                    )
+
+    def _job_delete_handler(self, job_data: dict[str, Any]) -> None:
+        """
+        Обработка события удаления работы.
+
+        :param job_data: json с данными удаленной работы
+        :return: None
+        """
+        job_id = job_data["id"]
+        self.job_action.delete(job_id)
 
     def _job_create_handler(self, job_data: dict[str, Any]) -> None:
         """

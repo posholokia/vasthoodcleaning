@@ -9,7 +9,7 @@ from ninja import Router
 
 from core.containers import get_container
 from core.mapper import dataclass_to_schema
-from core.security.auth.jwt_auth import AuthBearer
+from core.security.callable import client_jwt_auth
 
 
 router = Router(tags=["Jobs"])
@@ -18,7 +18,7 @@ router = Router(tags=["Jobs"])
 @router.get(
     path="jobs/",
     response=list[JobSchema],
-    auth=AuthBearer(),
+    auth=client_jwt_auth(),
     description="List of all jobs for the current user",
 )
 def get_jobs(request: HttpRequest) -> list[JobSchema]:
@@ -32,7 +32,7 @@ def get_jobs(request: HttpRequest) -> list[JobSchema]:
 @router.get(
     path="job/{job_id}/",
     response=JobDetailSchema,
-    auth=AuthBearer(),
+    auth=client_jwt_auth(),
     description="Getting detailed information about the job.\n"
     "materials and discount can be null.",
 )

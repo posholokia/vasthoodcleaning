@@ -129,3 +129,12 @@ class JobAction:
             total_cost=job.total_cost,
             last_updated=job.last_updated,
         )
+
+    def delete(self, pk: str) -> None:
+        """
+        Удалить работу из БД.
+
+        :param pk: id работы
+        :return: None
+        """
+        self.__repository.delete(pk)

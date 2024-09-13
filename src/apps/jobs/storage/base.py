@@ -83,3 +83,12 @@ class IJobRepository(ABC):
         :param kwargs: field_name: value, которые надо обновить
         :return: None
         """
+
+    @abstractmethod
+    def delete(self, pk: str) -> None:
+        """
+        Удалить работу.
+
+        :param pk: id работы
+        :return: None
+        """

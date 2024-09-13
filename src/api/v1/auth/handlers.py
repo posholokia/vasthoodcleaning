@@ -13,6 +13,7 @@ from django.http import (
 from ninja import Router
 
 from core.containers import get_container
+from core.security.callable import client_jwt_auth
 
 from ..schema import ResponseStatusSchema
 from .schema import (
@@ -118,3 +119,14 @@ def logout(
     response = HttpResponse(content=response_obj.json())
     response.delete_cookie(key="refresh", samesite="Lax")
     return response
+
+
+@router.get(
+    path="profile/",
+    response=ClientPhoneSchema,
+    auth=client_jwt_auth(),
+    description="Get client profile.",
+)
+def get_profile(request: HttpRequest):
+    client_phone = request.auth  # type: ignore
+    return ClientPhoneSchema(phone=f"+1{client_phone}")

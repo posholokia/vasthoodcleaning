@@ -59,3 +59,9 @@ class ORMJobRepository(IJobRepository):
 
     def update(self, pk: str, **kwargs) -> None:
         self.model.objects.filter(pk=pk).update(**kwargs)
+
+    def delete(self, pk: str) -> None:
+        try:
+            self.model.objects.get(pk=pk).delete()
+        except self.model.DoesNotExist:
+            return
