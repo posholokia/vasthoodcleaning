@@ -1,5 +1,6 @@
 from typing import Any
 
+import loguru
 from apps.clients.services.jwt_tokens.models import BlacklistRefreshToken
 from django.http import HttpRequest
 from ninja.security import HttpBearer
@@ -12,8 +13,13 @@ class AuthBearer(HttpBearer):
     def authenticate(self, request: HttpRequest, token: str) -> Any | None:
         try:
             container = get_container()
-            token_service = container.resolve(BlacklistRefreshToken)
+            token_service: BlacklistRefreshToken = container.resolve(
+                BlacklistRefreshToken
+            )
             payload = token_service.decode(token)
-            return payload.get("client").lstrip("+1")
+            loguru.logger.debug("payload: {}", payload)
+            client_phone: str = payload.get("client")
+            loguru.logger.debug("client_phone: {}", client_phone)
+            return client_phone[2:]
         except BaseJWTException:
             return None
