@@ -92,7 +92,7 @@ class Service(models.Model):
             id=self.id,
             name=self.name,
             font_color=self.font_color.to_entity(),
-            image=str(self.image),
+            image=self.image.url,
             discount_message=self.discount_message,
         )
 
@@ -200,7 +200,7 @@ class OurResultsPhoto(models.Model):
     def to_entity(self) -> ResultPhotoEntity:
         return ResultPhotoEntity(
             id=self.id,
-            image=str(self.image),
+            image=self.image.url,
         )
 
     class Meta:
