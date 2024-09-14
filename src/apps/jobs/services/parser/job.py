@@ -15,8 +15,10 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
     :return: работа
     """
     date_format = "%Y-%m-%dT%H:%M:%S%z"
-    schedule_str: str = job_data["schedule"]["scheduled_start"]
-    schedule: datetime = datetime.strptime(schedule_str, date_format)
+    schedule: str | None = job_data["schedule"]["scheduled_start"]
+
+    if schedule is not None:
+        schedule: datetime = datetime.strptime(schedule, date_format)
     last_updated_str: str = job_data["updated_at"]
     last_updated: datetime = datetime.strptime(last_updated_str, date_format)
 
