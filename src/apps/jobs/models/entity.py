@@ -11,7 +11,9 @@ class JobStatus(str, Enum):
     scheduled: str = "scheduled"
     in_progress: str = "in progress"  # job.started
     completed: str = "complete unrated"  # job.completed
-    canceled: str = "pro canceled"
+    user_rated: str = "complete rated"
+    pro_canceled: str = "pro canceled"
+    user_canceled: str = "user canceled"
 
 
 @dataclass

@@ -138,7 +138,11 @@ class WebhookEventRouter:
         :param job_data: json с данными о работе
         :return: None
         """
-        job = parse_job(job_data)
+        try:
+            job = parse_job(job_data)
+        except ValueError as e:
+            logger.error("Cant parse job: {}", e)
+            return
         if self.job_action.exists(job.id):
             self.job_action.update(job)
         else:
