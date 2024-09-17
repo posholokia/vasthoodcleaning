@@ -44,5 +44,5 @@ def get_job_detail(request: HttpRequest, job_id: str) -> JobDetailSchema:
     permission.has_permission(client_phone, job_id)
 
     action: JobAction = container.resolve(JobAction)
-    job = action.get_job_detail(job_id, client_phone)
+    job = action.get_job_detail(job_id)
     return dataclass_to_schema(JobDetailSchema, job)
