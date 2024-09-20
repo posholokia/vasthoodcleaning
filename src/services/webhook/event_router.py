@@ -28,7 +28,7 @@ class WebhookEventRouter:
     client_action: ClientAction
     job_action: JobAction
 
-    def route_event(self, event_data: dict):
+    def route_event(self, event_data: dict) -> None:
         """
         Основной метод, проверяет тип события и передает данные в action.
 
@@ -88,6 +88,7 @@ class WebhookEventRouter:
                 | AllowedEvents.job_on_my_way
                 | AllowedEvents.job_scheduled
             ):
+                logger.debug("job update event")
                 try:
                     self._job_update_handler(event_data["job"])
                 except KeyError as e:
@@ -114,7 +115,7 @@ class WebhookEventRouter:
         :param job_data: json с данными удаленной работы
         :return: None
         """
-        job_id = job_data["id"]
+        job_id = job_data["id"]  # в json'е только id работы и флаг deleted
         self.job_action.delete(job_id)
 
     def _job_create_handler(self, job_data: dict[str, Any]) -> None:
@@ -140,10 +141,12 @@ class WebhookEventRouter:
         """
         try:
             job = parse_job(job_data)
+            logger.debug("job successful parse")
         except ValueError as e:
             logger.error("Cant parse job: {}", e)
             return
         if self.job_action.exists(job.id):
+            logger.debug("job exists and go update")
             self.job_action.update(job)
         else:
             customer = self.client_action.get_or_create(

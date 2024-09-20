@@ -6,14 +6,12 @@ from datetime import datetime
 from enum import Enum
 
 
-class JobStatus(str, Enum):
-    unscheduled: str = "needs scheduling"
-    scheduled: str = "scheduled"
-    in_progress: str = "in progress"  # job.started
-    completed: str = "complete unrated"  # job.completed
-    user_rated: str = "complete rated"
-    pro_canceled: str = "pro canceled"
-    user_canceled: str = "user canceled"
+class JobStatus(Enum):
+    pending: str = "Pending"
+    scheduled: str = "Scheduled"
+    in_progress: str = "In Progress"
+    completed: str = "Completed"
+    canceled: str = "canceled"  # не отображается
 
 
 @dataclass

@@ -114,18 +114,17 @@ class JobAction:
         :return: None
         """
         # получаем работу (уже должно быть проверено, что она существует)
-        job_dto = self.__repository.get_by_id(job.id)
-
+        current_job = self.__repository.get_by_id(job.id)
         # сверяем дату последнего обновления в БД с текущими данными,
         # чтобы проверить актуальность данных
-        if job_dto.last_updated > job.last_updated:
+        if current_job.last_updated > job.last_updated:
             return
         # если данные актуальны, обновляем работу
         self.__repository.update(
             pk=job.id,
             schedule=job.schedule,
             address=job.address,
-            status=job.status,
+            status=job.status.value,
             total_cost=job.total_cost,
             paid=job.paid,
             last_updated=job.last_updated,

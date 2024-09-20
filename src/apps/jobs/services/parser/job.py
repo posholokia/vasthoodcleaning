@@ -7,6 +7,17 @@ from apps.jobs.models import (
 )
 
 
+JobCrmStatus = {
+    "needs scheduling": JobStatus.pending,
+    "scheduled": JobStatus.scheduled,
+    "in progress": JobStatus.in_progress,
+    "complete unrated": JobStatus.completed,
+    "complete rated": JobStatus.completed,
+    "pro canceled": JobStatus.canceled,
+    "user canceled": JobStatus.canceled,
+}
+
+
 def parse_job(job_data: dict[str, Any]) -> JobEntity:
     """
     Парсинг работы.
@@ -24,7 +35,7 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
 
     job_id: str = job_data["id"]
     address: str = _get_address_string(job_data["address"])
-    status: str = job_data["work_status"]
+    status = JobCrmStatus.get(job_data["work_status"])
     total_cost: int = job_data["total_amount"]
     paid: bool = not job_data["outstanding_balance"]
 
@@ -32,7 +43,7 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
         id=job_id,
         schedule=schedule,
         address=address,
-        status=JobStatus(status),
+        status=status,
         total_cost=total_cost,
         paid=paid,
         last_updated=last_updated,

@@ -1,9 +1,6 @@
 from datetime import datetime
 
-from apps.jobs.models import (
-    DiscountType,
-    JobStatus,
-)
+from apps.jobs.models import DiscountType
 from ninja import (
     Field,
     Schema,
@@ -38,7 +35,7 @@ class JobSchema(Schema):
     id: str
     schedule: datetime | None
     address: str
-    status: JobStatus
+    status: str
     paid: bool
     total_cost: int
 
