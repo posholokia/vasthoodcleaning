@@ -22,9 +22,9 @@ class ICodeStorage(ABC):
         """
         Сохранить одноразовый код.
 
-        :param phone: номер телефона клиента
-        :param code: одноразовый код, сгенерированный для клиента
-        :return: None
+        :param phone:   Номер телефона клиента.
+        :param code:    Одноразовый код, сгенерированный для клиента.
+        :return:        None.
         """
 
     @abstractmethod
@@ -32,8 +32,8 @@ class ICodeStorage(ABC):
         """
         Получить код из хранилища.
 
-        :param phone: номер телефона клиента
-        :return: одноразовый код или None
+        :param phone:   Номер телефона клиента.
+        :return:        Одноразовый код или None.
         """
 
     @abstractmethod
@@ -41,8 +41,8 @@ class ICodeStorage(ABC):
         """
         Удалить код из хранилища после успешной валидации.
 
-        :param phone: номер телефона клиента
-        :return: None
+        :param phone:   Номер телефона клиента.
+        :return:        None.
         """
 
 

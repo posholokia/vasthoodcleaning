@@ -17,9 +17,9 @@ class IClientRepository(ABC):
         """
         Записать кастомера в БД если он не существует.
 
-        :param pk: первичный ключ кастомера
-        :param phone: телефонный номер кастомера
-        :return: None
+        :param pk:      Первичный ключ кастомера.
+        :param phone:   Телефонный номер кастомера.
+        :return:        None.
         """
 
     @abstractmethod
@@ -27,9 +27,9 @@ class IClientRepository(ABC):
         """
         Получить или создать кастомера если он не существует.
 
-        :param pk: первичный ключ кастомера
-        :param phone: телефонный номер кастомера
-        :return: кастомер dto
+        :param pk:      Первичный ключ кастомера.
+        :param phone:   Телефонный номер кастомера.
+        :return:        Кастомер dto.
         """
 
     @abstractmethod
@@ -38,8 +38,8 @@ class IClientRepository(ABC):
         Получить клиента по номеру телефона.
         Объединяется из всех кастомеров с таким номером.
 
-        :param phone: номер телефона
-        :return: клиента
+        :param phone:   Номер телефона.
+        :return:        Клиент.
         """
 
     @abstractmethod
@@ -47,15 +47,15 @@ class IClientRepository(ABC):
         """
         Удалить одного кастомера по номеру телефона.
 
-        :param pk: id кастомера
-        :return: None
+        :param pk:  ID кастомера.
+        :return:    None.
         """
 
     @abstractmethod
     def exists(self, pk: str) -> bool:
         """
-        Проверяем что конкретный кастомер существует в БД
+        Проверяем что конкретный кастомер существует в БД.
 
-        :param pk: id кастомера
-        :return: bool
+        :param pk:  ID кастомера.
+        :return:    Bool.
         """

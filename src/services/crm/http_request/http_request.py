@@ -13,6 +13,12 @@ class HttpRequest:
         body: dict[str, str] | None = None,
         header: dict[str, str] | None = None,
     ) -> httpx.Response:
+        """
+        :param url:     Полный URL куда отправить запрос.
+        :param body:    Тело запроса (json).
+        :param header:  Заголовки запроса.
+        :return:        Ответ на запрос.
+        """
         with httpx.Client() as session:
             response = session.post(url=url, json=body, headers=header)
         self._check_error(response, "POST")
@@ -22,6 +28,11 @@ class HttpRequest:
     def get(
         self, url: str, header: dict[str, str] | None = None
     ) -> httpx.Response:
+        """
+        :param url:     Полный URL куда отправить запрос.
+        :param header:  Заголовки запроса.
+        :return:        Ответ на запрос.
+        """
         with httpx.Client() as session:
             response = session.get(url=url, headers=header)
         self._check_error(response, "GET")
@@ -31,6 +42,11 @@ class HttpRequest:
     def delete(
         self, url: str, header: dict[str, str] | None = None
     ) -> httpx.Response:
+        """
+        :param url:     Полный URL куда отправить запрос.
+        :param header:  Заголовки запроса.
+        :return:        Ответ на запрос.
+        """
         with httpx.Client() as session:
             response = session.delete(url=url, headers=header)
         self._check_error(response, "DELETE")

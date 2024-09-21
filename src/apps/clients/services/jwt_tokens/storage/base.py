@@ -16,17 +16,17 @@ class ITokenStorage(ABC):
         """
         Записывает токен в redis
 
-        :param key: подпись токена
-        :param value: токен
-        :param expire: временная метка окончания срока действия токена
-        :return: bool записан/не записан токен
+        :param key:     Подпись токена.
+        :param value:   Токен.
+        :param expire:  Временная метка окончания срока действия токена.
+        :return:        Bool записан/не записан токен.
         """
 
     @abstractmethod
     def get_token(self, key: str):
         """
-        Пытаемся получить токен из redis
+        Пытаемся получить токен из redis.
 
-        :param key: подпись токена
-        :return: токен или None
+        :param key: Подпись токена.
+        :return:    Токен или None.
         """

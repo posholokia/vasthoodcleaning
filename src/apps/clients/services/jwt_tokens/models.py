@@ -31,10 +31,10 @@ class RefreshToken(Token):
 
     def access_token(self, refresh_token: str) -> str:
         """
-        Выдает access токен по refresh токену
+        Выдает access токен по refresh токену.
 
-        :param refresh_token: jwt refresh токен
-        :return access token
+        :param refresh_token:   Refresh токен.
+        :return:                Access token.
         """
         payload = self.decode(refresh_token)
 
@@ -48,10 +48,10 @@ class RefreshToken(Token):
 
     def for_client(self, phone: str) -> str:
         """
-        Выдаем refresh токен юзеру
+        Выдаем refresh токен юзеру.
 
-        :param phone: телефонный номер клиента
-        :return refresh token
+        :param phone:   Телефонный номер клиента.
+        :return:        Refresh token.
         """
         self.set_payload()
         self[self.sub_claim] = phone
@@ -69,27 +69,27 @@ class BlacklistRefreshToken(RefreshToken):
 
     def __init__(self, storage: ITokenStorage):
         """
-        :param storage: хранилище токенов
+        :param storage: хранилище токенов.
         """
         super().__init__()
         self.storage = storage
 
     def access_token(self, refresh_token: str) -> str:
         """
-        Перед выдачей токена проверяем что его нет в черном списке
+        Перед выдачей токена проверяем что его нет в черном списке.
 
-        :param refresh_token: jwt refresh токен
-        :return access token
+        :param refresh_token:   Refresh токен.
+        :return:                Access token.
         """
         self.check_blacklist(refresh_token)
         return super().access_token(refresh_token)
 
     def set_blacklist(self, token: str) -> None:
         """
-        Записываем подпись токена в хранилище в черный список
+        Записываем подпись токена в хранилище в черный список.
 
-        :param token: jwt refresh токен
-        :return None
+        :param token:   Refresh токен.
+        :return:        None.
         """
         payload = self.decode(token)
         key = payload["jti"]
@@ -102,8 +102,8 @@ class BlacklistRefreshToken(RefreshToken):
         Проверяем, что токена нет в черном списке.
         Если есть, поднимаем ошибку.
 
-        :param token: jwt токен access/refresh
-        :return None
+        :param token:   Access/refresh токен.
+        :return:        None.
         """
         payload = self.decode(token)
         value = self.storage.get_token(payload["jti"])

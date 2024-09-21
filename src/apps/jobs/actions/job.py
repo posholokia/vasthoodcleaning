@@ -35,9 +35,9 @@ class JobAction:
         """
         Создание работы.
 
-        :param job: сущность работы
-        :param client_id: id кастомера, создавшего работу
-        :return: None
+        :param job:         Сущность работы.
+        :param client_id:   ID кастомера, создавшего работу.
+        :return:            None.
         """
         # проверяем что работы еще нет
         if self.__repository.exists(pk=job.id):
@@ -56,10 +56,10 @@ class JobAction:
 
     def get_list(self, client_phone: str) -> list[JobEntity]:
         """
-        Получить список работ клиента
+        Получить список работ клиента.
 
-        :param client_phone: номер телефона клиента
-        :return: список работ
+        :param client_phone:    Номер телефона клиента.
+        :return:                Список работ.
         """
         return self.__repository.list_by_client(client_phone)
 
@@ -68,8 +68,8 @@ class JobAction:
         """
         Получить детальную информацию о заказанной работе.
 
-        :param job_id: id работы
-        :return: детальная информация о работе
+        :param job_id:  ID работы.
+        :return:        Детальная информация о работе.
         """
         current_job = self.__repository.get_by_id(job_id)
         try:
@@ -88,8 +88,8 @@ class JobAction:
         """
         Перерасчет общей стоимости работы с учетом скидки.
 
-        :param job: детальная работа
-        :return: стоимость со скидкой
+        :param job: Детальная работа.
+        :return:    Стоимость со скидкой.
         """
         discount = job.discount
 
@@ -107,8 +107,8 @@ class JobAction:
         """
         Проверка существует ли работа.
 
-        :param pk: id работы
-        :return: bool
+        :param pk:  ID работы.
+        :return:    Bool.
         """
         return self.__repository.exists(pk)
 
@@ -116,8 +116,8 @@ class JobAction:
         """
         Обновление работы.
 
-        :param job: работа
-        :return: None
+        :param job: Работа.
+        :return:    None.
         """
         # получаем работу (уже должно быть проверено, что она существует)
         current_job = self.__repository.get_by_id(job.id)
@@ -140,8 +140,8 @@ class JobAction:
         """
         Удалить работу из БД.
 
-        :param pk: id работы
-        :return: None
+        :param pk:  ID работы.
+        :return:    None.
         """
         self.__repository.delete(pk)
 

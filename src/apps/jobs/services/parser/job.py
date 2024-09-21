@@ -23,8 +23,8 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
     """
     Парсинг работы.
 
-    :param job_data: json из crm с данными о работе
-    :return: работа
+    :param job_data:    Json из crm с данными о работе.
+    :return:            Работа.
     """
     date_format = "%Y-%m-%dT%H:%M:%S%z"
     schedule: str | None = job_data["schedule"]["scheduled_start"]
@@ -59,8 +59,8 @@ def _get_address_string(address_dict: dict) -> str:
     """
     Вспомогательный метод для конвертации адреса из словаря в строку.
 
-    :param address_dict: json с адресом
-    :return: адрес
+    :param address_dict:    Json с адресом.
+    :return:                Адрес.
     """
     street: str = address_dict["street"]
     street_line_2: str = address_dict["street_line_2"]

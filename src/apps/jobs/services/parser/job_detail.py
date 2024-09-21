@@ -37,8 +37,8 @@ def parse_job_detail(job_lines_data: dict[str, Any]) -> JobDetailEntity:
     """
     Парсер детальной информации о заказанной работе.
 
-    :param job_lines_data: json со списком всех лайнов заказа
-    :return: детальная информация о заказе
+    :param job_lines_data:  Json со списком всех лайнов заказа.
+    :return:                Детальная информация о заказе.
     """
     parts: list[JobPartEntity] = []  # список услуг в рамках одной работы
     materials: list[DetailMaterialEntity] = []  # список выбранных материалов
@@ -87,8 +87,8 @@ def _parse_discount(discount: dict) -> DiscountEntity:
     """
     Парсит данные о скидке.
 
-    :param discount: json с данными о скидке
-    :return: скидка
+    :param discount:    Json с данными о скидке.
+    :return:            Скидка.
     """
     return DiscountEntity(
         value=discount["amount"], kind=DiscountType(discount["kind"])
@@ -99,8 +99,8 @@ def _parse_materials(material: dict) -> DetailMaterialEntity:
     """
     Парсит данные о материалах.
 
-    :param material: json с данными о материале
-    :return: материал
+    :param material:    Json с данными о материале.
+    :return:            Материал.
     """
     return DetailMaterialEntity(
         name=material["name"],
@@ -113,8 +113,8 @@ def _parse_job(job_data: dict[str, Any]) -> JobPartEntity:
     """
     Парсит данные о работе в рамках заказа.
 
-    :param job_data: json с данными о работе
-    :return: работа
+    :param job_data:    Json с данными о работе.
+    :return:            Работа.
     """
     name = job_data.get("name")
     cost = job_data.get("amount")
@@ -128,8 +128,8 @@ def _parse_job_inlines(fields: list[dict[str, Any]]) -> T:
     """
     Парсинг выбранных параметров в работе.
 
-    :param fields: json c выбранными параметрами
-    :return: параметр
+    :param fields:  Json c выбранными параметрами.
+    :return:        Параметр (услуга) работы.
     """
     inlines: T = []
     for field_ in fields:
@@ -156,8 +156,8 @@ def _parse_multiple_select(inline: dict) -> MultipleSelectEntity | None:
     """
     Парсинг параметра множественного выбора.
 
-    :param inline: json c конкретным параметром множественного выбора
-    :return: множественный параметр
+    :param inline:  Json c конкретным параметром множественного выбора.
+    :return:        Множественный параметр.
     """
     selected: list[int] = inline["selected"]
     if not selected:
@@ -175,8 +175,8 @@ def _parse_quantity_select(inline: dict) -> QuantitySelectEntity | None:
     """
     Парсинг параметра количественного выбора.
 
-    :param inline: json c конкретным параметром количественного выбора
-    :return: количественный параметр
+    :param inline:  Json c конкретным параметром количественного выбора.
+    :return:        Количественный параметр.
     """
     value = inline["value"]
     if not value:
@@ -188,8 +188,8 @@ def _parse_single_select(inline: dict) -> SingleSelectEntity | None:
     """
     Парсинг параметра единственного выбора.
 
-    :param inline: json c конкретным параметром единственного выбора
-    :return: единственный параметр
+    :param inline:  Json c конкретным параметром единственного выбора.
+    :return:        Единственный параметр.
     """
     selected: list[int] = inline["selected"]
     if not selected:
@@ -210,8 +210,8 @@ def _parse_range_select(inline: dict) -> NumericalRangeEntity | None:
     """
     Парсинг параметра выбора выпадающего списка.
 
-    :param inline: json c конкретным параметром из выпадающего списка
-    :return: выбранный параметр
+    :param inline:  Json c конкретным параметром из выпадающего списка.
+    :return:        Выбранный параметр.
     """
     selected: list[int] = inline["selected"]
     if not selected:

@@ -25,16 +25,16 @@ class IJobRepository(ABC):
         last_updated: datetime,
     ) -> None:
         """
-        Создание работы
+        Создание работы.
 
-        :param pk: id работы из crm
-        :param schedule: время начала работы
-        :param address: адрес проведения работы
-        :param status: статус работы
-        :param total_cost: общая стоимость
-        :param client_id: id кастомера, создавшего работу
-        :param last_updated: дата последнего обновления
-        :return: None
+        :param pk:              ID работы из crm.
+        :param schedule:        Время начала работы.
+        :param address:         Адрес проведения работы.
+        :param status:          Статус работы.
+        :param total_cost:      Общая стоимость.
+        :param client_id:       ID кастомера, создавшего работу.
+        :param last_updated:    Дата последнего обновления.
+        :return:                None.
         """
 
     @abstractmethod
@@ -43,8 +43,8 @@ class IJobRepository(ABC):
         Получить все работы по номеру телефона клиента,
         за исключением отмененных.
 
-        :param client_phone: номер телефона клиента
-        :return: список работ
+        :param client_phone:    Номер телефона клиента.
+        :return:                Список работ.
         """
 
     @abstractmethod
@@ -52,8 +52,8 @@ class IJobRepository(ABC):
         """
         Проверка, что работа существует по id.
 
-        :param pk: id работы
-        :return: bool
+        :param pk:  ID работы.
+        :return:    Bool.
         """
 
     @abstractmethod
@@ -80,7 +80,7 @@ class IJobRepository(ABC):
         """
         Обновить работу.
 
-        :param pk:      id работы.
+        :param pk:      ID работы.
         :param kwargs:  Поля, которые надо обновить.
                         Возможно обновить: schedule, address, status,
                         total_cost, paid, last_updated.
@@ -92,6 +92,6 @@ class IJobRepository(ABC):
         """
         Удалить работу.
 
-        :param pk:  id работы.
+        :param pk:  ID работы.
         :return:    None.
         """

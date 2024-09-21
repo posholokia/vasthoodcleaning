@@ -42,9 +42,9 @@ def dataclass_to_schema(schema: Type[TSchema], obj: Any) -> TSchema:
                 list_field: list[BSchema] = Field(default_factory=list)
 
             dataclass_to_schema(CSchema, dataclass_obj)
-    :param schema: pydantic схема в которую нужно конвертировать
-    :param obj: объект dataclass
-    :return: конвертированный объект pydantic схемы
+    :param schema:  pydantic схема в которую нужно конвертировать.
+    :param obj:     Объект dataclass.
+    :return:        Конвертированный объект pydantic схемы.
     """
     attrs = {}
     if isinstance(schema, Sequence):

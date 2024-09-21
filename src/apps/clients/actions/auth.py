@@ -35,9 +35,9 @@ class AuthClientAction:
         """
         Аутентификация клиента по одноразовому коду.
 
-        :param phone: номер телефона клиента
-        :param code: одноразовый код
-        return: пару access и refresh токенов
+        :param phone:   Номер телефона клиента.
+        :param code:    Одноразовый код.
+        :return:         Пару access и refresh токенов.
         """
         self.validator.validate(phone)
         if self.code_service.check_code(phone, code):
@@ -52,8 +52,8 @@ class AuthClientAction:
         """
         Отправить одноразовый код подтверждения для аутентификации.
 
-        :param phone: номер телефона клиента
-        :return: None
+        :param phone:   Номер телефона клиента.
+        :return:        None.
         """
         self.validator.validate(phone)
         code = self.code_service.generate_code(phone)
@@ -68,8 +68,8 @@ class AuthClientAction:
         """
         Обновить access токен по refresh токену.
 
-        :param refresh: refresh токен
-        :return: access токен
+        :param refresh: refresh токен.
+        :return:        access токен.
         """
         try:
             access = self.token_service.access_token(refresh)
@@ -85,8 +85,8 @@ class AuthClientAction:
         """
         Выйти из системы и забанить refresh токен.
 
-        :param refresh: refresh токен
-        :return: None
+        :param refresh: refresh токен.
+        :return:        None.
         """
         try:
             self.token_service.set_blacklist(refresh)

@@ -15,4 +15,5 @@ class SaveCodeError(BaseHTTPException):
     message: str = "Failed to save verification code"
 
 
-class CodeMatchError(Exception): ...
+class CodeMatchError(Exception):
+    pass

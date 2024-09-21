@@ -32,8 +32,8 @@ class WebhookEventRouter:
         """
         Основной метод, проверяет тип события и передает данные в action.
 
-        :param event_data: json полученный через вебхук
-        :return: None
+        :param event_data:  Json полученный через вебхук.
+        :return:            None.
         """
         try:
             event_type_str: str = event_data["event"]
@@ -112,8 +112,8 @@ class WebhookEventRouter:
         """
         Обработка события удаления работы.
 
-        :param job_data: json с данными удаленной работы
-        :return: None
+        :param job_data:    Json с данными удаленной работы.
+        :return:            None.
         """
         job_id = job_data["id"]  # в json'е только id работы и флаг deleted
         self.job_action.delete(job_id)
@@ -122,8 +122,8 @@ class WebhookEventRouter:
         """
         Обработка события создания работы.
 
-        :param job_data: json с данными о работе
-        :return: None
+        :param job_data:    Json с данными о работе.
+        :return:            None.
         """
         customer = self.client_action.get_or_create(
             job_data["customer"]["id"],
@@ -136,8 +136,8 @@ class WebhookEventRouter:
         """
         Обработка события обновления работы.
 
-        :param job_data: json с данными о работе
-        :return: None
+        :param job_data:    Json с данными о работе.
+        :return:            None.
         """
         try:
             job = parse_job(job_data)

@@ -28,8 +28,8 @@ class VerificationCodeService:
         """
         Генератор одноразового кода.
 
-        :param phone: номер телефона клиента
-        :return: одноразовый код
+        :param phone:   Номер телефона клиента.
+        :return:        Одноразовый код.
         """
         if conf.environ == EnvironVariables.prod:
             digest = "0123456789"
@@ -53,9 +53,9 @@ class VerificationCodeService:
         """
         Проверка корректности введенного клиентом кода.
 
-        :param phone: номер телефона клиента
-        :param user_code: шестизначный код, который ввел клиент
-        :return: bool
+        :param phone:       Номер телефона клиента.
+        :param user_code:   Шестизначный код, который ввел клиент.
+        :return:            Bool.
         """
         code_with_exp = self.storage.get_code(phone)
 

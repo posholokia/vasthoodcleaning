@@ -12,7 +12,7 @@ class INotificationReceiver(ABC):
         """
         Отправить уведомление пользователю.
 
-        :param to_: получатель сообщения
-        :param message: текст сообщения
-        :return: None
+        :param to_:     Получатель сообщения.
+        :param message: Текст сообщения.
+        :return:        None.
         """

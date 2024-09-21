@@ -19,9 +19,9 @@ class ClientAction:
         """
         Создать кастомера если он не существует.
 
-        :param pk: id кастомера из crm
-        :param phone: номер телефона кастомера
-        :return: None
+        :param pk:      ID кастомера из crm.
+        :param phone:   Номер телефона кастомера.
+        :return:        None.
         """
         self.__client_repository.create_if_not_exists(pk=pk, phone=phone)
 
@@ -29,9 +29,9 @@ class ClientAction:
         """
         Получить кастомера или создать кастомера если он не существует.
 
-        :param pk: id кастомера из crm
-        :param phone: телефон кастомера
-        :return: каcтомер dto
+        :param pk:      ID кастомера из crm.
+        :param phone:   Телефон кастомера.
+        :return:        Dto кастомера.
         """
         return self.__client_repository.get_or_create(pk, phone)
 
@@ -39,8 +39,8 @@ class ClientAction:
         """
         Проверить, что кастомер существует.
 
-        :param pk: id кастомера
-        :return: bool
+        :param pk:  ID кастомера.
+        :return:    Bool.
         """
         return self.__client_repository.exists(pk)
 
@@ -48,8 +48,8 @@ class ClientAction:
         """
         Получить клиента по id.
 
-        :param phone: номер телефона клиента.
-        :return: ClientEntity
+        :param phone:   Номер телефона клиента.
+        :return:        Клиент.
         """
         return self.__client_repository.get(phone)
 
@@ -57,7 +57,7 @@ class ClientAction:
         """
         Удаление кастомера.
 
-        :param pk: id кастомера
-        :return: None
+        :param pk:  ID кастомера.
+        :return:    None.
         """
         return self.__client_repository.delete(pk=pk)
