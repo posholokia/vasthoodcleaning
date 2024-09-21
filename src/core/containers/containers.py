@@ -30,6 +30,7 @@ from ninja.security import APIKeyHeader
 from services.crm.base import ICRM
 from services.crm.house_mock.interface import HouseProMockCRM
 from services.crm.house_pro.interface import HouseProCRM
+from services.crm.http_request import HttpRequest
 from services.notification.base import INotificationReceiver
 from services.notification.console_sender.sender import (
     ConsoleNotificationReceiver,
@@ -131,6 +132,7 @@ class DiContainer:
         self.builder.register(ClientPhoneValidator, ClientPhoneValidator)
 
     def __init_service_containers(self) -> None:
+        self.builder.register(HttpRequest, HttpRequest)
         self.builder.register(BlacklistRefreshToken, BlacklistRefreshToken)
         self.builder.register(VerificationCodeService, VerificationCodeService)
         self.builder.register(

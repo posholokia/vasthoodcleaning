@@ -59,11 +59,11 @@ class IJobRepository(ABC):
     @abstractmethod
     def exists_by_client(self, pk: str, phone: str) -> bool:
         """
-        Проверка, что эта работа указанного клиента
+        Проверка, что эта работа указанного клиента.
 
-        :param pk: id работы.
-        :param phone: номер телефона клиента
-        :return: bool
+        :param pk:      ID работы.
+        :param phone:   Номер телефона клиента.
+        :return:        Bool.
         """
 
     @abstractmethod
@@ -71,17 +71,20 @@ class IJobRepository(ABC):
         """
         Получить работу по id.
 
-        :param pk: id работы
-        :return: работа
+        :param pk:  ID работы.
+        :return:    Работа.
         """
 
     @abstractmethod
-    def update(self, **kwargs) -> None:
+    def update(self, pk: str, **kwargs) -> None:
         """
         Обновить работу.
 
-        :param kwargs: field_name: value, которые надо обновить
-        :return: None
+        :param pk:      id работы.
+        :param kwargs:  Поля, которые надо обновить.
+                        Возможно обновить: schedule, address, status,
+                        total_cost, paid, last_updated.
+        :return:        None
         """
 
     @abstractmethod
@@ -89,6 +92,6 @@ class IJobRepository(ABC):
         """
         Удалить работу.
 
-        :param pk: id работы
-        :return: None
+        :param pk:  id работы.
+        :return:    None.
         """

@@ -1,2 +1,0 @@
-class CRMRequestError(Exception):
-    pass

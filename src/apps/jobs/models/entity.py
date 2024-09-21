@@ -3,15 +3,11 @@ from dataclasses import (
     field,
 )
 from datetime import datetime
-from enum import Enum
 
-
-class JobStatus(Enum):
-    pending: str = "Pending"
-    scheduled: str = "Scheduled"
-    in_progress: str = "In Progress"
-    completed: str = "Completed"
-    canceled: str = "canceled"  # не отображается
+from apps.jobs.models.dataclasses_ import (
+    DiscountType,
+    JobStatus,
+)
 
 
 @dataclass
@@ -51,11 +47,6 @@ class QuantitySelectEntity:
     name: str
     value: int
     kind: str = field(init=False, default="quantity")
-
-
-class DiscountType(Enum):
-    fixed: str = "fixed discount"
-    percent: str = "percent discount"
 
 
 @dataclass

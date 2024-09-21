@@ -1,10 +1,13 @@
+from .dataclasses_ import (
+    DeleteTag,
+    DiscountType,
+    JobStatus,
+)
 from .entity import (
     DetailMaterialEntity,
     DiscountEntity,
-    DiscountType,
     JobDetailEntity,
     JobEntity,
-    JobStatus,
     MaterialsEntity,
     MultipleSelectEntity,
     NumericalRangeEntity,
@@ -27,4 +30,5 @@ __all__ = (
     MaterialsEntity,
     JobDetailEntity,
     JobModel,
+    DeleteTag,
 )

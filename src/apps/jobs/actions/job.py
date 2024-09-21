@@ -2,16 +2,23 @@ from dataclasses import (
     dataclass,
     field,
 )
+from datetime import (
+    datetime,
+    UTC,
+)
 
+from apps.jobs.exceptions import CRMTemporarilyUnavailable
 from apps.jobs.models import (
     DiscountType,
     JobDetailEntity,
     JobEntity,
+    JobStatus,
 )
 from apps.jobs.services.parser import parse_job_detail
 from apps.jobs.storage.base import IJobRepository
 from services.cache import cache_for_minutes
 from services.crm.base import ICRM
+from services.crm.http_request import HttpRequestError
 
 
 @dataclass
@@ -24,11 +31,7 @@ class JobAction:
     __crm_interface: ICRM
     date_format: str = field(init=False, default="%Y-%m-%dT%H:%M:%S%z")
 
-    def create(
-        self,
-        client_id: str,
-        job: JobEntity,
-    ) -> None:
+    def create(self, client_id: str, job: JobEntity) -> None:
         """
         Создание работы.
 
@@ -69,7 +72,10 @@ class JobAction:
         :return: детальная информация о работе
         """
         current_job = self.__repository.get_by_id(job_id)
-        job_data = self.__crm_interface.get_job_detail(job_id)
+        try:
+            job_data = self.__crm_interface.get_job_detail(job_id)
+        except HttpRequestError:
+            raise CRMTemporarilyUnavailable()
         job_detail_entity = parse_job_detail(job_data)
 
         job_cost = self._calculate_job_cost(job_detail_entity)
@@ -138,3 +144,19 @@ class JobAction:
         :return: None
         """
         self.__repository.delete(pk)
+
+    def cancel_job(self, job_id: str) -> None:
+        """
+        Отмена работы Клиентом.
+
+        :param job_id:  ID работы.
+        :return:        None.
+        """
+
+        self.__repository.update(
+            pk=job_id,
+            status=JobStatus.canceled.value,
+            last_updated=datetime.now(UTC),
+        )
+        self.__crm_interface.delete_schedule(job_id)
+        self.__crm_interface.add_delete_tag(job_id)

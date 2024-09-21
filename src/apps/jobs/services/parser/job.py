@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Any
 
 from apps.jobs.models import (
+    DeleteTag,
     JobEntity,
     JobStatus,
 )
@@ -39,6 +40,10 @@ def parse_job(job_data: dict[str, Any]) -> JobEntity:
     total_cost: int = job_data["total_amount"]
     paid: bool = not job_data["outstanding_balance"]
 
+    tags: list[str] = job_data["tags"]
+    if DeleteTag.name in tags:
+        status = JobStatus.canceled
+
     return JobEntity(
         id=job_id,
         schedule=schedule,
@@ -65,6 +70,8 @@ def _get_address_string(address_dict: dict) -> str:
 
 
 if __name__ == "__main__":
+    "tag_583f12bf1475460faa6b420cc167096c"
+
     job_updated = {
         "event": "job.updated",
         "company_id": "d3514589-8266-4fcf-aa56-af658b20f8ab",

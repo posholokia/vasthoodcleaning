@@ -22,6 +22,30 @@ services:
       retries: 3
       start_period: 5s
 
+#  celery-beat:
+#    container_name: celery-beat
+#    build:
+#      context: ../../
+#      dockerfile: Dockerfile
+#    command: [ "-m", "celery", "-A", "services.tasks_.celery_app", "beat", "-l", "info" ]
+#    env_file:
+#      - ../../.env
+#    tty: true
+#    networks:
+#      - dev-net
+
+  celery-worker:
+    container_name: celery-worker
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    command: [ "-m", "celery", "-A", "services.tasks_.celery_app", "worker", "-l", "info" ]
+    env_file:
+      - ../../.env
+    tty: true
+    networks:
+      - dev-net
+
 networks:
   dev-net:
     name: dev-net
