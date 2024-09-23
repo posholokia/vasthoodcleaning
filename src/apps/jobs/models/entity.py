@@ -7,6 +7,7 @@ from datetime import datetime
 from apps.jobs.models.dataclasses_ import (
     DiscountType,
     JobStatus,
+    NoneLessThanDate,
 )
 
 
@@ -19,6 +20,10 @@ class JobEntity:
     total_cost: int
     paid: bool = field(default=False)
     last_updated: datetime = field(default_factory=datetime.now)
+
+    @property
+    def sort_by_schedule(self):
+        return self.schedule if self.schedule else NoneLessThanDate()
 
 
 @dataclass

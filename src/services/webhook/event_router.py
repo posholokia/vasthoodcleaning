@@ -4,7 +4,10 @@ from typing import Any
 
 from apps.clients.actions import ClientAction
 from apps.jobs.actions.job import JobAction
-from apps.jobs.services.parser.job import parse_job
+from apps.jobs.services.parser.job import (
+    parse_customer,
+    parse_job,
+)
 from loguru import logger
 
 
@@ -47,9 +50,12 @@ class WebhookEventRouter:
         match event_type:
             case AllowedEvents.customer_create:
                 try:
-                    self.client_action.create_if_not_exists(
-                        event_data["customer"]["id"],
-                        event_data["customer"]["mobile_number"],
+                    customer_dto = parse_customer(event_data["customer"])
+                    if not customer_dto:
+                        return
+                    self.client_action.get_or_create(
+                        customer_dto.cus_id,
+                        customer_dto.phone,
                     )
                 except KeyError as e:
                     logger.error(
@@ -125,9 +131,12 @@ class WebhookEventRouter:
         :param job_data:    Json с данными о работе.
         :return:            None.
         """
+        customer_dto = parse_customer(job_data["customer"])
+        if not customer_dto:
+            return
         customer = self.client_action.get_or_create(
-            job_data["customer"]["id"],
-            job_data["customer"]["mobile_number"],
+            customer_dto.cus_id,
+            customer_dto.phone,
         )
         job = parse_job(job_data)
         self.job_action.create(customer.id, job)
@@ -149,8 +158,11 @@ class WebhookEventRouter:
             logger.debug("job exists and go update")
             self.job_action.update(job)
         else:
+            customer_dto = parse_customer(job_data["customer"])
+            if not customer_dto:
+                return
             customer = self.client_action.get_or_create(
-                job_data["customer"]["id"],
-                job_data["customer"]["mobile_number"],
+                customer_dto.cus_id,
+                customer_dto.phone,
             )
             self.job_action.create(customer.id, job)

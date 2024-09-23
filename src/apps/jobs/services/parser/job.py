@@ -19,6 +19,23 @@ JobCrmStatus = {
 }
 
 
+class Customer:
+    def __init__(self, cus_id: str, cus_phone: str):
+        if cus_phone is None:
+            raise ValueError()
+        self.cus_id = cus_id
+        self.phone = cus_phone
+
+
+def parse_customer(customer_data: dict[str, Any]) -> Customer | None:
+    try:
+        cus_id = customer_data["id"]
+        cus_phone: str | None = customer_data["mobile_number"]
+        return Customer(cus_id=cus_id, cus_phone=cus_phone)
+    except ValueError:
+        return
+
+
 def parse_job(job_data: dict[str, Any]) -> JobEntity:
     """
     Парсинг работы.

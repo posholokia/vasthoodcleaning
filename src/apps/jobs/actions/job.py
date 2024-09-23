@@ -61,7 +61,9 @@ class JobAction:
         :param client_phone:    Номер телефона клиента.
         :return:                Список работ.
         """
-        return self.__repository.list_by_client(client_phone)
+        jobs = self.__repository.list_by_client(client_phone)
+        jobs.sort(key=lambda x: x.sort_by_schedule)
+        return jobs
 
     @cache_for_minutes(1)
     def get_job_detail(self, job_id: str) -> JobDetailEntity:

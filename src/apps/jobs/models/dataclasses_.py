@@ -27,3 +27,14 @@ class DeleteTag:
 
     id: str = field(init=False, default="tag_583f12bf1475460faa6b420cc167096c")
     name: str = field(init=False, default="deleted")
+
+
+class NoneLessThanDate:
+    def __eq__(self, other):
+        return other is None
+
+    def __lt__(self, other):
+        return True
+
+    def __gt__(self, other):
+        return False

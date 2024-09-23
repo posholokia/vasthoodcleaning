@@ -21,7 +21,7 @@ app:
 
 .PHONY: debug
 debug:
-	${MANAGE} runserver
+	python src/manage.py runserver
 
 .PHONY: stor
 stor:
