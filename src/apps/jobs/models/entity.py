@@ -23,6 +23,13 @@ class JobEntity:
 
     @property
     def sort_by_schedule(self):
+        """
+        Работы должны быть отсортированы в порядке: сперва без
+        schedule, затем от тех что раньше к тем что позже.
+        None нельзя сравнить с datetime, поэтому для работ
+        где schedule=None возвращает объект, который меньше
+        datetime и равен None.
+        """
         return self.schedule if self.schedule else NoneLessThanDate()
 
 
