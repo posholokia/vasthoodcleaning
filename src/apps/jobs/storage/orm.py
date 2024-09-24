@@ -2,7 +2,10 @@ from dataclasses import (
     dataclass,
     field,
 )
-from datetime import datetime
+from datetime import (
+    datetime,
+    UTC,
+)
 
 from apps.jobs.models import (
     JobEntity,
@@ -27,7 +30,7 @@ class ORMJobRepository(IJobRepository):
         last_updated: datetime | None = None,
     ) -> None:
         if last_updated is None:
-            last_updated = datetime.now()
+            last_updated = datetime.now(UTC)
         self.model.objects.create(
             pk=pk,
             schedule=schedule,

@@ -2,6 +2,7 @@ import json
 from datetime import (
     datetime,
     timedelta,
+    UTC,
 )
 
 from apps.clients.actions import AuthClientAction
@@ -71,7 +72,7 @@ def login(
         secure=True,
         httponly=True,
         samesite="Lax",
-        expires=datetime.now() + timedelta(days=1),
+        expires=datetime.now(UTC) + timedelta(days=1),
     )
     return response
 
