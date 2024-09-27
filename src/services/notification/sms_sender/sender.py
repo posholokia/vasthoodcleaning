@@ -24,7 +24,16 @@ class SMSNotificationReceiver(INotificationReceiver):
                 to=to_,
                 body=message,
                 from_=conf.from_number,
+                messaging_service_sid=conf.messaging_service_sid,
             )
         except TwilioException as e:
             logger.error("Ошибка отправки сообщения: {}", e)
             raise SendSmsError(e)
+
+
+if __name__ == "__main__":
+    sms = SMSNotificationReceiver()
+    sms.send(
+        to_="+18722587942",
+        message="Your Vast Cleaning verification code is: 123456",
+    )

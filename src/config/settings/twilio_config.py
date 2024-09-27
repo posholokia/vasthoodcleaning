@@ -5,3 +5,4 @@ class SMSTwilioConfig(BaseSettings):
     account_sid: str
     auth_token: str
     from_number: str
+    messaging_service_sid: str
