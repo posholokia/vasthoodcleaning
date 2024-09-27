@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from django.conf import settings
+from config.settings import conf
 from loguru import logger
 from services.notification.base import INotificationReceiver
 from services.notification.exceptions import SendSmsError
@@ -15,7 +15,7 @@ class SMSNotificationReceiver(INotificationReceiver):
     """
 
     def __init__(self):
-        client = Client(settings.conf.account_sid, settings.conf.auth_token)
+        client = Client(conf.account_sid, conf.auth_token)
         self.client = client
 
     def send(self, to_: str, message: str) -> None:
@@ -23,7 +23,7 @@ class SMSNotificationReceiver(INotificationReceiver):
             self.client.messages.create(
                 to=to_,
                 body=message,
-                from_=settings.conf.from_number,
+                from_=conf.from_number,
             )
         except TwilioException as e:
             logger.error("Ошибка отправки сообщения: {}", e)
