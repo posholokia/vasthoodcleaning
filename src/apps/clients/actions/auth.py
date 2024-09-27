@@ -59,7 +59,8 @@ class AuthClientAction:
         code = self.code_service.generate_code(phone)
         try:
             self.notification_service.send(
-                to_=phone, message=f"You code {code}"
+                to_=phone,
+                message=f"Your Vast Cleaning verification code is: {code}",
             )
         except SendSmsError:
             raise SmsServiceError()

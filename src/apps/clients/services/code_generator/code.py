@@ -40,7 +40,7 @@ class VerificationCodeService:
         created_at = time.time()
 
         if code_with_exp := self.storage.get_code(phone):
-            code, exp = code_with_exp.split("-")
+            _, exp = code_with_exp.split("-")
 
             # проверяем, что между отправками кода прошло более 60 секунд
             if created_at - float(exp) < self.code_interval:
