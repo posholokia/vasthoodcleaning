@@ -18,6 +18,7 @@ class AllowedEvents(Enum):
     job_updated: str = "job.updated"
     job_deleted: str = "job.deleted"
     job_started: str = "job.started"
+    job_completed: str = "job.completed"
     job_on_my_way: str = "job.on_my_way"
     job_scheduled: str = "job.scheduled"
 
@@ -93,6 +94,7 @@ class WebhookEventRouter:
                 | AllowedEvents.job_started
                 | AllowedEvents.job_on_my_way
                 | AllowedEvents.job_scheduled
+                | AllowedEvents.job_completed
             ):
                 logger.debug("job update event")
                 try:

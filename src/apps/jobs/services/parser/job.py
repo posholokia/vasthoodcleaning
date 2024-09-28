@@ -83,7 +83,8 @@ def _get_address_string(address_dict: dict) -> str:
     street_line_2: str = address_dict["street_line_2"]
     city: str = address_dict["city"]
     state: str = address_dict["state"]
-    return f"{street} {street_line_2} {city} {state}"
+    zip_code: str = address_dict["zip"]
+    return f"{street} {street_line_2} {city} {state} {zip_code}"
 
 
 if __name__ == "__main__":
