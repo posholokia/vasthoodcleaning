@@ -21,6 +21,8 @@ class AllowedEvents(Enum):
     job_completed: str = "job.completed"
     job_on_my_way: str = "job.on_my_way"
     job_scheduled: str = "job.scheduled"
+    job_paid: str = "job.paid"
+    job_canceled = "job.canceled"
 
 
 @dataclass
@@ -95,6 +97,8 @@ class WebhookEventRouter:
                 | AllowedEvents.job_on_my_way
                 | AllowedEvents.job_scheduled
                 | AllowedEvents.job_completed
+                | AllowedEvents.job_paid
+                | AllowedEvents.job_canceled
             ):
                 logger.debug("job update event")
                 try:
