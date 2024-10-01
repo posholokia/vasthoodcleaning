@@ -6,6 +6,7 @@ from apps.jobs.models import (
     JobEntity,
     JobStatus,
 )
+from apps.jobs.services.parser.address import AddressParser
 
 
 JobCrmStatus = {
@@ -79,12 +80,8 @@ def _get_address_string(address_dict: dict) -> str:
     :param address_dict:    Json с адресом.
     :return:                Адрес.
     """
-    street: str = address_dict["street"]
-    street_line_2: str = address_dict["street_line_2"]
-    city: str = address_dict["city"]
-    state: str = address_dict["state"]
-    zip_code: str = address_dict["zip"]
-    return f"{street} {street_line_2} {city} {state} {zip_code}"
+    parser = AddressParser()
+    return parser.build(address_dict)
 
 
 if __name__ == "__main__":
@@ -293,4 +290,4 @@ if __name__ == "__main__":
             "attachments": [],
         },
     }
-    parse_job(job_updated["job"])
+    print(parse_job(job_updated["job"]))
