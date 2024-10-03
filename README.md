@@ -1,16 +1,11 @@
-# Vasthood Cleaning Site
+# Vasthood Cleaning Site 
+
+https://vasthood.com
+
 ## Application Deployment
 
 Set environment variables as specified in the example.env:
-```
-    SECRET_KEY - Django secret key
-    DEBUG - Server mode (True/False)
-    DB_NAME - PostgreSQL database name
-    DB_USER - PostgreSQL username
-    DB_PASS - PostgreSQL user password
-    DB_HOST - PostgreSQL host
-    DB_PORT - PostgreSQL port
-```
+
 The application is ready for deployment. To run it in Docker, use the docker-compose files:
 ./.ci/docker/*.local.yml
 
@@ -21,7 +16,6 @@ docker compose -f ./.ci/docker/storage.local.yml up
 docker compose -f ./.ci/docker/app.local.yml up
 docker exec -it vasthood_django python manage.py migrate
 ```
-Or use make: `make run`
 
 3. For local development, mark the core directory as "Source root" since imports in the application are done after core.
 
